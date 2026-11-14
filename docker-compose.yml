@@ -1,0 +1,56 @@
+name: napoli-urban-ops
+
+services:
+  app:
+    build:
+      context: .
+    # Il nome dell'immagine serve a deploy/deploy.sh: prima di ricostruire ne tiene una copia
+    # con il tag `previous` per tornare indietro se la nuova non parte.
+    image: napoli-urban-ops:latest
+    # Un `init` raccoglie lo script dei dati (avviato in background da start.sh) quando finisce.
+    init: true
+    # Tutte le chiavi e la password stanno solo qui: Caddy non le riceve.
+    env_file: .env
+    environment:
+      # I dati stanno dove c'è il volume, qualunque cosa dica il .env: un DATA_DIR vuoto (come in
+      # .env.example) o sbagliato li scriverebbe dentro il container e un deploy li perderebbe.
+      DATA_DIR: /data
+      # Accesso libero, senza password (regola dell'hackathon, 14/11/2026: tutto pubblico). Acceso di
+      # default; per tornare alla password metti `PUBLIC_ACCESS=false` nel `.env` e rilancia il deploy
+      # (la password e il segreto di sessione restano nel `.env`: servono a quel ritorno).
+      PUBLIC_ACCESS: ${PUBLIC_ACCESS:-true}
+    volumes:
+      - ${DATA_HOST_DIR:-/data}:/data
+    # Nessuna `ports:`: la porta 8000 è raggiungibile solo da Caddy, sulla rete di Compose.
+    healthcheck:
+      # /api/health risponde 200 anche in modo degradato (dati mancanti): conta che il server viva.
+      test:
+        - CMD
+        - python
+        - -c
+        - import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=4)
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+    restart: unless-stopped
+
+  caddy:
+    image: caddy:2.11.9
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      DOMAIN: ${DOMAIN:?imposta DOMAIN nel .env}
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      # i certificati ottenuti da Let's Encrypt sopravvivono ai riavvii e ai deploy
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - app
+    restart: unless-stopped
+
+volumes:
+  caddy_data:
+  caddy_config:

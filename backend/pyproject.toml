@@ -1,0 +1,83 @@
+[project]
+name = "napoli-urban-ops"
+version = "0.1.0"
+description = "Sentrix - backend (FastAPI)"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "fastapi>=0.162.1",
+    "google-genai>=3.1.0",
+    "httpx2>=2.16.0",
+    "networkx>=3.7",
+    "osmnx>=2.1.1",
+    "pandas>=3.1.1",
+    "pydantic>=2.14.3",
+    "python-dotenv>=1.2.4",
+    "pyyaml>=6.0.3",
+    "uvicorn[standard]>=0.54.0",
+]
+
+[tool.uv]
+# Applicazione, non libreria: nessun build backend, si lancia da backend/ (app.main:app).
+package = false
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+# E/F: errori base; I: import ordinati; B: bug comuni; UP: sintassi moderna; SIM: semplificazioni;
+# T20: vieta print() nel codice applicativo (dev-rules 4: usare logging).
+select = ["E", "F", "I", "B", "UP", "SIM", "T20"]
+
+[tool.ruff.lint.per-file-ignores]
+# Gli script da riga di comando comunicano con l'utente via stdout.
+"scripts/**" = ["T20"]
+# Anche la riga di comando del motore (`python -m app.engine.cli`).
+"app/engine/cli.py" = ["T20"]
+# Le prove su servizi reali (a mano, con -s) riferiscono l'esito a video.
+"tests/live/**" = ["T20"]
+# La prova di prestazioni (a mano, con -s) riferisce i tempi a video.
+"tests/integration/test_engine_perf.py" = ["T20"]
+# Il confronto con e senza Arco Mirelli (a mano, con -s) stampa i carichi di L1 e L6 a video.
+"tests/integration/test_engine_transit.py" = ["T20"]
+# Testi italiani e tabelle di numeri di esempio del mock: righe lunghe per leggibilità.
+"scripts/fixture_world.py" = ["E501"]
+
+[tool.mypy]
+python_version = "3.12"
+files = ["app", "scripts", "tests"]
+# Senza __init__.py nei test (import-mode=importlib) servono basi esplicite per i nomi dei moduli.
+explicit_package_bases = true
+mypy_path = "."
+plugins = ["pydantic.mypy"]
+# Non strict (dev-rules 4), ma niente funzioni senza annotazioni.
+disallow_untyped_defs = true
+check_untyped_defs = true
+warn_unused_ignores = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+# Suite veloce = tutto tranne i test `live` (servizi reali, solo a mano: `pytest -m live`), `realdata`
+# (integrazione sul grafo e sui preset veri, ~50 s, ai cancelli: `pytest -m realdata`) e `perf`
+# (prestazioni sul grafo vero: `pytest -m perf -s`).
+# importlib: permette lo stesso nome di file in unit/ e integration/ senza __init__.py.
+addopts = "-ra --import-mode=importlib -m 'not live and not realdata and not perf'"
+markers = [
+    "live: chiama servizi reali (Gemini, TomTom, Overpass...): esclusi di default, solo a mano",
+    "realdata: integrazione sui dati veri di DATA_DIR (grafo OSM) e sui preset: esclusi di default, ai cancelli",
+    "perf: misura i tempi sui dati veri contro il budget: esclusi di default, solo a mano",
+]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+
+[dependency-groups]
+dev = [
+    "mypy>=2.4.1",
+    "pandas-stubs>=3.1.0.261029",
+    "pytest>=9.2.0",
+    "pytest-asyncio>=1.4.1.post1",
+    "ruff>=0.17.4",
+    "types-networkx>=3.6.1.20261107",
+    "types-pyyaml>=6.0.12.20261103",
+]
