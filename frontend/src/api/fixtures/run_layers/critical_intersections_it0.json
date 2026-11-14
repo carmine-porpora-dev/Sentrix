@@ -1,0 +1,43 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "9137361046",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.2449,
+          40.8353
+        ]
+      },
+      "properties": {
+        "node": "9137361046",
+        "label": "Piazza Vittoria",
+        "rank": 1,
+        "vc": 1.08,
+        "window": "departure",
+        "evidence_id": "m.run_mock_match_2027.it0.road.departure.critical_intersection.1.vc"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "1798206520",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.2223,
+          40.8289
+        ]
+      },
+      "properties": {
+        "node": "1798206520",
+        "label": "Piazza Sannazaro",
+        "rank": 2,
+        "vc": 0.97,
+        "window": "departure",
+        "evidence_id": "m.run_mock_match_2027.it0.road.departure.critical_intersection.2.vc"
+      }
+    }
+  ]
+}

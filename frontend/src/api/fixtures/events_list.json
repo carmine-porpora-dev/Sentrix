@@ -1,0 +1,18 @@
+[
+  {
+    "id": "match_2027",
+    "name": "Match 2027 — serata di regata",
+    "date": "2027-07-10",
+    "is_seed": true,
+    "revision": 1,
+    "updated_at": "2026-11-08T00:00:00+01:00"
+  },
+  {
+    "id": "regate_sep_2026",
+    "name": "Regate preliminari settembre 2026",
+    "date": "2026-09-26",
+    "is_seed": true,
+    "revision": 1,
+    "updated_at": "2026-11-08T00:00:00+01:00"
+  }
+]

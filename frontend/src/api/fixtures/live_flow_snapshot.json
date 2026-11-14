@@ -1,0 +1,1039 @@
+{
+  "segments": [
+    {
+      "id": "via_caracciolo",
+      "label": "Via Caracciolo",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            14.232395,
+            40.832315
+          ],
+          [
+            14.235009,
+            40.832315
+          ]
+        ]
+      },
+      "current_speed": {
+        "id": "m.live.via_caracciolo.current_speed",
+        "value": 15,
+        "unit": "km/h",
+        "kind": "real",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "velocità attuale del tratto (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "free_flow_speed": {
+        "id": "m.live.via_caracciolo.free_flow_speed",
+        "value": 27,
+        "unit": "km/h",
+        "kind": "real",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "velocità a flusso libero (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "ratio": {
+        "id": "m.live.via_caracciolo.ratio",
+        "value": 0.556,
+        "unit": "rapporto",
+        "kind": "estimate",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "attuale ÷ flusso libero (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "congestion_class": 2,
+      "fetched_at": "2026-11-09T09:35:00+01:00"
+    },
+    {
+      "id": "riviera_chiaia_1",
+      "label": "Riviera di Chiaia (punto 1)",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            14.229743,
+            40.833456
+          ],
+          [
+            14.232357,
+            40.833456
+          ]
+        ]
+      },
+      "current_speed": {
+        "id": "m.live.riviera_chiaia_1.current_speed",
+        "value": 27,
+        "unit": "km/h",
+        "kind": "real",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "velocità attuale del tratto (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "free_flow_speed": {
+        "id": "m.live.riviera_chiaia_1.free_flow_speed",
+        "value": 28,
+        "unit": "km/h",
+        "kind": "real",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "velocità a flusso libero (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "ratio": {
+        "id": "m.live.riviera_chiaia_1.ratio",
+        "value": 0.964,
+        "unit": "rapporto",
+        "kind": "estimate",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "attuale ÷ flusso libero (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "congestion_class": 0,
+      "fetched_at": "2026-11-09T09:35:00+01:00"
+    },
+    {
+      "id": "riviera_chiaia_2",
+      "label": "Riviera di Chiaia (punto 2)",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            14.237154,
+            40.833259
+          ],
+          [
+            14.239768,
+            40.833259
+          ]
+        ]
+      },
+      "current_speed": {
+        "id": "m.live.riviera_chiaia_2.current_speed",
+        "value": 26,
+        "unit": "km/h",
+        "kind": "real",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "velocità attuale del tratto (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "free_flow_speed": {
+        "id": "m.live.riviera_chiaia_2.free_flow_speed",
+        "value": 29,
+        "unit": "km/h",
+        "kind": "real",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "velocità a flusso libero (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "ratio": {
+        "id": "m.live.riviera_chiaia_2.ratio",
+        "value": 0.897,
+        "unit": "rapporto",
+        "kind": "estimate",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "attuale ÷ flusso libero (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "congestion_class": 0,
+      "fetched_at": "2026-11-09T09:35:00+01:00"
+    },
+    {
+      "id": "via_partenope",
+      "label": "Via Partenope",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            14.24872,
+            40.829926
+          ],
+          [
+            14.251334,
+            40.829926
+          ]
+        ]
+      },
+      "current_speed": {
+        "id": "m.live.via_partenope.current_speed",
+        "value": 30,
+        "unit": "km/h",
+        "kind": "real",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "velocità attuale del tratto (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "free_flow_speed": {
+        "id": "m.live.via_partenope.free_flow_speed",
+        "value": 31,
+        "unit": "km/h",
+        "kind": "real",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "velocità a flusso libero (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "ratio": {
+        "id": "m.live.via_partenope.ratio",
+        "value": 0.968,
+        "unit": "rapporto",
+        "kind": "estimate",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "attuale ÷ flusso libero (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "congestion_class": 0,
+      "fetched_at": "2026-11-09T09:35:00+01:00"
+    },
+    {
+      "id": "via_posillipo",
+      "label": "Via Posillipo",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            14.207364,
+            40.814473
+          ],
+          [
+            14.209978,
+            40.814473
+          ]
+        ]
+      },
+      "current_speed": {
+        "id": "m.live.via_posillipo.current_speed",
+        "value": 45,
+        "unit": "km/h",
+        "kind": "real",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "velocità attuale del tratto (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "free_flow_speed": {
+        "id": "m.live.via_posillipo.free_flow_speed",
+        "value": 45,
+        "unit": "km/h",
+        "kind": "real",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "velocità a flusso libero (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "ratio": {
+        "id": "m.live.via_posillipo.ratio",
+        "value": 1.0,
+        "unit": "rapporto",
+        "kind": "estimate",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "attuale ÷ flusso libero (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "congestion_class": 0,
+      "fetched_at": "2026-11-09T09:35:00+01:00"
+    },
+    {
+      "id": "galleria_laziale",
+      "label": "Galleria Laziale",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            14.211888,
+            40.827543
+          ],
+          [
+            14.214502,
+            40.827543
+          ]
+        ]
+      },
+      "current_speed": {
+        "id": "m.live.galleria_laziale.current_speed",
+        "value": 32,
+        "unit": "km/h",
+        "kind": "real",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "velocità attuale del tratto (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "free_flow_speed": {
+        "id": "m.live.galleria_laziale.free_flow_speed",
+        "value": 35,
+        "unit": "km/h",
+        "kind": "real",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "velocità a flusso libero (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "ratio": {
+        "id": "m.live.galleria_laziale.ratio",
+        "value": 0.914,
+        "unit": "rapporto",
+        "kind": "estimate",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "attuale ÷ flusso libero (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "congestion_class": 0,
+      "fetched_at": "2026-11-09T09:35:00+01:00"
+    },
+    {
+      "id": "galleria_vittoria",
+      "label": "Galleria della Vittoria",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            14.245548,
+            40.833699
+          ],
+          [
+            14.248162,
+            40.833699
+          ]
+        ]
+      },
+      "current_speed": {
+        "id": "m.live.galleria_vittoria.current_speed",
+        "value": 28,
+        "unit": "km/h",
+        "kind": "real",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "velocità attuale del tratto (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "free_flow_speed": {
+        "id": "m.live.galleria_vittoria.free_flow_speed",
+        "value": 32,
+        "unit": "km/h",
+        "kind": "real",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "velocità a flusso libero (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "ratio": {
+        "id": "m.live.galleria_vittoria.ratio",
+        "value": 0.875,
+        "unit": "rapporto",
+        "kind": "estimate",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "attuale ÷ flusso libero (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "congestion_class": 0,
+      "fetched_at": "2026-11-09T09:35:00+01:00"
+    },
+    {
+      "id": "via_acton",
+      "label": "Via Acton",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            14.251777,
+            40.836746
+          ],
+          [
+            14.254393,
+            40.836746
+          ]
+        ]
+      },
+      "current_speed": {
+        "id": "m.live.via_acton.current_speed",
+        "value": 28,
+        "unit": "km/h",
+        "kind": "real",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "velocità attuale del tratto (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "free_flow_speed": {
+        "id": "m.live.via_acton.free_flow_speed",
+        "value": 40,
+        "unit": "km/h",
+        "kind": "real",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "velocità a flusso libero (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "ratio": {
+        "id": "m.live.via_acton.ratio",
+        "value": 0.7,
+        "unit": "rapporto",
+        "kind": "estimate",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "attuale ÷ flusso libero (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "congestion_class": 1,
+      "fetched_at": "2026-11-09T09:35:00+01:00"
+    },
+    {
+      "id": "corso_vittorio_emanuele_1",
+      "label": "Corso Vittorio Emanuele (punto 1)",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            14.235988,
+            40.839869
+          ],
+          [
+            14.238604,
+            40.839869
+          ]
+        ]
+      },
+      "current_speed": {
+        "id": "m.live.corso_vittorio_emanuele_1.current_speed",
+        "value": 36,
+        "unit": "km/h",
+        "kind": "real",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "velocità attuale del tratto (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "free_flow_speed": {
+        "id": "m.live.corso_vittorio_emanuele_1.free_flow_speed",
+        "value": 38,
+        "unit": "km/h",
+        "kind": "real",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "velocità a flusso libero (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "ratio": {
+        "id": "m.live.corso_vittorio_emanuele_1.ratio",
+        "value": 0.947,
+        "unit": "rapporto",
+        "kind": "estimate",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "attuale ÷ flusso libero (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "congestion_class": 0,
+      "fetched_at": "2026-11-09T09:35:00+01:00"
+    },
+    {
+      "id": "corso_vittorio_emanuele_2",
+      "label": "Corso Vittorio Emanuele (punto 2)",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            14.243184,
+            40.842963
+          ],
+          [
+            14.2458,
+            40.842963
+          ]
+        ]
+      },
+      "current_speed": {
+        "id": "m.live.corso_vittorio_emanuele_2.current_speed",
+        "value": 35,
+        "unit": "km/h",
+        "kind": "real",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "velocità attuale del tratto (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "free_flow_speed": {
+        "id": "m.live.corso_vittorio_emanuele_2.free_flow_speed",
+        "value": 36,
+        "unit": "km/h",
+        "kind": "real",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "velocità a flusso libero (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "ratio": {
+        "id": "m.live.corso_vittorio_emanuele_2.ratio",
+        "value": 0.972,
+        "unit": "rapporto",
+        "kind": "estimate",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "attuale ÷ flusso libero (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "congestion_class": 0,
+      "fetched_at": "2026-11-09T09:35:00+01:00"
+    },
+    {
+      "id": "tangenziale_fuorigrotta",
+      "label": "Tangenziale svincolo Fuorigrotta",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            14.199104,
+            40.837178
+          ],
+          [
+            14.20172,
+            40.837178
+          ]
+        ]
+      },
+      "current_speed": {
+        "id": "m.live.tangenziale_fuorigrotta.current_speed",
+        "value": 80,
+        "unit": "km/h",
+        "kind": "real",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "velocità attuale del tratto (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "free_flow_speed": {
+        "id": "m.live.tangenziale_fuorigrotta.free_flow_speed",
+        "value": 80,
+        "unit": "km/h",
+        "kind": "real",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "velocità a flusso libero (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "ratio": {
+        "id": "m.live.tangenziale_fuorigrotta.ratio",
+        "value": 1.0,
+        "unit": "rapporto",
+        "kind": "estimate",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "attuale ÷ flusso libero (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "congestion_class": 0,
+      "fetched_at": "2026-11-09T09:35:00+01:00"
+    },
+    {
+      "id": "tangenziale_vomero",
+      "label": "Tangenziale svincolo Vomero",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            14.212825,
+            40.841926
+          ],
+          [
+            14.215441,
+            40.841926
+          ]
+        ]
+      },
+      "current_speed": {
+        "id": "m.live.tangenziale_vomero.current_speed",
+        "value": 79,
+        "unit": "km/h",
+        "kind": "real",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "velocità attuale del tratto (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "free_flow_speed": {
+        "id": "m.live.tangenziale_vomero.free_flow_speed",
+        "value": 80,
+        "unit": "km/h",
+        "kind": "real",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "velocità a flusso libero (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "ratio": {
+        "id": "m.live.tangenziale_vomero.ratio",
+        "value": 0.988,
+        "unit": "rapporto",
+        "kind": "estimate",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "attuale ÷ flusso libero (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "congestion_class": 0,
+      "fetched_at": "2026-11-09T09:35:00+01:00"
+    },
+    {
+      "id": "tangenziale_capodichino",
+      "label": "Tangenziale svincolo Capodichino",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            14.281089,
+            40.871789
+          ],
+          [
+            14.283705,
+            40.871789
+          ]
+        ]
+      },
+      "current_speed": {
+        "id": "m.live.tangenziale_capodichino.current_speed",
+        "value": 80,
+        "unit": "km/h",
+        "kind": "real",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "velocità attuale del tratto (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "free_flow_speed": {
+        "id": "m.live.tangenziale_capodichino.free_flow_speed",
+        "value": 80,
+        "unit": "km/h",
+        "kind": "real",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "velocità a flusso libero (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "ratio": {
+        "id": "m.live.tangenziale_capodichino.ratio",
+        "value": 1.0,
+        "unit": "rapporto",
+        "kind": "estimate",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "attuale ÷ flusso libero (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "congestion_class": 0,
+      "fetched_at": "2026-11-09T09:35:00+01:00"
+    },
+    {
+      "id": "via_marina",
+      "label": "Via Marina",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            14.261766,
+            40.845665
+          ],
+          [
+            14.264382,
+            40.845665
+          ]
+        ]
+      },
+      "current_speed": {
+        "id": "m.live.via_marina.current_speed",
+        "value": 38,
+        "unit": "km/h",
+        "kind": "real",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "velocità attuale del tratto (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "free_flow_speed": {
+        "id": "m.live.via_marina.free_flow_speed",
+        "value": 45,
+        "unit": "km/h",
+        "kind": "real",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "velocità a flusso libero (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "ratio": {
+        "id": "m.live.via_marina.ratio",
+        "value": 0.844,
+        "unit": "rapporto",
+        "kind": "estimate",
+        "source": "mock.fixture (tomtom.flow)",
+        "method": "attuale ÷ flusso libero (valore di esempio)",
+        "inputs": [
+          "fixture F1-09"
+        ],
+        "assumptions": [
+          "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+        ],
+        "as_of": "2026-11-09T09:35:00+01:00"
+      },
+      "congestion_class": 0,
+      "fetched_at": "2026-11-09T09:35:00+01:00"
+    }
+  ],
+  "mode": "snapshot",
+  "degraded_reason": "tomtom_unreachable",
+  "summary": [
+    {
+      "id": "m.live.summary.mean_speed",
+      "value": 41.4,
+      "unit": "km/h",
+      "kind": "estimate",
+      "source": "mock.fixture (live.summary v1)",
+      "method": "media della velocità attuale dei tratti (valore di esempio)",
+      "inputs": [
+        "m.live.via_caracciolo.current_speed",
+        "m.live.riviera_chiaia_1.current_speed",
+        "m.live.riviera_chiaia_2.current_speed",
+        "m.live.via_partenope.current_speed",
+        "m.live.via_posillipo.current_speed",
+        "m.live.galleria_laziale.current_speed",
+        "m.live.galleria_vittoria.current_speed",
+        "m.live.via_acton.current_speed",
+        "m.live.corso_vittorio_emanuele_1.current_speed",
+        "m.live.corso_vittorio_emanuele_2.current_speed",
+        "m.live.tangenziale_fuorigrotta.current_speed",
+        "m.live.tangenziale_vomero.current_speed",
+        "m.live.tangenziale_capodichino.current_speed",
+        "m.live.via_marina.current_speed"
+      ],
+      "assumptions": [
+        "14 tratti su 14",
+        "media semplice: non pesa la lunghezza dei tratti né il traffico che portano",
+        "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+      ],
+      "as_of": "2026-11-09T09:35:00+01:00"
+    },
+    {
+      "id": "m.live.summary.mean_ratio",
+      "value": 0.902,
+      "unit": "rapporto",
+      "kind": "estimate",
+      "source": "mock.fixture (live.summary v1)",
+      "method": "media del rapporto velocità attuale ÷ flusso libero dei tratti (valore di esempio)",
+      "inputs": [
+        "m.live.via_caracciolo.ratio",
+        "m.live.riviera_chiaia_1.ratio",
+        "m.live.riviera_chiaia_2.ratio",
+        "m.live.via_partenope.ratio",
+        "m.live.via_posillipo.ratio",
+        "m.live.galleria_laziale.ratio",
+        "m.live.galleria_vittoria.ratio",
+        "m.live.via_acton.ratio",
+        "m.live.corso_vittorio_emanuele_1.ratio",
+        "m.live.corso_vittorio_emanuele_2.ratio",
+        "m.live.tangenziale_fuorigrotta.ratio",
+        "m.live.tangenziale_vomero.ratio",
+        "m.live.tangenziale_capodichino.ratio",
+        "m.live.via_marina.ratio"
+      ],
+      "assumptions": [
+        "14 tratti su 14",
+        "media semplice: non pesa la lunghezza dei tratti né il traffico che portano",
+        "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+      ],
+      "as_of": "2026-11-09T09:35:00+01:00"
+    },
+    {
+      "id": "m.live.summary.slowed_count",
+      "value": 2,
+      "unit": "n",
+      "kind": "estimate",
+      "source": "mock.fixture (live.summary v1)",
+      "method": "tratti sotto la prima soglia del rapporto (classi di config/live.yaml) (valore di esempio)",
+      "inputs": [
+        "m.live.via_caracciolo.ratio",
+        "m.live.riviera_chiaia_1.ratio",
+        "m.live.riviera_chiaia_2.ratio",
+        "m.live.via_partenope.ratio",
+        "m.live.via_posillipo.ratio",
+        "m.live.galleria_laziale.ratio",
+        "m.live.galleria_vittoria.ratio",
+        "m.live.via_acton.ratio",
+        "m.live.corso_vittorio_emanuele_1.ratio",
+        "m.live.corso_vittorio_emanuele_2.ratio",
+        "m.live.tangenziale_fuorigrotta.ratio",
+        "m.live.tangenziale_vomero.ratio",
+        "m.live.tangenziale_capodichino.ratio",
+        "m.live.via_marina.ratio"
+      ],
+      "assumptions": [
+        "14 tratti su 14",
+        "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+      ],
+      "as_of": "2026-11-09T09:35:00+01:00"
+    },
+    {
+      "id": "m.live.summary.slowest_speed",
+      "value": 15.0,
+      "unit": "km/h",
+      "kind": "real",
+      "source": "mock.fixture (mock.fixture (tomtom.flow))",
+      "method": "velocità attuale del tratto più lento: Via Caracciolo (valore di esempio)",
+      "inputs": [
+        "m.live.via_caracciolo.current_speed"
+      ],
+      "assumptions": [
+        "14 tratti su 14",
+        "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore",
+        "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+      ],
+      "as_of": "2026-11-09T09:35:00+01:00"
+    },
+    {
+      "id": "m.live.summary.covered_count",
+      "value": 14,
+      "unit": "n",
+      "kind": "estimate",
+      "source": "mock.fixture (live.summary v1)",
+      "method": "tratti che hanno un dato (valore di esempio)",
+      "inputs": [
+        "m.live.via_caracciolo.current_speed",
+        "m.live.riviera_chiaia_1.current_speed",
+        "m.live.riviera_chiaia_2.current_speed",
+        "m.live.via_partenope.current_speed",
+        "m.live.via_posillipo.current_speed",
+        "m.live.galleria_laziale.current_speed",
+        "m.live.galleria_vittoria.current_speed",
+        "m.live.via_acton.current_speed",
+        "m.live.corso_vittorio_emanuele_1.current_speed",
+        "m.live.corso_vittorio_emanuele_2.current_speed",
+        "m.live.tangenziale_fuorigrotta.current_speed",
+        "m.live.tangenziale_vomero.current_speed",
+        "m.live.tangenziale_capodichino.current_speed",
+        "m.live.via_marina.current_speed"
+      ],
+      "assumptions": [
+        "14 tratti su 14",
+        "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+      ],
+      "as_of": "2026-11-09T09:35:00+01:00"
+    }
+  ]
+}

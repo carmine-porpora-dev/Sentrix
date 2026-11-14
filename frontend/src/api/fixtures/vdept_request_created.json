@@ -1,0 +1,34 @@
+{
+  "request": {
+    "run_id": "run_mock_match_2027",
+    "iteration": 1,
+    "type": "traffic_post",
+    "target": "9137361046",
+    "target_label": "Incrocio Piazza Vittoria",
+    "target_geo": {
+      "lat": 40.8353,
+      "lon": 14.2449,
+      "label": "Incrocio Piazza Vittoria"
+    },
+    "window": "departure",
+    "priority": "high",
+    "payload": {},
+    "alternative_of": null,
+    "simulation": true,
+    "action_id": "act_001",
+    "department": "municipal_police",
+    "state": "CREATED",
+    "reject_code": null,
+    "reject_reason": null
+  },
+  "events": [
+    {
+      "id": 1,
+      "action_id": "act_001",
+      "from_state": null,
+      "to_state": "CREATED",
+      "reason": null,
+      "at": "2026-11-09T10:00:30+01:00"
+    }
+  ]
+}

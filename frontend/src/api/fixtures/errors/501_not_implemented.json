@@ -1,0 +1,9 @@
+{
+  "error": {
+    "code": "NOT_IMPLEMENTED",
+    "message": "L'avvio di un'analisi non è ancora disponibile",
+    "details": {
+      "planned_in": "F6-07"
+    }
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "18122092-8475097329-0",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            14.2268,
+            40.832
+          ],
+          [
+            14.2406,
+            40.8317
+          ]
+        ]
+      },
+      "properties": {
+        "edge_key": "18122092-8475097329-0",
+        "label": "Viale Anton Dohrn",
+        "length_m": 1180,
+        "mode": "closed"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "8399521491-8475097329-0",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            14.2265,
+            40.8318
+          ],
+          [
+            14.2268,
+            40.832
+          ]
+        ]
+      },
+      "properties": {
+        "edge_key": "8399521491-8475097329-0",
+        "label": "Viale Anton Dohrn",
+        "length_m": 33,
+        "mode": "closed"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "8475097329-18122092-0",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            14.2268,
+            40.832
+          ],
+          [
+            14.2406,
+            40.8317
+          ]
+        ]
+      },
+      "properties": {
+        "edge_key": "8475097329-18122092-0",
+        "label": "Viale Anton Dohrn",
+        "length_m": 1180,
+        "mode": "closed"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "8475097329-8399521499-0",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            14.2268,
+            40.832
+          ],
+          [
+            14.2264,
+            40.8319
+          ]
+        ]
+      },
+      "properties": {
+        "edge_key": "8475097329-8399521499-0",
+        "label": "Viale Anton Dohrn",
+        "length_m": 32,
+        "mode": "closed"
+      }
+    }
+  ]
+}

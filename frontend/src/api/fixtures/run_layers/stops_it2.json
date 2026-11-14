@@ -1,0 +1,89 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "mock_stop_1",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.233,
+          40.834
+        ]
+      },
+      "properties": {
+        "stop_id": "mock_stop_1",
+        "name": "Fermata di esempio 1",
+        "load_ratio": 1.05,
+        "overloaded": true,
+        "closed": false,
+        "pax_h": 5250.0,
+        "capacity_pax_h": 5000.0,
+        "schematic": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "mock_stop_2",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.23,
+          40.831
+        ]
+      },
+      "properties": {
+        "stop_id": "mock_stop_2",
+        "name": "Fermata di esempio 2",
+        "load_ratio": 0.8,
+        "overloaded": false,
+        "closed": false,
+        "pax_h": 4000.0,
+        "capacity_pax_h": 5000.0,
+        "schematic": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "mock_stop_3",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.238,
+          40.836
+        ]
+      },
+      "properties": {
+        "stop_id": "mock_stop_3",
+        "name": "Fermata di esempio 3",
+        "load_ratio": 1.05,
+        "overloaded": true,
+        "closed": false,
+        "pax_h": 5250.0,
+        "capacity_pax_h": 5000.0,
+        "schematic": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "mock_stop_4",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.226,
+          40.829
+        ]
+      },
+      "properties": {
+        "stop_id": "mock_stop_4",
+        "name": "Fermata di esempio 4",
+        "load_ratio": 0.55,
+        "overloaded": false,
+        "closed": false,
+        "pax_h": 2750.0,
+        "capacity_pax_h": 5000.0,
+        "schematic": true
+      }
+    }
+  ]
+}

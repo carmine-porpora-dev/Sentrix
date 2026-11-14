@@ -1,0 +1,58 @@
+{
+  "request": {
+    "run_id": "run_mock_match_2027",
+    "iteration": 1,
+    "type": "traffic_post",
+    "target": "1798206520",
+    "target_label": "Incrocio Piazza Sannazaro",
+    "target_geo": {
+      "lat": 40.8289,
+      "lon": 14.2223,
+      "label": "Incrocio Piazza Sannazaro"
+    },
+    "window": "departure",
+    "priority": "high",
+    "payload": {},
+    "alternative_of": null,
+    "simulation": true,
+    "action_id": "act_002",
+    "department": "municipal_police",
+    "state": "REJECTED",
+    "reject_code": "UNAVAILABLE",
+    "reject_reason": "Pattuglie esaurite nella finestra 21:00–23:00: 6 totali, 6 già impegnate ai varchi"
+  },
+  "events": [
+    {
+      "id": 2,
+      "action_id": "act_002",
+      "from_state": null,
+      "to_state": "CREATED",
+      "reason": null,
+      "at": "2026-11-09T10:00:30+01:00"
+    },
+    {
+      "id": 5,
+      "action_id": "act_002",
+      "from_state": "CREATED",
+      "to_state": "SENT",
+      "reason": "inviata al dipartimento (simulazione)",
+      "at": "2026-11-09T10:00:31+01:00"
+    },
+    {
+      "id": 8,
+      "action_id": "act_002",
+      "from_state": "SENT",
+      "to_state": "RECEIVED",
+      "reason": null,
+      "at": "2026-11-09T10:00:32+01:00"
+    },
+    {
+      "id": 11,
+      "action_id": "act_002",
+      "from_state": "RECEIVED",
+      "to_state": "REJECTED",
+      "reason": "Pattuglie esaurite nella finestra 21:00–23:00: 6 totali, 6 già impegnate ai varchi",
+      "at": "2026-11-09T10:00:36+01:00"
+    }
+  ]
+}

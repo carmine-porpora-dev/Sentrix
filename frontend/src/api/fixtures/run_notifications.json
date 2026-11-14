@@ -1,0 +1,172 @@
+[
+  {
+    "run_id": "run_mock_match_2027",
+    "iteration": 2,
+    "channel": "whatsapp",
+    "recipient_id": "whatsapp_to",
+    "recipient_label": "+39 *** *** **12",
+    "kind": "traffic_advisory",
+    "text": "*Sentrix — Avviso viabilità*\nEvento: Match 2027 — serata di regata (10/07/2027)\n\nStrade chiuse:\n• Via Francesco Caracciolo (viale Dohrn – piazza Vittoria)\n• Viale Anton Dohrn\n\nTrasporto pubblico (TPL):\n• Stazione Arco Mirelli chiusa per sicurezza\n\nMisure per i cittadini:\nChiusure dalle 16:00: Via Francesco Caracciolo (viale Dohrn – piazza Vittoria); Viale Anton Dohrn. Linea 6 prolungata fino all'1:30.\n\nMessaggio automatico di Sentrix",
+    "evidence_ids": [
+      "act_005"
+    ],
+    "state": "SENT",
+    "provider_message_id": null,
+    "error_code": null,
+    "simulation": false,
+    "id": 1,
+    "created_at": "2026-11-09T10:01:18+01:00"
+  },
+  {
+    "run_id": "run_mock_match_2027",
+    "iteration": 2,
+    "channel": "emergency_bulletin",
+    "recipient_id": "questura_napoli",
+    "recipient_label": "Questura di Napoli (sala operativa)",
+    "kind": "traffic_bulletin",
+    "text": "BOLLETTINO VIABILITÀ — SIMULATO\nA: Questura di Napoli (sala operativa)\nEvento: Match 2027 — serata di regata (10/07/2027)\nArrivo: 16:00–19:00 · Deflusso: 21:00–23:00\n\nStrade chiuse:\n• Via Francesco Caracciolo (viale Dohrn – piazza Vittoria)\n• Viale Anton Dohrn\n\nStrade sature (carico oltre il 90% della capacità, stima del modello):\n• Galleria di Posillipo (Laziale); Via Fuorigrotta — deflusso 21:00–23:00\n• Riviera di Chiaia — deflusso 21:00–23:00\n• Via Ferdinando Acton; Galleria della Vittoria — deflusso 21:00–23:00\n\nIncroci critici:\n• Piazza Vittoria — deflusso 21:00–23:00\n• Piazza Sannazaro — deflusso 21:00–23:00\n\nTrasporto pubblico interrotto:\n• Stazione Arco Mirelli chiusa per sicurezza\n\nBollettino simulato di Sentrix: nessun invio a enti reali. I valori sono stime di un modello non calibrato.",
+    "evidence_ids": [
+      "m.run_mock_match_2027.it2.road.departure.critical_intersection.1.vc",
+      "m.run_mock_match_2027.it2.road.departure.critical_intersection.2.vc"
+    ],
+    "state": "DELIVERED",
+    "provider_message_id": null,
+    "error_code": null,
+    "simulation": true,
+    "id": 2,
+    "created_at": "2026-11-09T10:01:17+01:00"
+  },
+  {
+    "run_id": "run_mock_match_2027",
+    "iteration": 2,
+    "channel": "emergency_bulletin",
+    "recipient_id": "vigili_del_fuoco_napoli",
+    "recipient_label": "Comando provinciale Vigili del Fuoco di Napoli",
+    "kind": "traffic_bulletin",
+    "text": "BOLLETTINO VIABILITÀ — SIMULATO\nA: Comando provinciale Vigili del Fuoco di Napoli\nEvento: Match 2027 — serata di regata (10/07/2027)\nArrivo: 16:00–19:00 · Deflusso: 21:00–23:00\n\nStrade chiuse:\n• Via Francesco Caracciolo (viale Dohrn – piazza Vittoria)\n• Viale Anton Dohrn\n\nStrade sature (carico oltre il 90% della capacità, stima del modello):\n• Galleria di Posillipo (Laziale); Via Fuorigrotta — deflusso 21:00–23:00\n• Riviera di Chiaia — deflusso 21:00–23:00\n• Via Ferdinando Acton; Galleria della Vittoria — deflusso 21:00–23:00\n\nIncroci critici:\n• Piazza Vittoria — deflusso 21:00–23:00\n• Piazza Sannazaro — deflusso 21:00–23:00\n\nTrasporto pubblico interrotto:\n• Stazione Arco Mirelli chiusa per sicurezza\n\nBollettino simulato di Sentrix: nessun invio a enti reali. I valori sono stime di un modello non calibrato.",
+    "evidence_ids": [
+      "m.run_mock_match_2027.it2.road.departure.critical_intersection.1.vc",
+      "m.run_mock_match_2027.it2.road.departure.critical_intersection.2.vc"
+    ],
+    "state": "DELIVERED",
+    "provider_message_id": null,
+    "error_code": null,
+    "simulation": true,
+    "id": 3,
+    "created_at": "2026-11-09T10:01:17+01:00"
+  },
+  {
+    "run_id": "run_mock_match_2027",
+    "iteration": 2,
+    "channel": "emergency_bulletin",
+    "recipient_id": "ospedale_cardarelli",
+    "recipient_label": "Ospedale Cardarelli",
+    "kind": "traffic_bulletin",
+    "text": "BOLLETTINO VIABILITÀ — SIMULATO\nA: Ospedale Cardarelli\nEvento: Match 2027 — serata di regata (10/07/2027)\nArrivo: 16:00–19:00 · Deflusso: 21:00–23:00\n\nStrade chiuse:\n• Via Francesco Caracciolo (viale Dohrn – piazza Vittoria)\n• Viale Anton Dohrn\n\nStrade sature (carico oltre il 90% della capacità, stima del modello):\n• Galleria di Posillipo (Laziale); Via Fuorigrotta — deflusso 21:00–23:00\n• Riviera di Chiaia — deflusso 21:00–23:00\n• Via Ferdinando Acton; Galleria della Vittoria — deflusso 21:00–23:00\n\nIncroci critici:\n• Piazza Vittoria — deflusso 21:00–23:00\n• Piazza Sannazaro — deflusso 21:00–23:00\n\nTrasporto pubblico interrotto:\n• Stazione Arco Mirelli chiusa per sicurezza\n\nBollettino simulato di Sentrix: nessun invio a enti reali. I valori sono stime di un modello non calibrato.",
+    "evidence_ids": [
+      "m.run_mock_match_2027.it2.road.departure.critical_intersection.1.vc",
+      "m.run_mock_match_2027.it2.road.departure.critical_intersection.2.vc"
+    ],
+    "state": "DELIVERED",
+    "provider_message_id": null,
+    "error_code": null,
+    "simulation": true,
+    "id": 4,
+    "created_at": "2026-11-09T10:01:17+01:00"
+  },
+  {
+    "run_id": "run_mock_match_2027",
+    "iteration": 2,
+    "channel": "emergency_bulletin",
+    "recipient_id": "ospedale_del_mare",
+    "recipient_label": "Ospedale del Mare",
+    "kind": "traffic_bulletin",
+    "text": "BOLLETTINO VIABILITÀ — SIMULATO\nA: Ospedale del Mare\nEvento: Match 2027 — serata di regata (10/07/2027)\nArrivo: 16:00–19:00 · Deflusso: 21:00–23:00\n\nStrade chiuse:\n• Via Francesco Caracciolo (viale Dohrn – piazza Vittoria)\n• Viale Anton Dohrn\n\nStrade sature (carico oltre il 90% della capacità, stima del modello):\n• Galleria di Posillipo (Laziale); Via Fuorigrotta — deflusso 21:00–23:00\n• Riviera di Chiaia — deflusso 21:00–23:00\n• Via Ferdinando Acton; Galleria della Vittoria — deflusso 21:00–23:00\n\nIncroci critici:\n• Piazza Vittoria — deflusso 21:00–23:00\n• Piazza Sannazaro — deflusso 21:00–23:00\n\nTrasporto pubblico interrotto:\n• Stazione Arco Mirelli chiusa per sicurezza\n\nBollettino simulato di Sentrix: nessun invio a enti reali. I valori sono stime di un modello non calibrato.",
+    "evidence_ids": [
+      "m.run_mock_match_2027.it2.road.departure.critical_intersection.1.vc",
+      "m.run_mock_match_2027.it2.road.departure.critical_intersection.2.vc"
+    ],
+    "state": "DELIVERED",
+    "provider_message_id": null,
+    "error_code": null,
+    "simulation": true,
+    "id": 5,
+    "created_at": "2026-11-09T10:01:17+01:00"
+  },
+  {
+    "run_id": "run_mock_match_2027",
+    "iteration": 2,
+    "channel": "emergency_bulletin",
+    "recipient_id": "ospedale_san_paolo",
+    "recipient_label": "Ospedale San Paolo (Fuorigrotta)",
+    "kind": "traffic_bulletin",
+    "text": "BOLLETTINO VIABILITÀ — SIMULATO\nA: Ospedale San Paolo (Fuorigrotta)\nEvento: Match 2027 — serata di regata (10/07/2027)\nArrivo: 16:00–19:00 · Deflusso: 21:00–23:00\n\nStrade chiuse:\n• Via Francesco Caracciolo (viale Dohrn – piazza Vittoria)\n• Viale Anton Dohrn\n\nStrade sature (carico oltre il 90% della capacità, stima del modello):\n• Galleria di Posillipo (Laziale); Via Fuorigrotta — deflusso 21:00–23:00\n• Riviera di Chiaia — deflusso 21:00–23:00\n• Via Ferdinando Acton; Galleria della Vittoria — deflusso 21:00–23:00\n\nIncroci critici:\n• Piazza Vittoria — deflusso 21:00–23:00\n• Piazza Sannazaro — deflusso 21:00–23:00\n\nTrasporto pubblico interrotto:\n• Stazione Arco Mirelli chiusa per sicurezza\n\nBollettino simulato di Sentrix: nessun invio a enti reali. I valori sono stime di un modello non calibrato.",
+    "evidence_ids": [
+      "m.run_mock_match_2027.it2.road.departure.critical_intersection.1.vc",
+      "m.run_mock_match_2027.it2.road.departure.critical_intersection.2.vc"
+    ],
+    "state": "DELIVERED",
+    "provider_message_id": null,
+    "error_code": null,
+    "simulation": true,
+    "id": 6,
+    "created_at": "2026-11-09T10:01:17+01:00"
+  },
+  {
+    "run_id": "run_mock_match_2027",
+    "iteration": 2,
+    "channel": "emergency_bulletin",
+    "recipient_id": "ospedale_pellegrini",
+    "recipient_label": "Ospedale dei Pellegrini",
+    "kind": "traffic_bulletin",
+    "text": "BOLLETTINO VIABILITÀ — SIMULATO\nA: Ospedale dei Pellegrini\nEvento: Match 2027 — serata di regata (10/07/2027)\nArrivo: 16:00–19:00 · Deflusso: 21:00–23:00\n\nStrade chiuse:\n• Via Francesco Caracciolo (viale Dohrn – piazza Vittoria)\n• Viale Anton Dohrn\n\nStrade sature (carico oltre il 90% della capacità, stima del modello):\n• Galleria di Posillipo (Laziale); Via Fuorigrotta — deflusso 21:00–23:00\n• Riviera di Chiaia — deflusso 21:00–23:00\n• Via Ferdinando Acton; Galleria della Vittoria — deflusso 21:00–23:00\n\nIncroci critici:\n• Piazza Vittoria — deflusso 21:00–23:00\n• Piazza Sannazaro — deflusso 21:00–23:00\n\nTrasporto pubblico interrotto:\n• Stazione Arco Mirelli chiusa per sicurezza\n\nBollettino simulato di Sentrix: nessun invio a enti reali. I valori sono stime di un modello non calibrato.",
+    "evidence_ids": [
+      "m.run_mock_match_2027.it2.road.departure.critical_intersection.1.vc",
+      "m.run_mock_match_2027.it2.road.departure.critical_intersection.2.vc"
+    ],
+    "state": "DELIVERED",
+    "provider_message_id": null,
+    "error_code": null,
+    "simulation": true,
+    "id": 7,
+    "created_at": "2026-11-09T10:01:17+01:00"
+  },
+  {
+    "run_id": "run_mock_match_2027",
+    "iteration": 2,
+    "channel": "emergency_bulletin",
+    "recipient_id": "ospedale_cto",
+    "recipient_label": "CTO",
+    "kind": "traffic_bulletin",
+    "text": "BOLLETTINO VIABILITÀ — SIMULATO\nA: CTO\nEvento: Match 2027 — serata di regata (10/07/2027)\nArrivo: 16:00–19:00 · Deflusso: 21:00–23:00\n\nStrade chiuse:\n• Via Francesco Caracciolo (viale Dohrn – piazza Vittoria)\n• Viale Anton Dohrn\n\nStrade sature (carico oltre il 90% della capacità, stima del modello):\n• Galleria di Posillipo (Laziale); Via Fuorigrotta — deflusso 21:00–23:00\n• Riviera di Chiaia — deflusso 21:00–23:00\n• Via Ferdinando Acton; Galleria della Vittoria — deflusso 21:00–23:00\n\nIncroci critici:\n• Piazza Vittoria — deflusso 21:00–23:00\n• Piazza Sannazaro — deflusso 21:00–23:00\n\nTrasporto pubblico interrotto:\n• Stazione Arco Mirelli chiusa per sicurezza\n\nBollettino simulato di Sentrix: nessun invio a enti reali. I valori sono stime di un modello non calibrato.",
+    "evidence_ids": [
+      "m.run_mock_match_2027.it2.road.departure.critical_intersection.1.vc",
+      "m.run_mock_match_2027.it2.road.departure.critical_intersection.2.vc"
+    ],
+    "state": "DELIVERED",
+    "provider_message_id": null,
+    "error_code": null,
+    "simulation": true,
+    "id": 8,
+    "created_at": "2026-11-09T10:01:17+01:00"
+  },
+  {
+    "run_id": "run_mock_match_2027",
+    "iteration": 2,
+    "channel": "emergency_bulletin",
+    "recipient_id": "municipal_police",
+    "recipient_label": "Polizia Municipale",
+    "kind": "traffic_bulletin",
+    "text": "BOLLETTINO VIABILITÀ — SIMULATO\nA: Polizia Municipale\nEvento: Match 2027 — serata di regata (10/07/2027)\nArrivo: 16:00–19:00 · Deflusso: 21:00–23:00\n\nStrade chiuse:\n• Via Francesco Caracciolo (viale Dohrn – piazza Vittoria)\n• Viale Anton Dohrn\n\nStrade sature (carico oltre il 90% della capacità, stima del modello):\n• Galleria di Posillipo (Laziale); Via Fuorigrotta — deflusso 21:00–23:00\n• Riviera di Chiaia — deflusso 21:00–23:00\n• Via Ferdinando Acton; Galleria della Vittoria — deflusso 21:00–23:00\n\nIncroci critici:\n• Piazza Vittoria — deflusso 21:00–23:00\n• Piazza Sannazaro — deflusso 21:00–23:00\n\nTrasporto pubblico interrotto:\n• Stazione Arco Mirelli chiusa per sicurezza\n\nBollettino simulato di Sentrix: nessun invio a enti reali. I valori sono stime di un modello non calibrato.",
+    "evidence_ids": [
+      "m.run_mock_match_2027.it2.road.departure.critical_intersection.1.vc",
+      "m.run_mock_match_2027.it2.road.departure.critical_intersection.2.vc"
+    ],
+    "state": "DELIVERED",
+    "provider_message_id": null,
+    "error_code": null,
+    "simulation": true,
+    "id": 9,
+    "created_at": "2026-11-09T10:01:17+01:00"
+  }
+]

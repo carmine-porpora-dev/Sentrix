@@ -1,0 +1,439 @@
+{
+  "run": {
+    "id": "run_mock_match_2027",
+    "event_id": "match_2027",
+    "event_revision": 1,
+    "attendance_level": "mid",
+    "state": "AWAIT",
+    "iteration": 0,
+    "replans": 0,
+    "started_at": "2026-11-09T10:00:00+01:00",
+    "ended_at": null,
+    "params_hash": "a047fd23745f7b2f3d416666e86ec53545bff0dc20f70aa3b3171c1d9563284d",
+    "seed": 42,
+    "llm_mode": "cache_only",
+    "error": null
+  },
+  "timeline": [
+    {
+      "state": "INTAKE",
+      "at": "2026-11-09T10:00:00+01:00"
+    },
+    {
+      "state": "ANALYZE",
+      "at": "2026-11-09T10:00:03+01:00"
+    },
+    {
+      "state": "RECONCILE",
+      "at": "2026-11-09T10:00:22+01:00"
+    },
+    {
+      "state": "PLAN",
+      "at": "2026-11-09T10:00:24+01:00"
+    },
+    {
+      "state": "DISPATCH",
+      "at": "2026-11-09T10:00:30+01:00"
+    },
+    {
+      "state": "AWAIT",
+      "at": "2026-11-09T10:00:33+01:00"
+    }
+  ],
+  "agents": [
+    {
+      "agent": "event_demand",
+      "state": "done",
+      "tools_called": [
+        "create_event_context",
+        "build_demand"
+      ],
+      "text": "Match 2027 — serata di regata: 150.000 presenti (livello mid) e picco di deflusso alle 21:30. Le 2 chiusure spostano il traffico sul percorso alternativo.",
+      "text_origin": "llm_cache",
+      "findings": []
+    },
+    {
+      "agent": "traffic",
+      "state": "done",
+      "tools_called": [
+        "apply_closures",
+        "assign_traffic",
+        "find_congested_edges",
+        "find_critical_intersections",
+        "od_times"
+      ],
+      "text": "Con le chiusure il deflusso carica la Riviera di Chiaia: 6 archi con v/c oltre 0,9 (4,5 km). Incroci critici: Piazza Vittoria (v/c 1,08) e Piazza Sannazaro (0,97).",
+      "text_origin": "llm_cache",
+      "findings": [
+        {
+          "summary": "Piazza Vittoria: l'incrocio più carico sulla deviazione in deflusso (v/c 1,08).",
+          "severity": "critical",
+          "window": "departure",
+          "trigger": "critical_intersection",
+          "target": "9137361046",
+          "evidence_ids": [
+            "m.run_mock_match_2027.it0.road.departure.critical_intersection.1.vc"
+          ],
+          "location": {
+            "lat": 40.8353,
+            "lon": 14.2449,
+            "label": null
+          }
+        },
+        {
+          "summary": "Piazza Sannazaro: secondo incrocio critico (v/c 0,97).",
+          "severity": "warning",
+          "window": "departure",
+          "trigger": "critical_intersection",
+          "target": "1798206520",
+          "evidence_ids": [
+            "m.run_mock_match_2027.it0.road.departure.critical_intersection.2.vc"
+          ],
+          "location": {
+            "lat": 40.8289,
+            "lon": 14.2223,
+            "label": null
+          }
+        },
+        {
+          "summary": "Riviera di Chiaia: 6 archi con v/c oltre 0,9 (4,5 km) sul percorso alternativo.",
+          "severity": "warning",
+          "window": "departure",
+          "trigger": "saturated_path",
+          "target": "3465091789-3468033710-0",
+          "evidence_ids": [
+            "m.run_mock_match_2027.it0.road.departure.critical_edges.count",
+            "m.run_mock_match_2027.it0.road.departure.critical_edges.km"
+          ],
+          "location": null
+        }
+      ]
+    },
+    {
+      "agent": "transit",
+      "state": "done_fallback",
+      "tools_called": [
+        "get_stops_near",
+        "get_trips_in_window",
+        "estimate_loads",
+        "find_alternative_connections"
+      ],
+      "text": "Linea 6: nessuna corsa nella finestra di deflusso (dato GTFS). Due tratte e tre fermate risultano sovraccariche nel deflusso (stime).",
+      "text_origin": "template",
+      "findings": [
+        {
+          "summary": "La Linea 6 non ha corse nella finestra di deflusso: nessun servizio.",
+          "severity": "warning",
+          "window": "departure",
+          "trigger": "line_no_service_in_window",
+          "target": "2302",
+          "evidence_ids": [
+            "m.run_mock_match_2027.it0.transit.departure.trips_in_window.metro_line_6"
+          ],
+          "location": null
+        },
+        {
+          "summary": "Due tratte della rete risultano sovraccariche nel deflusso (stima).",
+          "severity": "info",
+          "window": "departure",
+          "trigger": "section_overloaded",
+          "target": "4955",
+          "evidence_ids": [
+            "m.run_mock_match_2027.it0.transit.departure.sections_overloaded"
+          ],
+          "location": null
+        }
+      ]
+    },
+    {
+      "agent": "operations",
+      "state": "done",
+      "tools_called": [
+        "list_catalog",
+        "list_alternatives_for_measure",
+        "get_request_status",
+        "get_department_resources"
+      ],
+      "text": "Piano: due presidi della polizia municipale, il prolungamento orario della Linea 6 e un avviso ai cittadini; scartata una deviazione su un arco chiuso.",
+      "text_origin": "llm_cache",
+      "findings": []
+    }
+  ],
+  "plan": [
+    {
+      "seq": 1,
+      "recommendation": {
+        "measure_type": "traffic_post",
+        "target": "9137361046",
+        "department": "municipal_police",
+        "window": "departure",
+        "params": {},
+        "rationale": "Presidio a Piazza Vittoria: v/c 1,08 sulla deviazione in deflusso.",
+        "evidence_ids": [
+          "m.run_mock_match_2027.it0.road.departure.critical_intersection.1.vc"
+        ]
+      },
+      "action_id": "act_001",
+      "status": "accepted",
+      "replaced_by": null,
+      "note": null
+    },
+    {
+      "seq": 2,
+      "recommendation": {
+        "measure_type": "traffic_post",
+        "target": "1798206520",
+        "department": "municipal_police",
+        "window": "departure",
+        "params": {},
+        "rationale": "Presidio a Piazza Sannazaro: v/c 0,97 sulla deviazione in deflusso.",
+        "evidence_ids": [
+          "m.run_mock_match_2027.it0.road.departure.critical_intersection.2.vc"
+        ]
+      },
+      "action_id": "act_002",
+      "status": "rejected",
+      "replaced_by": null,
+      "note": null
+    },
+    {
+      "seq": 3,
+      "recommendation": {
+        "measure_type": "extend_hours",
+        "target": "2302",
+        "department": "transport_control",
+        "window": "departure",
+        "params": {
+          "until": "01:30"
+        },
+        "rationale": "La Linea 6 non ha corse nella finestra di deflusso: servizio da prolungare.",
+        "evidence_ids": [
+          "m.run_mock_match_2027.it0.transit.departure.trips_in_window.metro_line_6"
+        ]
+      },
+      "action_id": "act_003",
+      "status": "accepted",
+      "replaced_by": null,
+      "note": null
+    },
+    {
+      "seq": 5,
+      "recommendation": {
+        "measure_type": "citizen_notice",
+        "target": "cittadinanza",
+        "department": "public_comms",
+        "window": "departure",
+        "params": {},
+        "rationale": "Avviso sulle chiusure e sui servizi prolungati, dopo le misure accettate.",
+        "evidence_ids": [
+          "m.run_mock_match_2027.it2.road.departure.veh_hours"
+        ]
+      },
+      "action_id": null,
+      "status": "proposed",
+      "replaced_by": null,
+      "note": null
+    },
+    {
+      "seq": 6,
+      "recommendation": {
+        "measure_type": "detour_signage",
+        "target": "18122092-8475097329-0",
+        "department": "traffic_control",
+        "window": "departure",
+        "params": {},
+        "rationale": "Deviazione indicata su un arco che il dispositivo chiude.",
+        "evidence_ids": [
+          "m.run_mock_match_2027.it0.road.departure.critical_edges.count"
+        ]
+      },
+      "action_id": null,
+      "status": "discarded",
+      "replaced_by": null,
+      "note": "R2: la stessa via risulta chiusa dal dispositivo e proposta come deviazione: scartata la deviazione"
+    }
+  ],
+  "requests": [
+    {
+      "request": {
+        "run_id": "run_mock_match_2027",
+        "iteration": 1,
+        "type": "traffic_post",
+        "target": "9137361046",
+        "target_label": "Incrocio Piazza Vittoria",
+        "target_geo": {
+          "lat": 40.8353,
+          "lon": 14.2449,
+          "label": "Incrocio Piazza Vittoria"
+        },
+        "window": "departure",
+        "priority": "high",
+        "payload": {},
+        "alternative_of": null,
+        "simulation": true,
+        "action_id": "act_001",
+        "department": "municipal_police",
+        "state": "IN_PROGRESS",
+        "reject_code": null,
+        "reject_reason": null
+      },
+      "events": [
+        {
+          "id": 1,
+          "action_id": "act_001",
+          "from_state": null,
+          "to_state": "CREATED",
+          "reason": null,
+          "at": "2026-11-09T10:00:30+01:00"
+        },
+        {
+          "id": 4,
+          "action_id": "act_001",
+          "from_state": "CREATED",
+          "to_state": "SENT",
+          "reason": "inviata al dipartimento (simulazione)",
+          "at": "2026-11-09T10:00:31+01:00"
+        },
+        {
+          "id": 7,
+          "action_id": "act_001",
+          "from_state": "SENT",
+          "to_state": "RECEIVED",
+          "reason": null,
+          "at": "2026-11-09T10:00:32+01:00"
+        },
+        {
+          "id": 10,
+          "action_id": "act_001",
+          "from_state": "RECEIVED",
+          "to_state": "ACCEPTED",
+          "reason": "Pattuglia disponibile",
+          "at": "2026-11-09T10:00:36+01:00"
+        },
+        {
+          "id": 12,
+          "action_id": "act_001",
+          "from_state": "ACCEPTED",
+          "to_state": "IN_PROGRESS",
+          "reason": null,
+          "at": "2026-11-09T10:00:37+01:00"
+        }
+      ]
+    },
+    {
+      "request": {
+        "run_id": "run_mock_match_2027",
+        "iteration": 1,
+        "type": "traffic_post",
+        "target": "1798206520",
+        "target_label": "Incrocio Piazza Sannazaro",
+        "target_geo": {
+          "lat": 40.8289,
+          "lon": 14.2223,
+          "label": "Incrocio Piazza Sannazaro"
+        },
+        "window": "departure",
+        "priority": "high",
+        "payload": {},
+        "alternative_of": null,
+        "simulation": true,
+        "action_id": "act_002",
+        "department": "municipal_police",
+        "state": "REJECTED",
+        "reject_code": "UNAVAILABLE",
+        "reject_reason": "Pattuglie esaurite nella finestra 21:00–23:00: 6 totali, 6 già impegnate ai varchi"
+      },
+      "events": [
+        {
+          "id": 2,
+          "action_id": "act_002",
+          "from_state": null,
+          "to_state": "CREATED",
+          "reason": null,
+          "at": "2026-11-09T10:00:30+01:00"
+        },
+        {
+          "id": 5,
+          "action_id": "act_002",
+          "from_state": "CREATED",
+          "to_state": "SENT",
+          "reason": "inviata al dipartimento (simulazione)",
+          "at": "2026-11-09T10:00:31+01:00"
+        },
+        {
+          "id": 8,
+          "action_id": "act_002",
+          "from_state": "SENT",
+          "to_state": "RECEIVED",
+          "reason": null,
+          "at": "2026-11-09T10:00:32+01:00"
+        },
+        {
+          "id": 11,
+          "action_id": "act_002",
+          "from_state": "RECEIVED",
+          "to_state": "REJECTED",
+          "reason": "Pattuglie esaurite nella finestra 21:00–23:00: 6 totali, 6 già impegnate ai varchi",
+          "at": "2026-11-09T10:00:36+01:00"
+        }
+      ]
+    },
+    {
+      "request": {
+        "run_id": "run_mock_match_2027",
+        "iteration": 1,
+        "type": "extend_hours",
+        "target": "2302",
+        "target_label": "Linea 6",
+        "target_geo": null,
+        "window": "departure",
+        "priority": "normal",
+        "payload": {
+          "until": "01:30"
+        },
+        "alternative_of": null,
+        "simulation": true,
+        "action_id": "act_003",
+        "department": "transport_control",
+        "state": "ACCEPTED",
+        "reject_code": null,
+        "reject_reason": null
+      },
+      "events": [
+        {
+          "id": 3,
+          "action_id": "act_003",
+          "from_state": null,
+          "to_state": "CREATED",
+          "reason": null,
+          "at": "2026-11-09T10:00:30+01:00"
+        },
+        {
+          "id": 6,
+          "action_id": "act_003",
+          "from_state": "CREATED",
+          "to_state": "SENT",
+          "reason": "inviata al dipartimento (simulazione)",
+          "at": "2026-11-09T10:00:31+01:00"
+        },
+        {
+          "id": 9,
+          "action_id": "act_003",
+          "from_state": "SENT",
+          "to_state": "RECEIVED",
+          "reason": null,
+          "at": "2026-11-09T10:00:32+01:00"
+        },
+        {
+          "id": 13,
+          "action_id": "act_003",
+          "from_state": "RECEIVED",
+          "to_state": "ACCEPTED",
+          "reason": "Prolungamento orario disponibile",
+          "at": "2026-11-09T10:00:37+01:00"
+        }
+      ]
+    }
+  ],
+  "degraded": []
+}

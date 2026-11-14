@@ -1,0 +1,15 @@
+iteration,edge_key,name,vc,length_m
+0,3465091789-3468033710-0,Riviera di Chiaia,1.12,440.0
+0,8399521503-9137948052-0,Riviera di Chiaia,0.98,821.0
+0,1242030781-3420057522-0,Via Ferdinando Acton; Galleria della Vittoria,1.03,671.0
+0,3455594756-9055605241-0,Via Ferdinando Acton,0.95,584.0
+0,11413409184-13414395318-0,Corso Vittorio Emanuele,0.91,818.0
+0,197555700-3550590945-0,Galleria di Posillipo (Laziale); Via Fuorigrotta,0.97,1132.0
+1,3465091789-3468033710-0,Riviera di Chiaia,1.05,440.0
+1,8399521503-9137948052-0,Riviera di Chiaia,0.94,821.0
+1,1242030781-3420057522-0,Via Ferdinando Acton; Galleria della Vittoria,0.99,671.0
+1,3455594756-9055605241-0,Via Ferdinando Acton,0.93,584.0
+1,197555700-3550590945-0,Galleria di Posillipo (Laziale); Via Fuorigrotta,0.96,1132.0
+2,3465091789-3468033710-0,Riviera di Chiaia,0.93,440.0
+2,1242030781-3420057522-0,Via Ferdinando Acton; Galleria della Vittoria,0.91,671.0
+2,197555700-3550590945-0,Galleria di Posillipo (Laziale); Via Fuorigrotta,0.95,1132.0

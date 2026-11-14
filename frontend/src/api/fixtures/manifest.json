@@ -1,0 +1,835 @@
+{
+  "generated_by": "backend/scripts/export_api_fixtures.py",
+  "notice": "DATI DI ESEMPIO per il mock del frontend (06 8). I numeri non sono risultati del motore: ogni Measured ha fonte «mock.fixture» e lo dichiara nelle assunzioni. L'interfaccia in modalità mock deve dirlo.",
+  "scenario": {
+    "event_id": "match_2027",
+    "run_id": "run_mock_match_2027",
+    "attendance_level": "mid",
+    "started_at": "2026-11-09T10:00:00+01:00"
+  },
+  "operations": {
+    "ack_notification": [
+      {
+        "status": 200,
+        "file": "notification_acknowledged.json",
+        "schema": "Notification",
+        "note": "dopo «Conferma ricezione»"
+      }
+    ],
+    "create_event": [
+      {
+        "status": 201,
+        "file": "event_created.json",
+        "schema": "Event",
+        "note": "evento dell'utente, revisione 1"
+      }
+    ],
+    "create_run": [
+      {
+        "status": 202,
+        "file": "run_created.json",
+        "schema": "CreateRunResponse",
+        "note": ""
+      }
+    ],
+    "create_vdept_request": [
+      {
+        "status": 201,
+        "file": "vdept_request_created.json",
+        "schema": "RequestView",
+        "note": "appena creata (CREATED)"
+      }
+    ],
+    "export_run": [
+      {
+        "status": 200,
+        "file": "run_export.json",
+        "schema": "RunExport",
+        "note": "format=json"
+      },
+      {
+        "status": 200,
+        "file": "run_export_metrics.csv",
+        "schema": "text/csv",
+        "note": "format=csv&what=metrics"
+      },
+      {
+        "status": 200,
+        "file": "run_export_critical_edges.csv",
+        "schema": "text/csv",
+        "note": "format=csv&what=critical_edges"
+      }
+    ],
+    "get_event": [
+      {
+        "status": 200,
+        "file": "event_match_2027.json",
+        "schema": "Event",
+        "note": "preset: dati veri"
+      }
+    ],
+    "get_run": [
+      {
+        "status": 200,
+        "file": "run_view/step_00_intake.json",
+        "schema": "RunView",
+        "note": "stato INTAKE, t=1 s"
+      },
+      {
+        "status": 200,
+        "file": "run_view/step_01_analyze_event_demand.json",
+        "schema": "RunView",
+        "note": "stato ANALYZE, t=5 s"
+      },
+      {
+        "status": 200,
+        "file": "run_view/step_02_analyze_traffic_transit.json",
+        "schema": "RunView",
+        "note": "stato ANALYZE, t=15 s"
+      },
+      {
+        "status": 200,
+        "file": "run_view/step_03_reconcile.json",
+        "schema": "RunView",
+        "note": "stato RECONCILE, t=23 s"
+      },
+      {
+        "status": 200,
+        "file": "run_view/step_04_plan.json",
+        "schema": "RunView",
+        "note": "stato PLAN, t=27 s"
+      },
+      {
+        "status": 200,
+        "file": "run_view/step_05_dispatch.json",
+        "schema": "RunView",
+        "note": "stato DISPATCH, t=31 s"
+      },
+      {
+        "status": 200,
+        "file": "run_view/step_06_await_sent.json",
+        "schema": "RunView",
+        "note": "stato AWAIT, t=34 s"
+      },
+      {
+        "status": 200,
+        "file": "run_view/step_07_await_outcomes.json",
+        "schema": "RunView",
+        "note": "stato AWAIT, t=38 s"
+      },
+      {
+        "status": 200,
+        "file": "run_view/step_08_verify_it1.json",
+        "schema": "RunView",
+        "note": "stato VERIFY, t=45 s"
+      },
+      {
+        "status": 200,
+        "file": "run_view/step_09_replan.json",
+        "schema": "RunView",
+        "note": "stato REPLAN, t=55.5 s"
+      },
+      {
+        "status": 200,
+        "file": "run_view/step_10_dispatch_alternative.json",
+        "schema": "RunView",
+        "note": "stato DISPATCH, t=57.2 s"
+      },
+      {
+        "status": 200,
+        "file": "run_view/step_11_await_alternative.json",
+        "schema": "RunView",
+        "note": "stato AWAIT, t=61 s"
+      },
+      {
+        "status": 200,
+        "file": "run_view/step_12_verify_it2.json",
+        "schema": "RunView",
+        "note": "stato VERIFY, t=68 s"
+      },
+      {
+        "status": 200,
+        "file": "run_view/step_13_done.json",
+        "schema": "RunView",
+        "note": "stato DONE, t=77 s"
+      }
+    ],
+    "get_vdept_request": [
+      {
+        "status": 200,
+        "file": "vdept_request.json",
+        "schema": "RequestView",
+        "note": "richiesta rifiutata con le sue transizioni"
+      }
+    ],
+    "health": [
+      {
+        "status": 200,
+        "file": "health.json",
+        "schema": "HealthResponse",
+        "note": "tutto presente"
+      },
+      {
+        "status": 200,
+        "file": "health_degraded.json",
+        "schema": "HealthResponse",
+        "note": "grafo stradale assente: banner di modalità degradata"
+      }
+    ],
+    "list_events": [
+      {
+        "status": 200,
+        "file": "events_list.json",
+        "schema": "list[EventSummary]",
+        "note": ""
+      }
+    ],
+    "list_runs": [
+      {
+        "status": 200,
+        "file": "runs_list.json",
+        "schema": "list[Run]",
+        "note": "dal più recente"
+      }
+    ],
+    "list_sensors": [
+      {
+        "status": 200,
+        "file": "sensors.json",
+        "schema": "list[PlannedSensor]",
+        "note": "config/sensors.yaml: nessun numero, nessun dato"
+      }
+    ],
+    "live_flow": [
+      {
+        "status": 200,
+        "file": "live_flow_fresh.json",
+        "schema": "LiveFlowResponse",
+        "note": "mode=fresh"
+      },
+      {
+        "status": 200,
+        "file": "live_flow_cached.json",
+        "schema": "LiveFlowResponse",
+        "note": "mode=cached"
+      },
+      {
+        "status": 200,
+        "file": "live_flow_snapshot.json",
+        "schema": "LiveFlowResponse",
+        "note": "mode=snapshot"
+      },
+      {
+        "status": 200,
+        "file": "live_flow_unavailable.json",
+        "schema": "LiveFlowResponse",
+        "note": "mode=unavailable"
+      }
+    ],
+    "login": [
+      {
+        "status": 200,
+        "file": "auth_state_authenticated.json",
+        "schema": "AuthState",
+        "note": "dopo il login"
+      },
+      {
+        "status": 200,
+        "file": "auth_state_public.json",
+        "schema": "AuthState",
+        "note": "accesso libero"
+      }
+    ],
+    "logout": [
+      {
+        "status": 200,
+        "file": "auth_state_anonymous.json",
+        "schema": "AuthState",
+        "note": "senza sessione"
+      },
+      {
+        "status": 200,
+        "file": "auth_state_public.json",
+        "schema": "AuthState",
+        "note": "accesso libero"
+      }
+    ],
+    "manual_response": [
+      {
+        "status": 200,
+        "file": "vdept_manual_response.json",
+        "schema": "RequestView",
+        "note": "dopo la risposta manuale «accetta»"
+      }
+    ],
+    "me": [
+      {
+        "status": 200,
+        "file": "auth_state_authenticated.json",
+        "schema": "AuthState",
+        "note": "dopo il login"
+      },
+      {
+        "status": 200,
+        "file": "auth_state_anonymous.json",
+        "schema": "AuthState",
+        "note": "senza sessione"
+      },
+      {
+        "status": 200,
+        "file": "auth_state_public.json",
+        "schema": "AuthState",
+        "note": "accesso libero"
+      }
+    ],
+    "network_edges": [
+      {
+        "status": 200,
+        "file": "network_edges.json",
+        "schema": "FeatureCollection",
+        "note": ""
+      }
+    ],
+    "reset_event": [
+      {
+        "status": 200,
+        "file": "event_reset.json",
+        "schema": "Event",
+        "note": "preset ripristinato: nuova revisione"
+      }
+    ],
+    "resolve_event": [
+      {
+        "status": 200,
+        "file": "event_resolve_preview.json",
+        "schema": "FeatureCollection",
+        "note": "chiusure e punti di Match 2027 agganciati ai nodi"
+      }
+    ],
+    "run_decisions": [
+      {
+        "status": 200,
+        "file": "run_decisions/step_00.json",
+        "schema": "list[Decision]",
+        "note": ""
+      },
+      {
+        "status": 200,
+        "file": "run_decisions/step_01.json",
+        "schema": "list[Decision]",
+        "note": ""
+      },
+      {
+        "status": 200,
+        "file": "run_decisions/step_02.json",
+        "schema": "list[Decision]",
+        "note": ""
+      },
+      {
+        "status": 200,
+        "file": "run_decisions/step_03.json",
+        "schema": "list[Decision]",
+        "note": ""
+      },
+      {
+        "status": 200,
+        "file": "run_decisions/step_04.json",
+        "schema": "list[Decision]",
+        "note": ""
+      },
+      {
+        "status": 200,
+        "file": "run_decisions/step_05.json",
+        "schema": "list[Decision]",
+        "note": ""
+      },
+      {
+        "status": 200,
+        "file": "run_decisions/step_06.json",
+        "schema": "list[Decision]",
+        "note": ""
+      },
+      {
+        "status": 200,
+        "file": "run_decisions/step_07.json",
+        "schema": "list[Decision]",
+        "note": ""
+      },
+      {
+        "status": 200,
+        "file": "run_decisions/step_08.json",
+        "schema": "list[Decision]",
+        "note": ""
+      },
+      {
+        "status": 200,
+        "file": "run_decisions/step_09.json",
+        "schema": "list[Decision]",
+        "note": ""
+      },
+      {
+        "status": 200,
+        "file": "run_decisions/step_10.json",
+        "schema": "list[Decision]",
+        "note": ""
+      },
+      {
+        "status": 200,
+        "file": "run_decisions/step_11.json",
+        "schema": "list[Decision]",
+        "note": ""
+      },
+      {
+        "status": 200,
+        "file": "run_decisions/step_12.json",
+        "schema": "list[Decision]",
+        "note": ""
+      },
+      {
+        "status": 200,
+        "file": "run_decisions/step_13.json",
+        "schema": "list[Decision]",
+        "note": ""
+      }
+    ],
+    "run_layer": [
+      {
+        "status": 200,
+        "file": "run_layers/edges_vc_it0.json",
+        "schema": "FeatureCollection",
+        "note": ""
+      },
+      {
+        "status": 200,
+        "file": "run_layers/closures_it0.json",
+        "schema": "FeatureCollection",
+        "note": ""
+      },
+      {
+        "status": 200,
+        "file": "run_layers/critical_intersections_it0.json",
+        "schema": "FeatureCollection",
+        "note": ""
+      },
+      {
+        "status": 200,
+        "file": "run_layers/stops_it0.json",
+        "schema": "FeatureCollection",
+        "note": ""
+      },
+      {
+        "status": 200,
+        "file": "run_layers/sections_it0.json",
+        "schema": "FeatureCollection",
+        "note": ""
+      },
+      {
+        "status": 200,
+        "file": "run_layers/event_area_it0.json",
+        "schema": "FeatureCollection",
+        "note": ""
+      },
+      {
+        "status": 200,
+        "file": "run_layers/requests_it0.json",
+        "schema": "FeatureCollection",
+        "note": ""
+      },
+      {
+        "status": 200,
+        "file": "run_layers/edges_vc_it1.json",
+        "schema": "FeatureCollection",
+        "note": ""
+      },
+      {
+        "status": 200,
+        "file": "run_layers/closures_it1.json",
+        "schema": "FeatureCollection",
+        "note": ""
+      },
+      {
+        "status": 200,
+        "file": "run_layers/critical_intersections_it1.json",
+        "schema": "FeatureCollection",
+        "note": ""
+      },
+      {
+        "status": 200,
+        "file": "run_layers/stops_it1.json",
+        "schema": "FeatureCollection",
+        "note": ""
+      },
+      {
+        "status": 200,
+        "file": "run_layers/sections_it1.json",
+        "schema": "FeatureCollection",
+        "note": ""
+      },
+      {
+        "status": 200,
+        "file": "run_layers/event_area_it1.json",
+        "schema": "FeatureCollection",
+        "note": ""
+      },
+      {
+        "status": 200,
+        "file": "run_layers/requests_it1.json",
+        "schema": "FeatureCollection",
+        "note": ""
+      },
+      {
+        "status": 200,
+        "file": "run_layers/edges_vc_it2.json",
+        "schema": "FeatureCollection",
+        "note": ""
+      },
+      {
+        "status": 200,
+        "file": "run_layers/closures_it2.json",
+        "schema": "FeatureCollection",
+        "note": ""
+      },
+      {
+        "status": 200,
+        "file": "run_layers/critical_intersections_it2.json",
+        "schema": "FeatureCollection",
+        "note": ""
+      },
+      {
+        "status": 200,
+        "file": "run_layers/stops_it2.json",
+        "schema": "FeatureCollection",
+        "note": ""
+      },
+      {
+        "status": 200,
+        "file": "run_layers/sections_it2.json",
+        "schema": "FeatureCollection",
+        "note": ""
+      },
+      {
+        "status": 200,
+        "file": "run_layers/event_area_it2.json",
+        "schema": "FeatureCollection",
+        "note": ""
+      },
+      {
+        "status": 200,
+        "file": "run_layers/requests_it2.json",
+        "schema": "FeatureCollection",
+        "note": ""
+      }
+    ],
+    "run_metrics": [
+      {
+        "status": 200,
+        "file": "run_metrics/iteration_0.json",
+        "schema": "MetricsResponse",
+        "note": "iterazione 0 = senza misure"
+      },
+      {
+        "status": 200,
+        "file": "run_metrics/iteration_1.json",
+        "schema": "MetricsResponse",
+        "note": "iterazione 0 = senza misure"
+      },
+      {
+        "status": 200,
+        "file": "run_metrics/iteration_2.json",
+        "schema": "MetricsResponse",
+        "note": "iterazione 0 = senza misure"
+      }
+    ],
+    "run_notifications": [
+      {
+        "status": 200,
+        "file": "run_notifications.json",
+        "schema": "list[Notification]",
+        "note": "WhatsApp inviato e un bollettino consegnato per destinatario (esempio)"
+      }
+    ],
+    "transit_lines": [
+      {
+        "status": 200,
+        "file": "transit_lines.json",
+        "schema": "FeatureCollection",
+        "note": ""
+      }
+    ],
+    "transit_stops": [
+      {
+        "status": 200,
+        "file": "transit_stops.json",
+        "schema": "FeatureCollection",
+        "note": ""
+      }
+    ],
+    "update_event": [
+      {
+        "status": 200,
+        "file": "event_updated.json",
+        "schema": "Event",
+        "note": "dopo una modifica: revisione 2"
+      }
+    ],
+    "vdept_registry": [
+      {
+        "status": 200,
+        "file": "vdept_registry.json",
+        "schema": "VdeptRegistry",
+        "note": "registro e risorse residue a fine run"
+      }
+    ]
+  },
+  "run_sequence": [
+    {
+      "step": 0,
+      "t_seconds": 1,
+      "state": "INTAKE",
+      "run_view": "run_view/step_00_intake.json",
+      "decisions": "run_decisions/step_00.json",
+      "iterations_available": []
+    },
+    {
+      "step": 1,
+      "t_seconds": 5,
+      "state": "ANALYZE",
+      "run_view": "run_view/step_01_analyze_event_demand.json",
+      "decisions": "run_decisions/step_01.json",
+      "iterations_available": []
+    },
+    {
+      "step": 2,
+      "t_seconds": 15,
+      "state": "ANALYZE",
+      "run_view": "run_view/step_02_analyze_traffic_transit.json",
+      "decisions": "run_decisions/step_02.json",
+      "iterations_available": []
+    },
+    {
+      "step": 3,
+      "t_seconds": 23,
+      "state": "RECONCILE",
+      "run_view": "run_view/step_03_reconcile.json",
+      "decisions": "run_decisions/step_03.json",
+      "iterations_available": [
+        0
+      ]
+    },
+    {
+      "step": 4,
+      "t_seconds": 27,
+      "state": "PLAN",
+      "run_view": "run_view/step_04_plan.json",
+      "decisions": "run_decisions/step_04.json",
+      "iterations_available": [
+        0
+      ]
+    },
+    {
+      "step": 5,
+      "t_seconds": 31,
+      "state": "DISPATCH",
+      "run_view": "run_view/step_05_dispatch.json",
+      "decisions": "run_decisions/step_05.json",
+      "iterations_available": [
+        0
+      ]
+    },
+    {
+      "step": 6,
+      "t_seconds": 34,
+      "state": "AWAIT",
+      "run_view": "run_view/step_06_await_sent.json",
+      "decisions": "run_decisions/step_06.json",
+      "iterations_available": [
+        0
+      ]
+    },
+    {
+      "step": 7,
+      "t_seconds": 38,
+      "state": "AWAIT",
+      "run_view": "run_view/step_07_await_outcomes.json",
+      "decisions": "run_decisions/step_07.json",
+      "iterations_available": [
+        0
+      ]
+    },
+    {
+      "step": 8,
+      "t_seconds": 45,
+      "state": "VERIFY",
+      "run_view": "run_view/step_08_verify_it1.json",
+      "decisions": "run_decisions/step_08.json",
+      "iterations_available": [
+        0
+      ]
+    },
+    {
+      "step": 9,
+      "t_seconds": 55.5,
+      "state": "REPLAN",
+      "run_view": "run_view/step_09_replan.json",
+      "decisions": "run_decisions/step_09.json",
+      "iterations_available": [
+        0,
+        1
+      ]
+    },
+    {
+      "step": 10,
+      "t_seconds": 57.2,
+      "state": "DISPATCH",
+      "run_view": "run_view/step_10_dispatch_alternative.json",
+      "decisions": "run_decisions/step_10.json",
+      "iterations_available": [
+        0,
+        1
+      ]
+    },
+    {
+      "step": 11,
+      "t_seconds": 61,
+      "state": "AWAIT",
+      "run_view": "run_view/step_11_await_alternative.json",
+      "decisions": "run_decisions/step_11.json",
+      "iterations_available": [
+        0,
+        1
+      ]
+    },
+    {
+      "step": 12,
+      "t_seconds": 68,
+      "state": "VERIFY",
+      "run_view": "run_view/step_12_verify_it2.json",
+      "decisions": "run_decisions/step_12.json",
+      "iterations_available": [
+        0,
+        1
+      ]
+    },
+    {
+      "step": 13,
+      "t_seconds": 77,
+      "state": "DONE",
+      "run_view": "run_view/step_13_done.json",
+      "decisions": "run_decisions/step_13.json",
+      "iterations_available": [
+        0,
+        1,
+        2
+      ]
+    }
+  ],
+  "errors": {
+    "400": "errors/400_validation.json",
+    "401": "errors/401_unauthenticated.json",
+    "404": "errors/404_not_found.json",
+    "409": "errors/409_conflict.json",
+    "429": "errors/429_rate_limited.json",
+    "500": "errors/500_internal.json",
+    "501": "errors/501_not_implemented.json",
+    "503": "errors/503_auth_not_configured.json"
+  },
+  "binary": {
+    "pmtiles": "GET /tiles/napoli.pmtiles: nessuna fixture, si serve il file vero"
+  },
+  "files": {
+    "auth_state_anonymous.json": "AuthState",
+    "auth_state_authenticated.json": "AuthState",
+    "auth_state_public.json": "AuthState",
+    "errors/400_validation.json": "ErrorResponse",
+    "errors/401_unauthenticated.json": "ErrorResponse",
+    "errors/404_not_found.json": "ErrorResponse",
+    "errors/409_conflict.json": "ErrorResponse",
+    "errors/429_rate_limited.json": "ErrorResponse",
+    "errors/500_internal.json": "ErrorResponse",
+    "errors/501_not_implemented.json": "ErrorResponse",
+    "errors/503_auth_not_configured.json": "ErrorResponse",
+    "event_created.json": "Event",
+    "event_match_2027.json": "Event",
+    "event_regate_sep_2026.json": "Event",
+    "event_reset.json": "Event",
+    "event_resolve_preview.json": "FeatureCollection",
+    "event_updated.json": "Event",
+    "events_list.json": "list[EventSummary]",
+    "health.json": "HealthResponse",
+    "health_degraded.json": "HealthResponse",
+    "live_flow_cached.json": "LiveFlowResponse",
+    "live_flow_fresh.json": "LiveFlowResponse",
+    "live_flow_snapshot.json": "LiveFlowResponse",
+    "live_flow_unavailable.json": "LiveFlowResponse",
+    "network_edges.json": "FeatureCollection",
+    "notification_acknowledged.json": "Notification",
+    "run_created.json": "CreateRunResponse",
+    "run_decisions/step_00.json": "list[Decision]",
+    "run_decisions/step_01.json": "list[Decision]",
+    "run_decisions/step_02.json": "list[Decision]",
+    "run_decisions/step_03.json": "list[Decision]",
+    "run_decisions/step_04.json": "list[Decision]",
+    "run_decisions/step_05.json": "list[Decision]",
+    "run_decisions/step_06.json": "list[Decision]",
+    "run_decisions/step_07.json": "list[Decision]",
+    "run_decisions/step_08.json": "list[Decision]",
+    "run_decisions/step_09.json": "list[Decision]",
+    "run_decisions/step_10.json": "list[Decision]",
+    "run_decisions/step_11.json": "list[Decision]",
+    "run_decisions/step_12.json": "list[Decision]",
+    "run_decisions/step_13.json": "list[Decision]",
+    "run_export.json": "RunExport",
+    "run_export_critical_edges.csv": "text/csv",
+    "run_export_metrics.csv": "text/csv",
+    "run_layers/closures_it0.json": "FeatureCollection",
+    "run_layers/closures_it1.json": "FeatureCollection",
+    "run_layers/closures_it2.json": "FeatureCollection",
+    "run_layers/critical_intersections_it0.json": "FeatureCollection",
+    "run_layers/critical_intersections_it1.json": "FeatureCollection",
+    "run_layers/critical_intersections_it2.json": "FeatureCollection",
+    "run_layers/edges_vc_it0.json": "FeatureCollection",
+    "run_layers/edges_vc_it1.json": "FeatureCollection",
+    "run_layers/edges_vc_it2.json": "FeatureCollection",
+    "run_layers/event_area_it0.json": "FeatureCollection",
+    "run_layers/event_area_it1.json": "FeatureCollection",
+    "run_layers/event_area_it2.json": "FeatureCollection",
+    "run_layers/requests_it0.json": "FeatureCollection",
+    "run_layers/requests_it1.json": "FeatureCollection",
+    "run_layers/requests_it2.json": "FeatureCollection",
+    "run_layers/sections_it0.json": "FeatureCollection",
+    "run_layers/sections_it1.json": "FeatureCollection",
+    "run_layers/sections_it2.json": "FeatureCollection",
+    "run_layers/stops_it0.json": "FeatureCollection",
+    "run_layers/stops_it1.json": "FeatureCollection",
+    "run_layers/stops_it2.json": "FeatureCollection",
+    "run_metrics/iteration_0.json": "MetricsResponse",
+    "run_metrics/iteration_1.json": "MetricsResponse",
+    "run_metrics/iteration_2.json": "MetricsResponse",
+    "run_notifications.json": "list[Notification]",
+    "run_view/step_00_intake.json": "RunView",
+    "run_view/step_01_analyze_event_demand.json": "RunView",
+    "run_view/step_02_analyze_traffic_transit.json": "RunView",
+    "run_view/step_03_reconcile.json": "RunView",
+    "run_view/step_04_plan.json": "RunView",
+    "run_view/step_05_dispatch.json": "RunView",
+    "run_view/step_06_await_sent.json": "RunView",
+    "run_view/step_07_await_outcomes.json": "RunView",
+    "run_view/step_08_verify_it1.json": "RunView",
+    "run_view/step_09_replan.json": "RunView",
+    "run_view/step_10_dispatch_alternative.json": "RunView",
+    "run_view/step_11_await_alternative.json": "RunView",
+    "run_view/step_12_verify_it2.json": "RunView",
+    "run_view/step_13_done.json": "RunView",
+    "run_view_variant_degraded.json": "RunView",
+    "run_view_variant_error.json": "RunView",
+    "run_view_variant_human_decision.json": "RunView",
+    "runs_list.json": "list[Run]",
+    "sensors.json": "list[PlannedSensor]",
+    "transit_lines.json": "FeatureCollection",
+    "transit_stops.json": "FeatureCollection",
+    "vdept_manual_response.json": "RequestView",
+    "vdept_registry.json": "VdeptRegistry",
+    "vdept_request.json": "RequestView",
+    "vdept_request_created.json": "RequestView"
+  }
+}

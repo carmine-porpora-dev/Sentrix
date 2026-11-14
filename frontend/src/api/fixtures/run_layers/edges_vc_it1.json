@@ -1,0 +1,341 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "3465091789-3468033710-0",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            14.235846,
+            40.833259
+          ],
+          [
+            14.241076,
+            40.833259
+          ]
+        ]
+      },
+      "properties": {
+        "edge_key": "3465091789-3468033710-0",
+        "name": "Riviera di Chiaia",
+        "length_m": 440,
+        "vc": 1.05,
+        "vc_class": 2,
+        "closed": false,
+        "detour": true,
+        "window": "departure",
+        "schematic": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "8399521503-9137948052-0",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            14.226171,
+            40.833456
+          ],
+          [
+            14.235929,
+            40.833456
+          ]
+        ]
+      },
+      "properties": {
+        "edge_key": "8399521503-9137948052-0",
+        "name": "Riviera di Chiaia",
+        "length_m": 821,
+        "vc": 0.94,
+        "vc_class": 2,
+        "closed": false,
+        "detour": true,
+        "window": "departure",
+        "schematic": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "3420000620-194087475-0",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            14.249391,
+            40.829926
+          ],
+          [
+            14.250663,
+            40.829926
+          ]
+        ]
+      },
+      "properties": {
+        "edge_key": "3420000620-194087475-0",
+        "name": "Via Partenope; Via Nazario Sauro",
+        "length_m": 107,
+        "vc": 0.74,
+        "vc_class": 1,
+        "closed": false,
+        "detour": true,
+        "window": "departure",
+        "schematic": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "1242030781-3420057522-0",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            14.242867,
+            40.833699
+          ],
+          [
+            14.250843,
+            40.833699
+          ]
+        ]
+      },
+      "properties": {
+        "edge_key": "1242030781-3420057522-0",
+        "name": "Via Ferdinando Acton; Galleria della Vittoria",
+        "length_m": 671,
+        "vc": 0.99,
+        "vc_class": 2,
+        "closed": false,
+        "detour": true,
+        "window": "departure",
+        "schematic": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "3455594756-9055605241-0",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            14.249614,
+            40.836746
+          ],
+          [
+            14.256556,
+            40.836746
+          ]
+        ]
+      },
+      "properties": {
+        "edge_key": "3455594756-9055605241-0",
+        "name": "Via Ferdinando Acton",
+        "length_m": 584,
+        "vc": 0.93,
+        "vc_class": 2,
+        "closed": false,
+        "detour": true,
+        "window": "departure",
+        "schematic": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "11413409184-13414395318-0",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            14.232434,
+            40.839869
+          ],
+          [
+            14.242158,
+            40.839869
+          ]
+        ]
+      },
+      "properties": {
+        "edge_key": "11413409184-13414395318-0",
+        "name": "Corso Vittorio Emanuele",
+        "length_m": 818,
+        "vc": 0.88,
+        "vc_class": 1,
+        "closed": false,
+        "detour": true,
+        "window": "departure",
+        "schematic": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "1943835478-1289339058-0",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            14.240706,
+            40.842963
+          ],
+          [
+            14.248278,
+            40.842963
+          ]
+        ]
+      },
+      "properties": {
+        "edge_key": "1943835478-1289339058-0",
+        "name": "Corso Vittorio Emanuele",
+        "length_m": 637,
+        "vc": 0.86,
+        "vc_class": 1,
+        "closed": false,
+        "detour": true,
+        "window": "departure",
+        "schematic": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "197555700-3550590945-0",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            14.206468,
+            40.827543
+          ],
+          [
+            14.219922,
+            40.827543
+          ]
+        ]
+      },
+      "properties": {
+        "edge_key": "197555700-3550590945-0",
+        "name": "Galleria di Posillipo (Laziale); Via Fuorigrotta",
+        "length_m": 1132,
+        "vc": 0.96,
+        "vc_class": 2,
+        "closed": false,
+        "detour": true,
+        "window": "departure",
+        "schematic": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "18122092-8475097329-0",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            14.2268,
+            40.832
+          ],
+          [
+            14.2406,
+            40.8317
+          ]
+        ]
+      },
+      "properties": {
+        "edge_key": "18122092-8475097329-0",
+        "name": "Viale Anton Dohrn; Via Francesco Caracciolo",
+        "length_m": 1180,
+        "vc": 0.0,
+        "vc_class": 0,
+        "closed": true,
+        "detour": false,
+        "window": "departure",
+        "schematic": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "8399521491-8475097329-0",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            14.2265,
+            40.8318
+          ],
+          [
+            14.2268,
+            40.832
+          ]
+        ]
+      },
+      "properties": {
+        "edge_key": "8399521491-8475097329-0",
+        "name": "Viale Anton Dohrn; Via Francesco Caracciolo",
+        "length_m": 33,
+        "vc": 0.0,
+        "vc_class": 0,
+        "closed": true,
+        "detour": false,
+        "window": "departure",
+        "schematic": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "8475097329-18122092-0",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            14.2268,
+            40.832
+          ],
+          [
+            14.2406,
+            40.8317
+          ]
+        ]
+      },
+      "properties": {
+        "edge_key": "8475097329-18122092-0",
+        "name": "Viale Anton Dohrn; Via Francesco Caracciolo",
+        "length_m": 1180,
+        "vc": 0.0,
+        "vc_class": 0,
+        "closed": true,
+        "detour": false,
+        "window": "departure",
+        "schematic": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "8475097329-8399521499-0",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            14.2268,
+            40.832
+          ],
+          [
+            14.2264,
+            40.8319
+          ]
+        ]
+      },
+      "properties": {
+        "edge_key": "8475097329-8399521499-0",
+        "name": "Viale Anton Dohrn; Via Francesco Caracciolo",
+        "length_m": 32,
+        "vc": 0.0,
+        "vc_class": 0,
+        "closed": true,
+        "detour": false,
+        "window": "departure",
+        "schematic": true
+      }
+    }
+  ]
+}

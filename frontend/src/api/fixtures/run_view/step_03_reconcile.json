@@ -1,0 +1,148 @@
+{
+  "run": {
+    "id": "run_mock_match_2027",
+    "event_id": "match_2027",
+    "event_revision": 1,
+    "attendance_level": "mid",
+    "state": "RECONCILE",
+    "iteration": 0,
+    "replans": 0,
+    "started_at": "2026-11-09T10:00:00+01:00",
+    "ended_at": null,
+    "params_hash": "a047fd23745f7b2f3d416666e86ec53545bff0dc20f70aa3b3171c1d9563284d",
+    "seed": 42,
+    "llm_mode": "cache_only",
+    "error": null
+  },
+  "timeline": [
+    {
+      "state": "INTAKE",
+      "at": "2026-11-09T10:00:00+01:00"
+    },
+    {
+      "state": "ANALYZE",
+      "at": "2026-11-09T10:00:03+01:00"
+    },
+    {
+      "state": "RECONCILE",
+      "at": "2026-11-09T10:00:22+01:00"
+    }
+  ],
+  "agents": [
+    {
+      "agent": "event_demand",
+      "state": "done",
+      "tools_called": [
+        "create_event_context",
+        "build_demand"
+      ],
+      "text": "Match 2027 — serata di regata: 150.000 presenti (livello mid) e picco di deflusso alle 21:30. Le 2 chiusure spostano il traffico sul percorso alternativo.",
+      "text_origin": "llm_cache",
+      "findings": []
+    },
+    {
+      "agent": "traffic",
+      "state": "done",
+      "tools_called": [
+        "apply_closures",
+        "assign_traffic",
+        "find_congested_edges",
+        "find_critical_intersections",
+        "od_times"
+      ],
+      "text": "Con le chiusure il deflusso carica la Riviera di Chiaia: 6 archi con v/c oltre 0,9 (4,5 km). Incroci critici: Piazza Vittoria (v/c 1,08) e Piazza Sannazaro (0,97).",
+      "text_origin": "llm_cache",
+      "findings": [
+        {
+          "summary": "Piazza Vittoria: l'incrocio più carico sulla deviazione in deflusso (v/c 1,08).",
+          "severity": "critical",
+          "window": "departure",
+          "trigger": "critical_intersection",
+          "target": "9137361046",
+          "evidence_ids": [
+            "m.run_mock_match_2027.it0.road.departure.critical_intersection.1.vc"
+          ],
+          "location": {
+            "lat": 40.8353,
+            "lon": 14.2449,
+            "label": null
+          }
+        },
+        {
+          "summary": "Piazza Sannazaro: secondo incrocio critico (v/c 0,97).",
+          "severity": "warning",
+          "window": "departure",
+          "trigger": "critical_intersection",
+          "target": "1798206520",
+          "evidence_ids": [
+            "m.run_mock_match_2027.it0.road.departure.critical_intersection.2.vc"
+          ],
+          "location": {
+            "lat": 40.8289,
+            "lon": 14.2223,
+            "label": null
+          }
+        },
+        {
+          "summary": "Riviera di Chiaia: 6 archi con v/c oltre 0,9 (4,5 km) sul percorso alternativo.",
+          "severity": "warning",
+          "window": "departure",
+          "trigger": "saturated_path",
+          "target": "3465091789-3468033710-0",
+          "evidence_ids": [
+            "m.run_mock_match_2027.it0.road.departure.critical_edges.count",
+            "m.run_mock_match_2027.it0.road.departure.critical_edges.km"
+          ],
+          "location": null
+        }
+      ]
+    },
+    {
+      "agent": "transit",
+      "state": "done_fallback",
+      "tools_called": [
+        "get_stops_near",
+        "get_trips_in_window",
+        "estimate_loads",
+        "find_alternative_connections"
+      ],
+      "text": "Linea 6: nessuna corsa nella finestra di deflusso (dato GTFS). Due tratte e tre fermate risultano sovraccariche nel deflusso (stime).",
+      "text_origin": "template",
+      "findings": [
+        {
+          "summary": "La Linea 6 non ha corse nella finestra di deflusso: nessun servizio.",
+          "severity": "warning",
+          "window": "departure",
+          "trigger": "line_no_service_in_window",
+          "target": "2302",
+          "evidence_ids": [
+            "m.run_mock_match_2027.it0.transit.departure.trips_in_window.metro_line_6"
+          ],
+          "location": null
+        },
+        {
+          "summary": "Due tratte della rete risultano sovraccariche nel deflusso (stima).",
+          "severity": "info",
+          "window": "departure",
+          "trigger": "section_overloaded",
+          "target": "4955",
+          "evidence_ids": [
+            "m.run_mock_match_2027.it0.transit.departure.sections_overloaded"
+          ],
+          "location": null
+        }
+      ]
+    },
+    {
+      "agent": "operations",
+      "state": "waiting",
+      "tools_called": [],
+      "text": null,
+      "text_origin": null,
+      "findings": []
+    }
+  ],
+  "plan": [],
+  "requests": [],
+  "degraded": []
+}

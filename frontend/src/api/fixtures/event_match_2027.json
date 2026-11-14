@@ -1,0 +1,108 @@
+{
+  "id": "match_2027",
+  "name": "Match 2027 — serata di regata",
+  "date": "2027-07-10",
+  "description": null,
+  "area_center": {
+    "lat": 40.832,
+    "lon": 14.235,
+    "label": "Rotonda Diaz"
+  },
+  "area_radius_m": 400,
+  "arrival": {
+    "start": "16:00:00",
+    "end": "19:00:00",
+    "peak": "18:00:00"
+  },
+  "departure": {
+    "start": "21:00:00",
+    "end": "23:00:00",
+    "peak": "21:30:00"
+  },
+  "attendance": {
+    "low": 50000,
+    "mid": 150000,
+    "high": 300000,
+    "source_ref": "Ipotesi di scenario (documento di progetto 5.2)"
+  },
+  "closures": [
+    {
+      "label": "Via Francesco Caracciolo (viale Dohrn – piazza Vittoria)",
+      "street_names": [
+        "Via Francesco Caracciolo"
+      ],
+      "bbox": [
+        14.2275,
+        40.8295,
+        14.245,
+        40.8365
+      ],
+      "edge_keys": [
+        "18122092-8475097329-0",
+        "8475097329-18122092-0"
+      ],
+      "mode": "closed",
+      "capacity_factor": 0.0,
+      "source_ref": "Ipotesi basata sul dispositivo di settembre 2026"
+    },
+    {
+      "label": "Viale Anton Dohrn",
+      "street_names": [
+        "Viale Anton Dohrn"
+      ],
+      "bbox": null,
+      "edge_keys": [
+        "18122092-8475097329-0",
+        "8399521491-8475097329-0",
+        "8475097329-18122092-0",
+        "8475097329-8399521499-0"
+      ],
+      "mode": "closed",
+      "capacity_factor": 0.0,
+      "source_ref": "Ipotesi basata sul dispositivo di settembre 2026"
+    }
+  ],
+  "transit_disruptions": [
+    {
+      "label": "Stazione Arco Mirelli chiusa per sicurezza",
+      "stop_name": "Arco Mirelli",
+      "stop_ids": [
+        "6236",
+        "6237"
+      ],
+      "window": "arrival",
+      "source_ref": "Ipotesi di scenario"
+    }
+  ],
+  "background": {
+    "arrival_peak_share": 0.4,
+    "departure_peak_share": 0.25
+  },
+  "resources": [
+    {
+      "window": "departure",
+      "municipal_police_patrols_total": 6,
+      "municipal_police_patrols_committed": 5,
+      "traffic_control_signal_changes_max": 3,
+      "transport_control_reserve_buses": 8,
+      "transport_control_hour_extensions": 1
+    },
+    {
+      "window": "arrival",
+      "municipal_police_patrols_total": 6,
+      "municipal_police_patrols_committed": 3,
+      "traffic_control_signal_changes_max": 3,
+      "transport_control_reserve_buses": 8,
+      "transport_control_hour_extensions": 1
+    }
+  ],
+  "car_destinations": null,
+  "zones_override": null,
+  "modal_split_override": null,
+  "car_occupancy": null,
+  "real_measures": [],
+  "sources": [],
+  "revision": 1,
+  "created_at": "2026-11-08T00:00:00+01:00",
+  "updated_at": "2026-11-08T00:00:00+01:00"
+}

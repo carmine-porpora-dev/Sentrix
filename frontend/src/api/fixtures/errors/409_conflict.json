@@ -1,0 +1,7 @@
+{
+  "error": {
+    "code": "EVENT_EXISTS",
+    "message": "Esiste già un evento con questo id",
+    "details": {}
+  }
+}

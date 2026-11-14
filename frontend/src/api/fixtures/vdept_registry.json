@@ -1,0 +1,108 @@
+{
+  "departments": [
+    {
+      "id": "traffic_control",
+      "label": "Controllo Traffico (virtuale)",
+      "endpoint": "internal://traffic_control",
+      "request_types": [
+        "close_road",
+        "signal_plan_change",
+        "detour_signage"
+      ]
+    },
+    {
+      "id": "municipal_police",
+      "label": "Polizia Municipale (virtuale)",
+      "endpoint": "internal://municipal_police",
+      "request_types": [
+        "traffic_post",
+        "crowd_control_post"
+      ]
+    },
+    {
+      "id": "transport_control",
+      "label": "Controllo Trasporti (virtuale)",
+      "endpoint": "internal://transport_control",
+      "request_types": [
+        "add_runs",
+        "extend_hours",
+        "bus_detour",
+        "stop_suspension"
+      ]
+    },
+    {
+      "id": "public_comms",
+      "label": "Comunicazione Pubblica (virtuale)",
+      "endpoint": "internal://public_comms",
+      "request_types": [
+        "citizen_notice"
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "department": "municipal_police",
+      "window": "departure",
+      "resource": "patrols",
+      "total": 6,
+      "used": 6,
+      "remaining": 0
+    },
+    {
+      "department": "traffic_control",
+      "window": "departure",
+      "resource": "signal_changes",
+      "total": 3,
+      "used": 1,
+      "remaining": 2
+    },
+    {
+      "department": "transport_control",
+      "window": "departure",
+      "resource": "reserve_buses",
+      "total": 8,
+      "used": 0,
+      "remaining": 8
+    },
+    {
+      "department": "transport_control",
+      "window": "departure",
+      "resource": "hour_extensions",
+      "total": 1,
+      "used": 1,
+      "remaining": 0
+    },
+    {
+      "department": "municipal_police",
+      "window": "arrival",
+      "resource": "patrols",
+      "total": 6,
+      "used": 3,
+      "remaining": 3
+    },
+    {
+      "department": "traffic_control",
+      "window": "arrival",
+      "resource": "signal_changes",
+      "total": 3,
+      "used": 0,
+      "remaining": 3
+    },
+    {
+      "department": "transport_control",
+      "window": "arrival",
+      "resource": "reserve_buses",
+      "total": 8,
+      "used": 0,
+      "remaining": 8
+    },
+    {
+      "department": "transport_control",
+      "window": "arrival",
+      "resource": "hour_extensions",
+      "total": 1,
+      "used": 0,
+      "remaining": 1
+    }
+  ]
+}

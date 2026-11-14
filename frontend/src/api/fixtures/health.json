@@ -1,0 +1,20 @@
+{
+  "status": "ok",
+  "env": "local",
+  "data": {
+    "osm": true,
+    "gtfs": true,
+    "pmtiles": true,
+    "tomtom_key_present": true,
+    "gemini_key_present": true,
+    "whatsapp_configured": true,
+    "whatsapp_provider": "callmebot"
+  },
+  "degraded": [],
+  "versions": {
+    "python": "3.12.13",
+    "fastapi": "0.162.1",
+    "pydantic": "2.14.3",
+    "db_schema": "1"
+  }
+}

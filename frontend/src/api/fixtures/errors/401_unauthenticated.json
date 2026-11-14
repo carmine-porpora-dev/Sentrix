@@ -1,0 +1,7 @@
+{
+  "error": {
+    "code": "UNAUTHENTICATED",
+    "message": "Accesso richiesto: effettua il login",
+    "details": {}
+  }
+}

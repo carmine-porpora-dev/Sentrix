@@ -1,0 +1,66 @@
+{
+  "run": {
+    "id": "run_mock_match_2027",
+    "event_id": "match_2027",
+    "event_revision": 1,
+    "attendance_level": "mid",
+    "state": "ANALYZE",
+    "iteration": 0,
+    "replans": 0,
+    "started_at": "2026-11-09T10:00:00+01:00",
+    "ended_at": null,
+    "params_hash": "a047fd23745f7b2f3d416666e86ec53545bff0dc20f70aa3b3171c1d9563284d",
+    "seed": 42,
+    "llm_mode": "cache_only",
+    "error": null
+  },
+  "timeline": [
+    {
+      "state": "INTAKE",
+      "at": "2026-11-09T10:00:00+01:00"
+    },
+    {
+      "state": "ANALYZE",
+      "at": "2026-11-09T10:00:03+01:00"
+    }
+  ],
+  "agents": [
+    {
+      "agent": "event_demand",
+      "state": "running",
+      "tools_called": [
+        "create_event_context"
+      ],
+      "text": null,
+      "text_origin": null,
+      "findings": []
+    },
+    {
+      "agent": "traffic",
+      "state": "waiting",
+      "tools_called": [],
+      "text": null,
+      "text_origin": null,
+      "findings": []
+    },
+    {
+      "agent": "transit",
+      "state": "waiting",
+      "tools_called": [],
+      "text": null,
+      "text_origin": null,
+      "findings": []
+    },
+    {
+      "agent": "operations",
+      "state": "waiting",
+      "tools_called": [],
+      "text": null,
+      "text_origin": null,
+      "findings": []
+    }
+  ],
+  "plan": [],
+  "requests": [],
+  "degraded": []
+}

@@ -1,0 +1,7 @@
+{
+  "error": {
+    "code": "INTERNAL_ERROR",
+    "message": "Errore interno del server",
+    "details": {}
+  }
+}

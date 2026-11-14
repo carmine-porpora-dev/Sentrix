@@ -1,0 +1,167 @@
+[
+  {
+    "run_id": "run_mock_match_2027",
+    "seq": 1,
+    "at": "2026-11-09T10:00:00+01:00",
+    "actor": "system",
+    "decision": "Analisi avviata",
+    "rationale": "Evento match_2027, revisione 1, livello di affluenza mid, risposta manuale disattivata",
+    "refs": []
+  },
+  {
+    "run_id": "run_mock_match_2027",
+    "seq": 2,
+    "at": "2026-11-09T10:00:00.500000+01:00",
+    "actor": "orchestrator",
+    "decision": "INTAKE → ANALYZE",
+    "rationale": "Evento valido; 2 chiusure risolte (4 archi) e 1 interruzioni del trasporto pubblico (fermate 6236, 6237)",
+    "refs": []
+  },
+  {
+    "run_id": "run_mock_match_2027",
+    "seq": 3,
+    "at": "2026-11-09T10:00:08+01:00",
+    "actor": "event_demand",
+    "decision": "Domanda stimata",
+    "rationale": "150.000 presenti nel livello mid; picco di deflusso alle 21:30",
+    "refs": []
+  },
+  {
+    "run_id": "run_mock_match_2027",
+    "seq": 4,
+    "at": "2026-11-09T10:00:17+01:00",
+    "actor": "transit",
+    "decision": "Criticità del trasporto pubblico",
+    "rationale": "Linea 6 senza corse nella finestra 21:00–23:00; 2 tratte sovraccariche (stima)",
+    "refs": [
+      "m.run_mock_match_2027.it0.transit.departure.trips_in_window.metro_line_6"
+    ]
+  },
+  {
+    "run_id": "run_mock_match_2027",
+    "seq": 5,
+    "at": "2026-11-09T10:00:20+01:00",
+    "actor": "traffic",
+    "decision": "Criticità stradali individuate",
+    "rationale": "2 incroci critici sulla deviazione in deflusso",
+    "refs": [
+      "m.run_mock_match_2027.it0.road.departure.critical_intersection.1.vc",
+      "m.run_mock_match_2027.it0.road.departure.critical_intersection.2.vc"
+    ]
+  },
+  {
+    "run_id": "run_mock_match_2027",
+    "seq": 6,
+    "at": "2026-11-09T10:00:22+01:00",
+    "actor": "orchestrator",
+    "decision": "ANALYZE → RECONCILE",
+    "rationale": "Agenti completati; Transit con testo di riserva",
+    "refs": []
+  },
+  {
+    "run_id": "run_mock_match_2027",
+    "seq": 7,
+    "at": "2026-11-09T10:00:22.500000+01:00",
+    "actor": "orchestrator",
+    "decision": "RECONCILE: deviazione scartata",
+    "rationale": "R2: la deviazione su un arco chiuso dal dispositivo non ha senso",
+    "refs": [
+      "18122092-8475097329-0"
+    ]
+  },
+  {
+    "run_id": "run_mock_match_2027",
+    "seq": 8,
+    "at": "2026-11-09T10:00:24+01:00",
+    "actor": "orchestrator",
+    "decision": "RECONCILE → PLAN",
+    "rationale": "Nessun altro conflitto tra le raccomandazioni",
+    "refs": []
+  },
+  {
+    "run_id": "run_mock_match_2027",
+    "seq": 9,
+    "at": "2026-11-09T10:00:29+01:00",
+    "actor": "operations",
+    "decision": "Piano proposto",
+    "rationale": "5 misure dal catalogo, una scartata in RECONCILE",
+    "refs": [
+      "m.run_mock_match_2027.it0.road.departure.critical_intersection.1.vc",
+      "m.run_mock_match_2027.it0.road.departure.critical_intersection.2.vc",
+      "m.run_mock_match_2027.it0.transit.departure.trips_in_window.metro_line_6"
+    ]
+  },
+  {
+    "run_id": "run_mock_match_2027",
+    "seq": 10,
+    "at": "2026-11-09T10:00:30+01:00",
+    "actor": "orchestrator",
+    "decision": "PLAN → DISPATCH",
+    "rationale": "Piano pronto",
+    "refs": []
+  },
+  {
+    "run_id": "run_mock_match_2027",
+    "seq": 11,
+    "at": "2026-11-09T10:00:31+01:00",
+    "actor": "orchestrator",
+    "decision": "Richieste inviate (simulate)",
+    "rationale": "3 richieste: presidio ×2 e prolungamento della Linea 6",
+    "refs": [
+      "act_001",
+      "act_002",
+      "act_003"
+    ]
+  },
+  {
+    "run_id": "run_mock_match_2027",
+    "seq": 12,
+    "at": "2026-11-09T10:00:33+01:00",
+    "actor": "orchestrator",
+    "decision": "DISPATCH → AWAIT",
+    "rationale": "In attesa degli esiti (tempo massimo 10 s)",
+    "refs": []
+  },
+  {
+    "run_id": "run_mock_match_2027",
+    "seq": 13,
+    "at": "2026-11-09T10:00:36+01:00",
+    "actor": "municipal_police",
+    "decision": "Richiesta act_001 accettata",
+    "rationale": "Pattuglia disponibile",
+    "refs": [
+      "act_001"
+    ]
+  },
+  {
+    "run_id": "run_mock_match_2027",
+    "seq": 14,
+    "at": "2026-11-09T10:00:36+01:00",
+    "actor": "municipal_police",
+    "decision": "Richiesta act_002 rifiutata (UNAVAILABLE)",
+    "rationale": "Pattuglie esaurite nella finestra 21:00–23:00",
+    "refs": [
+      "act_002"
+    ]
+  },
+  {
+    "run_id": "run_mock_match_2027",
+    "seq": 15,
+    "at": "2026-11-09T10:00:37+01:00",
+    "actor": "transport_control",
+    "decision": "Richiesta act_003 accettata",
+    "rationale": "Prolungamento orario disponibile",
+    "refs": [
+      "act_003"
+    ]
+  },
+  {
+    "run_id": "run_mock_match_2027",
+    "seq": 16,
+    "at": "2026-11-09T10:00:40+01:00",
+    "actor": "orchestrator",
+    "decision": "AWAIT → VERIFY",
+    "rationale": "Esiti ricevuti: 2 accettate, 1 rifiutata",
+    "refs": []
+  }
+]

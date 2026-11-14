@@ -1,0 +1,65 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "act_001",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.2449,
+          40.8353
+        ]
+      },
+      "properties": {
+        "action_id": "act_001",
+        "type": "traffic_post",
+        "department": "municipal_police",
+        "state": "IN_PROGRESS",
+        "window": "departure",
+        "target_label": "Incrocio Piazza Vittoria",
+        "iteration": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "act_002",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.2223,
+          40.8289
+        ]
+      },
+      "properties": {
+        "action_id": "act_002",
+        "type": "traffic_post",
+        "department": "municipal_police",
+        "state": "REJECTED",
+        "window": "departure",
+        "target_label": "Incrocio Piazza Sannazaro",
+        "iteration": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "act_004",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.2223,
+          40.8289
+        ]
+      },
+      "properties": {
+        "action_id": "act_004",
+        "type": "signal_plan_change",
+        "department": "traffic_control",
+        "state": "ACCEPTED",
+        "window": "departure",
+        "target_label": "Incrocio Piazza Sannazaro",
+        "iteration": 2
+      }
+    }
+  ]
+}

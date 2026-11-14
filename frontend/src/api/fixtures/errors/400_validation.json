@@ -1,0 +1,15 @@
+{
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "La richiesta non è valida",
+    "details": {
+      "fields": [
+        {
+          "path": "arrival.peak",
+          "message": "il picco deve cadere nella finestra",
+          "type": "value_error"
+        }
+      ]
+    }
+  }
+}

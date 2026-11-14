@@ -1,0 +1,2753 @@
+{
+  "event": {
+    "id": "match_2027",
+    "name": "Match 2027 — serata di regata",
+    "date": "2027-07-10",
+    "description": null,
+    "area_center": {
+      "lat": 40.832,
+      "lon": 14.235,
+      "label": "Rotonda Diaz"
+    },
+    "area_radius_m": 400,
+    "arrival": {
+      "start": "16:00:00",
+      "end": "19:00:00",
+      "peak": "18:00:00"
+    },
+    "departure": {
+      "start": "21:00:00",
+      "end": "23:00:00",
+      "peak": "21:30:00"
+    },
+    "attendance": {
+      "low": 50000,
+      "mid": 150000,
+      "high": 300000,
+      "source_ref": "Ipotesi di scenario (documento di progetto 5.2)"
+    },
+    "closures": [
+      {
+        "label": "Via Francesco Caracciolo (viale Dohrn – piazza Vittoria)",
+        "street_names": [
+          "Via Francesco Caracciolo"
+        ],
+        "bbox": [
+          14.2275,
+          40.8295,
+          14.245,
+          40.8365
+        ],
+        "edge_keys": [
+          "18122092-8475097329-0",
+          "8475097329-18122092-0"
+        ],
+        "mode": "closed",
+        "capacity_factor": 0.0,
+        "source_ref": "Ipotesi basata sul dispositivo di settembre 2026"
+      },
+      {
+        "label": "Viale Anton Dohrn",
+        "street_names": [
+          "Viale Anton Dohrn"
+        ],
+        "bbox": null,
+        "edge_keys": [
+          "18122092-8475097329-0",
+          "8399521491-8475097329-0",
+          "8475097329-18122092-0",
+          "8475097329-8399521499-0"
+        ],
+        "mode": "closed",
+        "capacity_factor": 0.0,
+        "source_ref": "Ipotesi basata sul dispositivo di settembre 2026"
+      }
+    ],
+    "transit_disruptions": [
+      {
+        "label": "Stazione Arco Mirelli chiusa per sicurezza",
+        "stop_name": "Arco Mirelli",
+        "stop_ids": [
+          "6236",
+          "6237"
+        ],
+        "window": "arrival",
+        "source_ref": "Ipotesi di scenario"
+      }
+    ],
+    "background": {
+      "arrival_peak_share": 0.4,
+      "departure_peak_share": 0.25
+    },
+    "resources": [
+      {
+        "window": "departure",
+        "municipal_police_patrols_total": 6,
+        "municipal_police_patrols_committed": 5,
+        "traffic_control_signal_changes_max": 3,
+        "transport_control_reserve_buses": 8,
+        "transport_control_hour_extensions": 1
+      },
+      {
+        "window": "arrival",
+        "municipal_police_patrols_total": 6,
+        "municipal_police_patrols_committed": 3,
+        "traffic_control_signal_changes_max": 3,
+        "transport_control_reserve_buses": 8,
+        "transport_control_hour_extensions": 1
+      }
+    ],
+    "car_destinations": null,
+    "zones_override": null,
+    "modal_split_override": null,
+    "car_occupancy": null,
+    "real_measures": [],
+    "sources": [],
+    "revision": 1,
+    "created_at": "2026-11-08T00:00:00+01:00",
+    "updated_at": "2026-11-08T00:00:00+01:00"
+  },
+  "run": {
+    "id": "run_mock_match_2027",
+    "event_id": "match_2027",
+    "event_revision": 1,
+    "attendance_level": "mid",
+    "state": "DONE",
+    "iteration": 2,
+    "replans": 1,
+    "started_at": "2026-11-09T10:00:00+01:00",
+    "ended_at": "2026-11-09T10:01:16+01:00",
+    "params_hash": "a047fd23745f7b2f3d416666e86ec53545bff0dc20f70aa3b3171c1d9563284d",
+    "seed": 42,
+    "llm_mode": "cache_only",
+    "error": null
+  },
+  "plan": [
+    {
+      "seq": 1,
+      "recommendation": {
+        "measure_type": "traffic_post",
+        "target": "9137361046",
+        "department": "municipal_police",
+        "window": "departure",
+        "params": {},
+        "rationale": "Presidio a Piazza Vittoria: v/c 1,08 sulla deviazione in deflusso.",
+        "evidence_ids": [
+          "m.run_mock_match_2027.it0.road.departure.critical_intersection.1.vc"
+        ]
+      },
+      "action_id": "act_001",
+      "status": "accepted",
+      "replaced_by": null,
+      "note": null
+    },
+    {
+      "seq": 2,
+      "recommendation": {
+        "measure_type": "traffic_post",
+        "target": "1798206520",
+        "department": "municipal_police",
+        "window": "departure",
+        "params": {},
+        "rationale": "Presidio a Piazza Sannazaro: v/c 0,97 sulla deviazione in deflusso.",
+        "evidence_ids": [
+          "m.run_mock_match_2027.it0.road.departure.critical_intersection.2.vc"
+        ]
+      },
+      "action_id": "act_002",
+      "status": "replaced",
+      "replaced_by": 4,
+      "note": null
+    },
+    {
+      "seq": 3,
+      "recommendation": {
+        "measure_type": "extend_hours",
+        "target": "2302",
+        "department": "transport_control",
+        "window": "departure",
+        "params": {
+          "until": "01:30"
+        },
+        "rationale": "La Linea 6 non ha corse nella finestra di deflusso: servizio da prolungare.",
+        "evidence_ids": [
+          "m.run_mock_match_2027.it0.transit.departure.trips_in_window.metro_line_6"
+        ]
+      },
+      "action_id": "act_003",
+      "status": "accepted",
+      "replaced_by": null,
+      "note": null
+    },
+    {
+      "seq": 4,
+      "recommendation": {
+        "measure_type": "signal_plan_change",
+        "target": "1798206520",
+        "department": "traffic_control",
+        "window": "departure",
+        "params": {},
+        "rationale": "Alternativa al presidio rifiutato: variazione del piano semaforico allo stesso incrocio.",
+        "evidence_ids": [
+          "m.run_mock_match_2027.it1.road.departure.critical_intersection.2.vc"
+        ]
+      },
+      "action_id": "act_004",
+      "status": "accepted",
+      "replaced_by": null,
+      "note": null
+    },
+    {
+      "seq": 5,
+      "recommendation": {
+        "measure_type": "citizen_notice",
+        "target": "cittadinanza",
+        "department": "public_comms",
+        "window": "departure",
+        "params": {},
+        "rationale": "Avviso sulle chiusure e sui servizi prolungati, dopo le misure accettate.",
+        "evidence_ids": [
+          "m.run_mock_match_2027.it2.road.departure.veh_hours"
+        ]
+      },
+      "action_id": "act_005",
+      "status": "accepted",
+      "replaced_by": null,
+      "note": null
+    },
+    {
+      "seq": 6,
+      "recommendation": {
+        "measure_type": "detour_signage",
+        "target": "18122092-8475097329-0",
+        "department": "traffic_control",
+        "window": "departure",
+        "params": {},
+        "rationale": "Deviazione indicata su un arco che il dispositivo chiude.",
+        "evidence_ids": [
+          "m.run_mock_match_2027.it0.road.departure.critical_edges.count"
+        ]
+      },
+      "action_id": null,
+      "status": "discarded",
+      "replaced_by": null,
+      "note": "R2: la stessa via risulta chiusa dal dispositivo e proposta come deviazione: scartata la deviazione"
+    }
+  ],
+  "requests": [
+    {
+      "request": {
+        "run_id": "run_mock_match_2027",
+        "iteration": 1,
+        "type": "traffic_post",
+        "target": "9137361046",
+        "target_label": "Incrocio Piazza Vittoria",
+        "target_geo": {
+          "lat": 40.8353,
+          "lon": 14.2449,
+          "label": "Incrocio Piazza Vittoria"
+        },
+        "window": "departure",
+        "priority": "high",
+        "payload": {},
+        "alternative_of": null,
+        "simulation": true,
+        "action_id": "act_001",
+        "department": "municipal_police",
+        "state": "IN_PROGRESS",
+        "reject_code": null,
+        "reject_reason": null
+      },
+      "events": [
+        {
+          "id": 1,
+          "action_id": "act_001",
+          "from_state": null,
+          "to_state": "CREATED",
+          "reason": null,
+          "at": "2026-11-09T10:00:30+01:00"
+        },
+        {
+          "id": 4,
+          "action_id": "act_001",
+          "from_state": "CREATED",
+          "to_state": "SENT",
+          "reason": "inviata al dipartimento (simulazione)",
+          "at": "2026-11-09T10:00:31+01:00"
+        },
+        {
+          "id": 7,
+          "action_id": "act_001",
+          "from_state": "SENT",
+          "to_state": "RECEIVED",
+          "reason": null,
+          "at": "2026-11-09T10:00:32+01:00"
+        },
+        {
+          "id": 10,
+          "action_id": "act_001",
+          "from_state": "RECEIVED",
+          "to_state": "ACCEPTED",
+          "reason": "Pattuglia disponibile",
+          "at": "2026-11-09T10:00:36+01:00"
+        },
+        {
+          "id": 12,
+          "action_id": "act_001",
+          "from_state": "ACCEPTED",
+          "to_state": "IN_PROGRESS",
+          "reason": null,
+          "at": "2026-11-09T10:00:37+01:00"
+        }
+      ]
+    },
+    {
+      "request": {
+        "run_id": "run_mock_match_2027",
+        "iteration": 1,
+        "type": "traffic_post",
+        "target": "1798206520",
+        "target_label": "Incrocio Piazza Sannazaro",
+        "target_geo": {
+          "lat": 40.8289,
+          "lon": 14.2223,
+          "label": "Incrocio Piazza Sannazaro"
+        },
+        "window": "departure",
+        "priority": "high",
+        "payload": {},
+        "alternative_of": null,
+        "simulation": true,
+        "action_id": "act_002",
+        "department": "municipal_police",
+        "state": "REJECTED",
+        "reject_code": "UNAVAILABLE",
+        "reject_reason": "Pattuglie esaurite nella finestra 21:00–23:00: 6 totali, 6 già impegnate ai varchi"
+      },
+      "events": [
+        {
+          "id": 2,
+          "action_id": "act_002",
+          "from_state": null,
+          "to_state": "CREATED",
+          "reason": null,
+          "at": "2026-11-09T10:00:30+01:00"
+        },
+        {
+          "id": 5,
+          "action_id": "act_002",
+          "from_state": "CREATED",
+          "to_state": "SENT",
+          "reason": "inviata al dipartimento (simulazione)",
+          "at": "2026-11-09T10:00:31+01:00"
+        },
+        {
+          "id": 8,
+          "action_id": "act_002",
+          "from_state": "SENT",
+          "to_state": "RECEIVED",
+          "reason": null,
+          "at": "2026-11-09T10:00:32+01:00"
+        },
+        {
+          "id": 11,
+          "action_id": "act_002",
+          "from_state": "RECEIVED",
+          "to_state": "REJECTED",
+          "reason": "Pattuglie esaurite nella finestra 21:00–23:00: 6 totali, 6 già impegnate ai varchi",
+          "at": "2026-11-09T10:00:36+01:00"
+        }
+      ]
+    },
+    {
+      "request": {
+        "run_id": "run_mock_match_2027",
+        "iteration": 1,
+        "type": "extend_hours",
+        "target": "2302",
+        "target_label": "Linea 6",
+        "target_geo": null,
+        "window": "departure",
+        "priority": "normal",
+        "payload": {
+          "until": "01:30"
+        },
+        "alternative_of": null,
+        "simulation": true,
+        "action_id": "act_003",
+        "department": "transport_control",
+        "state": "ACCEPTED",
+        "reject_code": null,
+        "reject_reason": null
+      },
+      "events": [
+        {
+          "id": 3,
+          "action_id": "act_003",
+          "from_state": null,
+          "to_state": "CREATED",
+          "reason": null,
+          "at": "2026-11-09T10:00:30+01:00"
+        },
+        {
+          "id": 6,
+          "action_id": "act_003",
+          "from_state": "CREATED",
+          "to_state": "SENT",
+          "reason": "inviata al dipartimento (simulazione)",
+          "at": "2026-11-09T10:00:31+01:00"
+        },
+        {
+          "id": 9,
+          "action_id": "act_003",
+          "from_state": "SENT",
+          "to_state": "RECEIVED",
+          "reason": null,
+          "at": "2026-11-09T10:00:32+01:00"
+        },
+        {
+          "id": 13,
+          "action_id": "act_003",
+          "from_state": "RECEIVED",
+          "to_state": "ACCEPTED",
+          "reason": "Prolungamento orario disponibile",
+          "at": "2026-11-09T10:00:37+01:00"
+        }
+      ]
+    },
+    {
+      "request": {
+        "run_id": "run_mock_match_2027",
+        "iteration": 2,
+        "type": "signal_plan_change",
+        "target": "1798206520",
+        "target_label": "Incrocio Piazza Sannazaro",
+        "target_geo": {
+          "lat": 40.8289,
+          "lon": 14.2223,
+          "label": "Incrocio Piazza Sannazaro"
+        },
+        "window": "departure",
+        "priority": "high",
+        "payload": {},
+        "alternative_of": "act_002",
+        "simulation": true,
+        "action_id": "act_004",
+        "department": "traffic_control",
+        "state": "ACCEPTED",
+        "reject_code": null,
+        "reject_reason": null
+      },
+      "events": [
+        {
+          "id": 14,
+          "action_id": "act_004",
+          "from_state": null,
+          "to_state": "CREATED",
+          "reason": null,
+          "at": "2026-11-09T10:00:56+01:00"
+        },
+        {
+          "id": 15,
+          "action_id": "act_004",
+          "from_state": "CREATED",
+          "to_state": "SENT",
+          "reason": "inviata al dipartimento (simulazione)",
+          "at": "2026-11-09T10:00:57+01:00"
+        },
+        {
+          "id": 16,
+          "action_id": "act_004",
+          "from_state": "SENT",
+          "to_state": "RECEIVED",
+          "reason": null,
+          "at": "2026-11-09T10:00:58+01:00"
+        },
+        {
+          "id": 17,
+          "action_id": "act_004",
+          "from_state": "RECEIVED",
+          "to_state": "ACCEPTED",
+          "reason": "Variazione semaforica consentita",
+          "at": "2026-11-09T10:01:00+01:00"
+        }
+      ]
+    },
+    {
+      "request": {
+        "run_id": "run_mock_match_2027",
+        "iteration": 2,
+        "type": "citizen_notice",
+        "target": "cittadinanza",
+        "target_label": "Avviso ai cittadini",
+        "target_geo": null,
+        "window": "departure",
+        "priority": "low",
+        "payload": {
+          "text": "Chiusure dalle 16:00: Via Francesco Caracciolo (viale Dohrn – piazza Vittoria); Viale Anton Dohrn. Linea 6 prolungata fino all'1:30."
+        },
+        "alternative_of": null,
+        "simulation": true,
+        "action_id": "act_005",
+        "department": "public_comms",
+        "state": "COMPLETED",
+        "reject_code": null,
+        "reject_reason": null
+      },
+      "events": [
+        {
+          "id": 18,
+          "action_id": "act_005",
+          "from_state": null,
+          "to_state": "CREATED",
+          "reason": null,
+          "at": "2026-11-09T10:01:11+01:00"
+        },
+        {
+          "id": 19,
+          "action_id": "act_005",
+          "from_state": "CREATED",
+          "to_state": "SENT",
+          "reason": "inviata al dipartimento (simulazione)",
+          "at": "2026-11-09T10:01:12+01:00"
+        },
+        {
+          "id": 20,
+          "action_id": "act_005",
+          "from_state": "SENT",
+          "to_state": "RECEIVED",
+          "reason": null,
+          "at": "2026-11-09T10:01:13+01:00"
+        },
+        {
+          "id": 21,
+          "action_id": "act_005",
+          "from_state": "RECEIVED",
+          "to_state": "ACCEPTED",
+          "reason": "Testo coerente con le misure accettate",
+          "at": "2026-11-09T10:01:14+01:00"
+        },
+        {
+          "id": 22,
+          "action_id": "act_005",
+          "from_state": "ACCEPTED",
+          "to_state": "COMPLETED",
+          "reason": null,
+          "at": "2026-11-09T10:01:15+01:00"
+        }
+      ]
+    }
+  ],
+  "decisions": [
+    {
+      "run_id": "run_mock_match_2027",
+      "seq": 1,
+      "at": "2026-11-09T10:00:00+01:00",
+      "actor": "system",
+      "decision": "Analisi avviata",
+      "rationale": "Evento match_2027, revisione 1, livello di affluenza mid, risposta manuale disattivata",
+      "refs": []
+    },
+    {
+      "run_id": "run_mock_match_2027",
+      "seq": 2,
+      "at": "2026-11-09T10:00:00.500000+01:00",
+      "actor": "orchestrator",
+      "decision": "INTAKE → ANALYZE",
+      "rationale": "Evento valido; 2 chiusure risolte (4 archi) e 1 interruzioni del trasporto pubblico (fermate 6236, 6237)",
+      "refs": []
+    },
+    {
+      "run_id": "run_mock_match_2027",
+      "seq": 3,
+      "at": "2026-11-09T10:00:08+01:00",
+      "actor": "event_demand",
+      "decision": "Domanda stimata",
+      "rationale": "150.000 presenti nel livello mid; picco di deflusso alle 21:30",
+      "refs": []
+    },
+    {
+      "run_id": "run_mock_match_2027",
+      "seq": 4,
+      "at": "2026-11-09T10:00:17+01:00",
+      "actor": "transit",
+      "decision": "Criticità del trasporto pubblico",
+      "rationale": "Linea 6 senza corse nella finestra 21:00–23:00; 2 tratte sovraccariche (stima)",
+      "refs": [
+        "m.run_mock_match_2027.it0.transit.departure.trips_in_window.metro_line_6"
+      ]
+    },
+    {
+      "run_id": "run_mock_match_2027",
+      "seq": 5,
+      "at": "2026-11-09T10:00:20+01:00",
+      "actor": "traffic",
+      "decision": "Criticità stradali individuate",
+      "rationale": "2 incroci critici sulla deviazione in deflusso",
+      "refs": [
+        "m.run_mock_match_2027.it0.road.departure.critical_intersection.1.vc",
+        "m.run_mock_match_2027.it0.road.departure.critical_intersection.2.vc"
+      ]
+    },
+    {
+      "run_id": "run_mock_match_2027",
+      "seq": 6,
+      "at": "2026-11-09T10:00:22+01:00",
+      "actor": "orchestrator",
+      "decision": "ANALYZE → RECONCILE",
+      "rationale": "Agenti completati; Transit con testo di riserva",
+      "refs": []
+    },
+    {
+      "run_id": "run_mock_match_2027",
+      "seq": 7,
+      "at": "2026-11-09T10:00:22.500000+01:00",
+      "actor": "orchestrator",
+      "decision": "RECONCILE: deviazione scartata",
+      "rationale": "R2: la deviazione su un arco chiuso dal dispositivo non ha senso",
+      "refs": [
+        "18122092-8475097329-0"
+      ]
+    },
+    {
+      "run_id": "run_mock_match_2027",
+      "seq": 8,
+      "at": "2026-11-09T10:00:24+01:00",
+      "actor": "orchestrator",
+      "decision": "RECONCILE → PLAN",
+      "rationale": "Nessun altro conflitto tra le raccomandazioni",
+      "refs": []
+    },
+    {
+      "run_id": "run_mock_match_2027",
+      "seq": 9,
+      "at": "2026-11-09T10:00:29+01:00",
+      "actor": "operations",
+      "decision": "Piano proposto",
+      "rationale": "5 misure dal catalogo, una scartata in RECONCILE",
+      "refs": [
+        "m.run_mock_match_2027.it0.road.departure.critical_intersection.1.vc",
+        "m.run_mock_match_2027.it0.road.departure.critical_intersection.2.vc",
+        "m.run_mock_match_2027.it0.transit.departure.trips_in_window.metro_line_6"
+      ]
+    },
+    {
+      "run_id": "run_mock_match_2027",
+      "seq": 10,
+      "at": "2026-11-09T10:00:30+01:00",
+      "actor": "orchestrator",
+      "decision": "PLAN → DISPATCH",
+      "rationale": "Piano pronto",
+      "refs": []
+    },
+    {
+      "run_id": "run_mock_match_2027",
+      "seq": 11,
+      "at": "2026-11-09T10:00:31+01:00",
+      "actor": "orchestrator",
+      "decision": "Richieste inviate (simulate)",
+      "rationale": "3 richieste: presidio ×2 e prolungamento della Linea 6",
+      "refs": [
+        "act_001",
+        "act_002",
+        "act_003"
+      ]
+    },
+    {
+      "run_id": "run_mock_match_2027",
+      "seq": 12,
+      "at": "2026-11-09T10:00:33+01:00",
+      "actor": "orchestrator",
+      "decision": "DISPATCH → AWAIT",
+      "rationale": "In attesa degli esiti (tempo massimo 10 s)",
+      "refs": []
+    },
+    {
+      "run_id": "run_mock_match_2027",
+      "seq": 13,
+      "at": "2026-11-09T10:00:36+01:00",
+      "actor": "municipal_police",
+      "decision": "Richiesta act_001 accettata",
+      "rationale": "Pattuglia disponibile",
+      "refs": [
+        "act_001"
+      ]
+    },
+    {
+      "run_id": "run_mock_match_2027",
+      "seq": 14,
+      "at": "2026-11-09T10:00:36+01:00",
+      "actor": "municipal_police",
+      "decision": "Richiesta act_002 rifiutata (UNAVAILABLE)",
+      "rationale": "Pattuglie esaurite nella finestra 21:00–23:00",
+      "refs": [
+        "act_002"
+      ]
+    },
+    {
+      "run_id": "run_mock_match_2027",
+      "seq": 15,
+      "at": "2026-11-09T10:00:37+01:00",
+      "actor": "transport_control",
+      "decision": "Richiesta act_003 accettata",
+      "rationale": "Prolungamento orario disponibile",
+      "refs": [
+        "act_003"
+      ]
+    },
+    {
+      "run_id": "run_mock_match_2027",
+      "seq": 16,
+      "at": "2026-11-09T10:00:40+01:00",
+      "actor": "orchestrator",
+      "decision": "AWAIT → VERIFY",
+      "rationale": "Esiti ricevuti: 2 accettate, 1 rifiutata",
+      "refs": []
+    },
+    {
+      "run_id": "run_mock_match_2027",
+      "seq": 17,
+      "at": "2026-11-09T10:00:50+01:00",
+      "actor": "orchestrator",
+      "decision": "Iterazione 1 calcolata",
+      "rationale": "Metriche e livelli salvati per le finestre toccate dalle misure",
+      "refs": [
+        "m.run_mock_match_2027.it1.road.departure.veh_hours"
+      ]
+    },
+    {
+      "run_id": "run_mock_match_2027",
+      "seq": 18,
+      "at": "2026-11-09T10:00:52+01:00",
+      "actor": "orchestrator",
+      "decision": "VERIFY → REPLAN",
+      "rationale": "1 rifiuto nell'ultimo round; ripianificazione 1 di 3",
+      "refs": []
+    },
+    {
+      "run_id": "run_mock_match_2027",
+      "seq": 19,
+      "at": "2026-11-09T10:00:55+01:00",
+      "actor": "operations",
+      "decision": "Alternativa scelta per act_002",
+      "rationale": "signal_plan_change allo stesso incrocio (prima alternativa del catalogo)",
+      "refs": [
+        "act_002"
+      ]
+    },
+    {
+      "run_id": "run_mock_match_2027",
+      "seq": 20,
+      "at": "2026-11-09T10:00:56+01:00",
+      "actor": "orchestrator",
+      "decision": "REPLAN → DISPATCH",
+      "rationale": "Una richiesta alternativa",
+      "refs": []
+    },
+    {
+      "run_id": "run_mock_match_2027",
+      "seq": 21,
+      "at": "2026-11-09T10:00:57+01:00",
+      "actor": "orchestrator",
+      "decision": "Richiesta act_004 inviata (simulata)",
+      "rationale": "Alternativa di act_002",
+      "refs": [
+        "act_004"
+      ]
+    },
+    {
+      "run_id": "run_mock_match_2027",
+      "seq": 22,
+      "at": "2026-11-09T10:00:58+01:00",
+      "actor": "orchestrator",
+      "decision": "DISPATCH → AWAIT",
+      "rationale": "In attesa dell'esito",
+      "refs": []
+    },
+    {
+      "run_id": "run_mock_match_2027",
+      "seq": 23,
+      "at": "2026-11-09T10:01:00+01:00",
+      "actor": "traffic_control",
+      "decision": "Richiesta act_004 accettata",
+      "rationale": "Variazione semaforica consentita (0 su 3 usate)",
+      "refs": [
+        "act_004"
+      ]
+    },
+    {
+      "run_id": "run_mock_match_2027",
+      "seq": 24,
+      "at": "2026-11-09T10:01:03+01:00",
+      "actor": "orchestrator",
+      "decision": "AWAIT → VERIFY",
+      "rationale": "Nessun rifiuto nel round",
+      "refs": []
+    },
+    {
+      "run_id": "run_mock_match_2027",
+      "seq": 25,
+      "at": "2026-11-09T10:01:10+01:00",
+      "actor": "orchestrator",
+      "decision": "Iterazione 2 calcolata",
+      "rationale": "Confronto con l'iterazione 1 e con quella senza misure",
+      "refs": [
+        "m.run_mock_match_2027.it2.road.departure.veh_hours",
+        "m.run_mock_match_2027.it1.road.departure.veh_hours",
+        "m.run_mock_match_2027.it0.road.departure.veh_hours"
+      ]
+    },
+    {
+      "run_id": "run_mock_match_2027",
+      "seq": 26,
+      "at": "2026-11-09T10:01:11+01:00",
+      "actor": "orchestrator",
+      "decision": "Avviso ai cittadini inviato",
+      "rationale": "Testo che cita solo misure accettate",
+      "refs": [
+        "act_005"
+      ]
+    },
+    {
+      "run_id": "run_mock_match_2027",
+      "seq": 27,
+      "at": "2026-11-09T10:01:14+01:00",
+      "actor": "public_comms",
+      "decision": "Richiesta act_005 accettata",
+      "rationale": "Testo coerente con le misure accettate",
+      "refs": [
+        "act_005"
+      ]
+    },
+    {
+      "run_id": "run_mock_match_2027",
+      "seq": 28,
+      "at": "2026-11-09T10:01:16+01:00",
+      "actor": "orchestrator",
+      "decision": "DONE",
+      "rationale": "Piano finale: 4 accettate, 1 sostituita, 1 scartata",
+      "refs": []
+    }
+  ],
+  "metrics": [
+    {
+      "iteration": 0,
+      "metrics": [
+        {
+          "id": "m.run_mock_match_2027.it0.event.attendance",
+          "value": 150000,
+          "unit": "pax",
+          "kind": "simulated",
+          "source": "Evento match_2027 (revisione 1)",
+          "method": "affluenza del livello mid indicata nell'Evento, ipotesi di scenario",
+          "inputs": [
+            "event match_2027 rev 1",
+            "livello di affluenza mid"
+          ],
+          "assumptions": [
+            "fonte indicata nell'Evento: Ipotesi di scenario (documento di progetto 5.2)"
+          ],
+          "as_of": "2026-11-08T00:00:00+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.road.arrival.veh_hours",
+          "value": 3210,
+          "unit": "veic·h",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "somma sugli archi di v × t (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.road.arrival.od_time.bagnoli_centrale",
+          "value": 24.1,
+          "unit": "min",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "cammino minimo sui costi finali (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.road.arrival.od_time.fuorigrotta_municipio",
+          "value": 21.8,
+          "unit": "min",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "cammino minimo sui costi finali (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.road.arrival.od_time.vomero_vittoria",
+          "value": 18.9,
+          "unit": "min",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "cammino minimo sui costi finali (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.road.arrival.od_time.posillipo_municipio",
+          "value": 33.5,
+          "unit": "min",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "cammino minimo sui costi finali (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.road.arrival.od_time.tangenziale_garibaldi",
+          "value": 26.0,
+          "unit": "min",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "cammino minimo sui costi finali (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.road.arrival.od_time.mean",
+          "value": 24.9,
+          "unit": "min",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "media semplice delle 5 coppie O/D (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.road.arrival.critical_edges.count",
+          "value": 4,
+          "unit": "n",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "archi con v/c oltre la soglia critica (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.road.arrival.critical_edges.km",
+          "value": 2.1,
+          "unit": "km",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "lunghezza degli archi critici (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.road.arrival.detour_extra_km",
+          "value": 2.1,
+          "unit": "km",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "lunghezza media delle deviazioni (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.road.arrival.unassigned_pairs",
+          "value": 0,
+          "unit": "n",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "coppie O/D senza percorso (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.road.arrival.critical_intersection.1.vc",
+          "value": 0.88,
+          "unit": "rapporto",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "massimo v/c degli archi entranti (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.road.arrival.critical_intersection.2.vc",
+          "value": 0.81,
+          "unit": "rapporto",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "massimo v/c degli archi entranti (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.transit.arrival.trips_in_window.metro_line_6",
+          "value": 12,
+          "unit": "n",
+          "kind": "real",
+          "source": "mock.fixture (gtfs.anm)",
+          "method": "corse della Linea 6 nella fascia di picco (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.transit.arrival.stops_overloaded",
+          "value": 1,
+          "unit": "n",
+          "kind": "estimate",
+          "source": "mock.fixture",
+          "method": "fermate vicine all'area con passeggeri/capacità > 1 (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.transit.arrival.sections_overloaded",
+          "value": 1,
+          "unit": "n",
+          "kind": "estimate",
+          "source": "mock.fixture",
+          "method": "tratte di metro e funicolare con passeggeri/capacità > 1 (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.transit.arrival.max_section_load.metro_line_1",
+          "value": 1.12,
+          "unit": "rapporto",
+          "kind": "estimate",
+          "source": "mock.fixture",
+          "method": "massimo di passeggeri/capacità tra le tratte di metro_line_1 (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.transit.arrival.max_section_load.metro_line_6",
+          "value": 0.9,
+          "unit": "rapporto",
+          "kind": "estimate",
+          "source": "mock.fixture",
+          "method": "massimo di passeggeri/capacità tra le tratte di metro_line_6 (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.transit.arrival.max_section_load.funicular",
+          "value": 0.45,
+          "unit": "rapporto",
+          "kind": "estimate",
+          "source": "mock.fixture",
+          "method": "massimo di passeggeri/capacità tra le tratte di funicular (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.road.departure.veh_hours",
+          "value": 4820,
+          "unit": "veic·h",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "somma sugli archi di v × t (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.road.departure.od_time.bagnoli_centrale",
+          "value": 41.2,
+          "unit": "min",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "cammino minimo sui costi finali (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.road.departure.od_time.fuorigrotta_municipio",
+          "value": 35.6,
+          "unit": "min",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "cammino minimo sui costi finali (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.road.departure.od_time.vomero_vittoria",
+          "value": 29.8,
+          "unit": "min",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "cammino minimo sui costi finali (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.road.departure.od_time.posillipo_municipio",
+          "value": 48.3,
+          "unit": "min",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "cammino minimo sui costi finali (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.road.departure.od_time.tangenziale_garibaldi",
+          "value": 37.1,
+          "unit": "min",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "cammino minimo sui costi finali (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.road.departure.od_time.mean",
+          "value": 38.4,
+          "unit": "min",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "media semplice delle 5 coppie O/D (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.road.departure.critical_edges.count",
+          "value": 6,
+          "unit": "n",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "archi con v/c oltre la soglia critica (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.road.departure.critical_edges.km",
+          "value": 4.5,
+          "unit": "km",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "lunghezza degli archi critici (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.road.departure.detour_extra_km",
+          "value": 2.9,
+          "unit": "km",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "lunghezza media delle deviazioni (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.road.departure.unassigned_pairs",
+          "value": 0,
+          "unit": "n",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "coppie O/D senza percorso (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.road.departure.critical_intersection.1.vc",
+          "value": 1.08,
+          "unit": "rapporto",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "massimo v/c degli archi entranti (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.road.departure.critical_intersection.2.vc",
+          "value": 0.97,
+          "unit": "rapporto",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "massimo v/c degli archi entranti (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.transit.departure.trips_in_window.metro_line_6",
+          "value": 0,
+          "unit": "n",
+          "kind": "real",
+          "source": "mock.fixture (gtfs.anm)",
+          "method": "corse della Linea 6 nella fascia di picco (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.transit.departure.stops_overloaded",
+          "value": 3,
+          "unit": "n",
+          "kind": "estimate",
+          "source": "mock.fixture",
+          "method": "fermate vicine all'area con passeggeri/capacità > 1 (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.transit.departure.sections_overloaded",
+          "value": 2,
+          "unit": "n",
+          "kind": "estimate",
+          "source": "mock.fixture",
+          "method": "tratte di metro e funicolare con passeggeri/capacità > 1 (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.transit.departure.max_section_load.metro_line_1",
+          "value": 1.12,
+          "unit": "rapporto",
+          "kind": "estimate",
+          "source": "mock.fixture",
+          "method": "massimo di passeggeri/capacità tra le tratte di metro_line_1 (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.transit.departure.max_section_load.metro_line_6",
+          "value": 0.0,
+          "unit": "rapporto",
+          "kind": "estimate",
+          "source": "mock.fixture",
+          "method": "massimo di passeggeri/capacità tra le tratte di metro_line_6 (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it0.transit.departure.max_section_load.funicular",
+          "value": 0.5,
+          "unit": "rapporto",
+          "kind": "estimate",
+          "source": "mock.fixture",
+          "method": "massimo di passeggeri/capacità tra le tratte di funicular (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:21+01:00"
+        }
+      ]
+    },
+    {
+      "iteration": 1,
+      "metrics": [
+        {
+          "id": "m.run_mock_match_2027.it1.road.arrival.veh_hours",
+          "value": 3210,
+          "unit": "veic·h",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "somma sugli archi di v × t (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.road.arrival.od_time.bagnoli_centrale",
+          "value": 24.1,
+          "unit": "min",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "cammino minimo sui costi finali (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.road.arrival.od_time.fuorigrotta_municipio",
+          "value": 21.8,
+          "unit": "min",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "cammino minimo sui costi finali (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.road.arrival.od_time.vomero_vittoria",
+          "value": 18.9,
+          "unit": "min",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "cammino minimo sui costi finali (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.road.arrival.od_time.posillipo_municipio",
+          "value": 33.5,
+          "unit": "min",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "cammino minimo sui costi finali (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.road.arrival.od_time.tangenziale_garibaldi",
+          "value": 26.0,
+          "unit": "min",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "cammino minimo sui costi finali (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.road.arrival.od_time.mean",
+          "value": 24.9,
+          "unit": "min",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "media semplice delle 5 coppie O/D (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.road.arrival.critical_edges.count",
+          "value": 4,
+          "unit": "n",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "archi con v/c oltre la soglia critica (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.road.arrival.critical_edges.km",
+          "value": 2.1,
+          "unit": "km",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "lunghezza degli archi critici (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.road.arrival.detour_extra_km",
+          "value": 2.1,
+          "unit": "km",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "lunghezza media delle deviazioni (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.road.arrival.unassigned_pairs",
+          "value": 0,
+          "unit": "n",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "coppie O/D senza percorso (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.road.arrival.critical_intersection.1.vc",
+          "value": 0.88,
+          "unit": "rapporto",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "massimo v/c degli archi entranti (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.road.arrival.critical_intersection.2.vc",
+          "value": 0.81,
+          "unit": "rapporto",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "massimo v/c degli archi entranti (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.transit.arrival.trips_in_window.metro_line_6",
+          "value": 12,
+          "unit": "n",
+          "kind": "real",
+          "source": "mock.fixture (gtfs.anm)",
+          "method": "corse della Linea 6 nella fascia di picco (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.transit.arrival.stops_overloaded",
+          "value": 1,
+          "unit": "n",
+          "kind": "estimate",
+          "source": "mock.fixture",
+          "method": "fermate vicine all'area con passeggeri/capacità > 1 (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.transit.arrival.sections_overloaded",
+          "value": 1,
+          "unit": "n",
+          "kind": "estimate",
+          "source": "mock.fixture",
+          "method": "tratte di metro e funicolare con passeggeri/capacità > 1 (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.transit.arrival.max_section_load.metro_line_1",
+          "value": 1.12,
+          "unit": "rapporto",
+          "kind": "estimate",
+          "source": "mock.fixture",
+          "method": "massimo di passeggeri/capacità tra le tratte di metro_line_1 (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.transit.arrival.max_section_load.metro_line_6",
+          "value": 0.8,
+          "unit": "rapporto",
+          "kind": "estimate",
+          "source": "mock.fixture",
+          "method": "massimo di passeggeri/capacità tra le tratte di metro_line_6 (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.transit.arrival.max_section_load.funicular",
+          "value": 0.45,
+          "unit": "rapporto",
+          "kind": "estimate",
+          "source": "mock.fixture",
+          "method": "massimo di passeggeri/capacità tra le tratte di funicular (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.road.departure.veh_hours",
+          "value": 4760,
+          "unit": "veic·h",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "somma sugli archi di v × t (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.road.departure.od_time.bagnoli_centrale",
+          "value": 40.1,
+          "unit": "min",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "cammino minimo sui costi finali (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.road.departure.od_time.fuorigrotta_municipio",
+          "value": 34.9,
+          "unit": "min",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "cammino minimo sui costi finali (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.road.departure.od_time.vomero_vittoria",
+          "value": 29.1,
+          "unit": "min",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "cammino minimo sui costi finali (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.road.departure.od_time.posillipo_municipio",
+          "value": 46.7,
+          "unit": "min",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "cammino minimo sui costi finali (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.road.departure.od_time.tangenziale_garibaldi",
+          "value": 36.5,
+          "unit": "min",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "cammino minimo sui costi finali (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.road.departure.od_time.mean",
+          "value": 37.5,
+          "unit": "min",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "media semplice delle 5 coppie O/D (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.road.departure.critical_edges.count",
+          "value": 5,
+          "unit": "n",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "archi con v/c oltre la soglia critica (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.road.departure.critical_edges.km",
+          "value": 3.6,
+          "unit": "km",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "lunghezza degli archi critici (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.road.departure.detour_extra_km",
+          "value": 2.9,
+          "unit": "km",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "lunghezza media delle deviazioni (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.road.departure.unassigned_pairs",
+          "value": 0,
+          "unit": "n",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "coppie O/D senza percorso (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.road.departure.critical_intersection.1.vc",
+          "value": 1.01,
+          "unit": "rapporto",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "massimo v/c degli archi entranti (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.road.departure.critical_intersection.2.vc",
+          "value": 0.97,
+          "unit": "rapporto",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "massimo v/c degli archi entranti (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.transit.departure.trips_in_window.metro_line_6",
+          "value": 8,
+          "unit": "n",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "corse della Linea 6 nella fascia di picco (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.transit.departure.stops_overloaded",
+          "value": 2,
+          "unit": "n",
+          "kind": "estimate",
+          "source": "mock.fixture",
+          "method": "fermate vicine all'area con passeggeri/capacità > 1 (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.transit.departure.sections_overloaded",
+          "value": 1,
+          "unit": "n",
+          "kind": "estimate",
+          "source": "mock.fixture",
+          "method": "tratte di metro e funicolare con passeggeri/capacità > 1 (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.transit.departure.max_section_load.metro_line_1",
+          "value": 1.12,
+          "unit": "rapporto",
+          "kind": "estimate",
+          "source": "mock.fixture",
+          "method": "massimo di passeggeri/capacità tra le tratte di metro_line_1 (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.transit.departure.max_section_load.metro_line_6",
+          "value": 0.8,
+          "unit": "rapporto",
+          "kind": "estimate",
+          "source": "mock.fixture",
+          "method": "massimo di passeggeri/capacità tra le tratte di metro_line_6 (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.transit.departure.max_section_load.funicular",
+          "value": 0.5,
+          "unit": "rapporto",
+          "kind": "estimate",
+          "source": "mock.fixture",
+          "method": "massimo di passeggeri/capacità tra le tratte di funicular (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.road.departure.measure_effect.act_001.vc_before",
+          "value": 1.08,
+          "unit": "rapporto",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "massimo v/c sugli archi toccati dalla misura (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it1.road.departure.measure_effect.act_001.vc_after",
+          "value": 1.01,
+          "unit": "rapporto",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "massimo v/c sugli archi toccati dalla misura (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:00:50+01:00"
+        }
+      ]
+    },
+    {
+      "iteration": 2,
+      "metrics": [
+        {
+          "id": "m.run_mock_match_2027.it2.road.arrival.veh_hours",
+          "value": 3210,
+          "unit": "veic·h",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "somma sugli archi di v × t (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.road.arrival.od_time.bagnoli_centrale",
+          "value": 24.1,
+          "unit": "min",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "cammino minimo sui costi finali (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.road.arrival.od_time.fuorigrotta_municipio",
+          "value": 21.8,
+          "unit": "min",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "cammino minimo sui costi finali (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.road.arrival.od_time.vomero_vittoria",
+          "value": 18.9,
+          "unit": "min",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "cammino minimo sui costi finali (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.road.arrival.od_time.posillipo_municipio",
+          "value": 33.5,
+          "unit": "min",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "cammino minimo sui costi finali (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.road.arrival.od_time.tangenziale_garibaldi",
+          "value": 26.0,
+          "unit": "min",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "cammino minimo sui costi finali (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.road.arrival.od_time.mean",
+          "value": 24.9,
+          "unit": "min",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "media semplice delle 5 coppie O/D (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.road.arrival.critical_edges.count",
+          "value": 4,
+          "unit": "n",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "archi con v/c oltre la soglia critica (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.road.arrival.critical_edges.km",
+          "value": 2.1,
+          "unit": "km",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "lunghezza degli archi critici (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.road.arrival.detour_extra_km",
+          "value": 2.1,
+          "unit": "km",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "lunghezza media delle deviazioni (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.road.arrival.unassigned_pairs",
+          "value": 0,
+          "unit": "n",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "coppie O/D senza percorso (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.road.arrival.critical_intersection.1.vc",
+          "value": 0.88,
+          "unit": "rapporto",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "massimo v/c degli archi entranti (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.road.arrival.critical_intersection.2.vc",
+          "value": 0.81,
+          "unit": "rapporto",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "massimo v/c degli archi entranti (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.transit.arrival.trips_in_window.metro_line_6",
+          "value": 12,
+          "unit": "n",
+          "kind": "real",
+          "source": "mock.fixture (gtfs.anm)",
+          "method": "corse della Linea 6 nella fascia di picco (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.transit.arrival.stops_overloaded",
+          "value": 1,
+          "unit": "n",
+          "kind": "estimate",
+          "source": "mock.fixture",
+          "method": "fermate vicine all'area con passeggeri/capacità > 1 (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.transit.arrival.sections_overloaded",
+          "value": 1,
+          "unit": "n",
+          "kind": "estimate",
+          "source": "mock.fixture",
+          "method": "tratte di metro e funicolare con passeggeri/capacità > 1 (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.transit.arrival.max_section_load.metro_line_1",
+          "value": 1.12,
+          "unit": "rapporto",
+          "kind": "estimate",
+          "source": "mock.fixture",
+          "method": "massimo di passeggeri/capacità tra le tratte di metro_line_1 (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.transit.arrival.max_section_load.metro_line_6",
+          "value": 0.8,
+          "unit": "rapporto",
+          "kind": "estimate",
+          "source": "mock.fixture",
+          "method": "massimo di passeggeri/capacità tra le tratte di metro_line_6 (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.transit.arrival.max_section_load.funicular",
+          "value": 0.45,
+          "unit": "rapporto",
+          "kind": "estimate",
+          "source": "mock.fixture",
+          "method": "massimo di passeggeri/capacità tra le tratte di funicular (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.road.departure.veh_hours",
+          "value": 4690,
+          "unit": "veic·h",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "somma sugli archi di v × t (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.road.departure.od_time.bagnoli_centrale",
+          "value": 38.8,
+          "unit": "min",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "cammino minimo sui costi finali (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.road.departure.od_time.fuorigrotta_municipio",
+          "value": 33.4,
+          "unit": "min",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "cammino minimo sui costi finali (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.road.departure.od_time.vomero_vittoria",
+          "value": 28.2,
+          "unit": "min",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "cammino minimo sui costi finali (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.road.departure.od_time.posillipo_municipio",
+          "value": 44.9,
+          "unit": "min",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "cammino minimo sui costi finali (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.road.departure.od_time.tangenziale_garibaldi",
+          "value": 35.9,
+          "unit": "min",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "cammino minimo sui costi finali (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.road.departure.od_time.mean",
+          "value": 36.2,
+          "unit": "min",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "media semplice delle 5 coppie O/D (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.road.departure.critical_edges.count",
+          "value": 3,
+          "unit": "n",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "archi con v/c oltre la soglia critica (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.road.departure.critical_edges.km",
+          "value": 2.2,
+          "unit": "km",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "lunghezza degli archi critici (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.road.departure.detour_extra_km",
+          "value": 2.8,
+          "unit": "km",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "lunghezza media delle deviazioni (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.road.departure.unassigned_pairs",
+          "value": 0,
+          "unit": "n",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "coppie O/D senza percorso (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.road.departure.critical_intersection.1.vc",
+          "value": 1.01,
+          "unit": "rapporto",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "massimo v/c degli archi entranti (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.road.departure.critical_intersection.2.vc",
+          "value": 0.91,
+          "unit": "rapporto",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "massimo v/c degli archi entranti (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.transit.departure.trips_in_window.metro_line_6",
+          "value": 8,
+          "unit": "n",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "corse della Linea 6 nella fascia di picco (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.transit.departure.stops_overloaded",
+          "value": 2,
+          "unit": "n",
+          "kind": "estimate",
+          "source": "mock.fixture",
+          "method": "fermate vicine all'area con passeggeri/capacità > 1 (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.transit.departure.sections_overloaded",
+          "value": 1,
+          "unit": "n",
+          "kind": "estimate",
+          "source": "mock.fixture",
+          "method": "tratte di metro e funicolare con passeggeri/capacità > 1 (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.transit.departure.max_section_load.metro_line_1",
+          "value": 1.12,
+          "unit": "rapporto",
+          "kind": "estimate",
+          "source": "mock.fixture",
+          "method": "massimo di passeggeri/capacità tra le tratte di metro_line_1 (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.transit.departure.max_section_load.metro_line_6",
+          "value": 0.8,
+          "unit": "rapporto",
+          "kind": "estimate",
+          "source": "mock.fixture",
+          "method": "massimo di passeggeri/capacità tra le tratte di metro_line_6 (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.transit.departure.max_section_load.funicular",
+          "value": 0.5,
+          "unit": "rapporto",
+          "kind": "estimate",
+          "source": "mock.fixture",
+          "method": "massimo di passeggeri/capacità tra le tratte di funicular (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.road.departure.measure_effect.act_004.vc_before",
+          "value": 0.97,
+          "unit": "rapporto",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "massimo v/c sugli archi toccati dalla misura (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        },
+        {
+          "id": "m.run_mock_match_2027.it2.road.departure.measure_effect.act_004.vc_after",
+          "value": 0.91,
+          "unit": "rapporto",
+          "kind": "simulated",
+          "source": "mock.fixture",
+          "method": "massimo v/c sugli archi toccati dalla misura (valore di esempio)",
+          "inputs": [
+            "event match_2027 rev 1",
+            "fixture F1-09"
+          ],
+          "assumptions": [
+            "Valore di esempio per il mock del frontend (F1-09): non è un risultato del motore"
+          ],
+          "as_of": "2026-11-09T10:01:10+01:00"
+        }
+      ]
+    }
+  ]
+}

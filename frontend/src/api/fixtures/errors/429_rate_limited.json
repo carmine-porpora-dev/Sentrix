@@ -1,0 +1,9 @@
+{
+  "error": {
+    "code": "RATE_LIMITED",
+    "message": "Troppe analisi avviate: riprova tra poco",
+    "details": {
+      "retry_after_s": 42
+    }
+  }
+}

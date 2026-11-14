@@ -1,0 +1,29 @@
+[
+  {
+    "run_id": "run_mock_match_2027",
+    "seq": 1,
+    "at": "2026-11-09T10:00:00+01:00",
+    "actor": "system",
+    "decision": "Analisi avviata",
+    "rationale": "Evento match_2027, revisione 1, livello di affluenza mid, risposta manuale disattivata",
+    "refs": []
+  },
+  {
+    "run_id": "run_mock_match_2027",
+    "seq": 2,
+    "at": "2026-11-09T10:00:00.500000+01:00",
+    "actor": "orchestrator",
+    "decision": "INTAKE → ANALYZE",
+    "rationale": "Evento valido; 2 chiusure risolte (4 archi) e 1 interruzioni del trasporto pubblico (fermate 6236, 6237)",
+    "refs": []
+  },
+  {
+    "run_id": "run_mock_match_2027",
+    "seq": 3,
+    "at": "2026-11-09T10:00:08+01:00",
+    "actor": "event_demand",
+    "decision": "Domanda stimata",
+    "rationale": "150.000 presenti nel livello mid; picco di deflusso alle 21:30",
+    "refs": []
+  }
+]

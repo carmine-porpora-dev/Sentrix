@@ -1,0 +1,182 @@
+[
+  {
+    "id": "gps_probes",
+    "type": "gps_probe",
+    "name": "Sonde GPS su bus ANM e flotte comunali",
+    "status": "planned",
+    "location": null,
+    "route_class": null,
+    "measures": "Posizione e velocità dei mezzi di servizio (bus ANM, raccolta rifiuti, Polizia Municipale, manutenzione): da qui, velocità e tempi di percorrenza per strada e ritardi dei bus.",
+    "replaces": "La velocità in tempo reale oggi solo di TomTom (resterebbe una fonte in più), le velocità a flusso libero e i valori di riserva per classe di strada, il traffico di fondo oggi a quota fissa."
+  },
+  {
+    "id": "turnstiles_metro_line_1",
+    "type": "turnstile",
+    "name": "Tornelli e validatori ANM — Linea 1",
+    "status": "planned",
+    "location": null,
+    "route_class": "metro_line_1",
+    "measures": "Ingressi (e uscite dove presenti) a ogni stazione della Linea 1, a intervalli di pochi minuti.",
+    "replaces": "I carichi per tratta e per fermata della Linea 1, oggi stimati, e la ripartizione tra i modi di trasporto per tipo di zona."
+  },
+  {
+    "id": "turnstiles_metro_line_6",
+    "type": "turnstile",
+    "name": "Tornelli e validatori ANM — Linea 6",
+    "status": "planned",
+    "location": null,
+    "route_class": "metro_line_6",
+    "measures": "Ingressi (e uscite dove presenti) a ogni stazione della Linea 6, a intervalli di pochi minuti.",
+    "replaces": "I carichi per tratta e per fermata della Linea 6, oggi stimati, e la ripartizione tra i modi di trasporto per tipo di zona."
+  },
+  {
+    "id": "turnstiles_funicular",
+    "type": "turnstile",
+    "name": "Tornelli e validatori ANM — Funicolari",
+    "status": "planned",
+    "location": null,
+    "route_class": "funicular",
+    "measures": "Ingressi (e uscite dove presenti) a ogni stazione delle funicolari, a intervalli di pochi minuti.",
+    "replaces": "I carichi per tratta e per fermata delle funicolari, oggi stimati, e la ripartizione tra i modi di trasporto per tipo di zona."
+  },
+  {
+    "id": "people_napoli_centrale",
+    "type": "people_counter",
+    "name": "Contapersone — Napoli Centrale / Garibaldi",
+    "status": "planned",
+    "location": {
+      "lat": 40.85265,
+      "lon": 14.27251,
+      "label": null
+    },
+    "route_class": null,
+    "measures": "Persone in uscita per varco e direzione, a intervalli di pochi minuti (conteggio anonimo: nessuna immagine salvata).",
+    "replaces": "I pesi ipotizzati degli arrivi nelle zone di arrivo e l'affluenza stimata degli eventi."
+  },
+  {
+    "id": "people_mergellina",
+    "type": "people_counter",
+    "name": "Contapersone — Mergellina",
+    "status": "planned",
+    "location": {
+      "lat": 40.83145,
+      "lon": 14.21874,
+      "label": null
+    },
+    "route_class": null,
+    "measures": "Persone in uscita per varco e direzione, a intervalli di pochi minuti (conteggio anonimo: nessuna immagine salvata).",
+    "replaces": "I pesi ipotizzati degli arrivi nelle zone di arrivo e l'affluenza stimata degli eventi."
+  },
+  {
+    "id": "people_campi_flegrei",
+    "type": "people_counter",
+    "name": "Contapersone — Campi Flegrei",
+    "status": "planned",
+    "location": {
+      "lat": 40.82253,
+      "lon": 14.19461,
+      "label": null
+    },
+    "route_class": null,
+    "measures": "Persone in uscita per varco e direzione, a intervalli di pochi minuti (conteggio anonimo: nessuna immagine salvata).",
+    "replaces": "I pesi ipotizzati degli arrivi nelle zone di arrivo e l'affluenza stimata degli eventi."
+  },
+  {
+    "id": "people_molo_beverello",
+    "type": "people_counter",
+    "name": "Contapersone — Molo Beverello",
+    "status": "planned",
+    "location": {
+      "lat": 40.83812,
+      "lon": 14.25454,
+      "label": null
+    },
+    "route_class": null,
+    "measures": "Persone in uscita per varco e direzione, a intervalli di pochi minuti (conteggio anonimo: nessuna immagine salvata).",
+    "replaces": "I pesi ipotizzati degli arrivi nelle zone di arrivo e l'affluenza stimata degli eventi."
+  },
+  {
+    "id": "people_calata_porta_di_massa",
+    "type": "people_counter",
+    "name": "Contapersone — Calata Porta di Massa",
+    "status": "planned",
+    "location": {
+      "lat": 40.84159,
+      "lon": 14.25775,
+      "label": null
+    },
+    "route_class": null,
+    "measures": "Persone in uscita per varco e direzione, a intervalli di pochi minuti (conteggio anonimo: nessuna immagine salvata).",
+    "replaces": "I pesi ipotizzati degli arrivi nelle zone di arrivo e l'affluenza stimata degli eventi."
+  },
+  {
+    "id": "people_stazione_marittima",
+    "type": "people_counter",
+    "name": "Contapersone — Stazione Marittima",
+    "status": "planned",
+    "location": {
+      "lat": 40.83868,
+      "lon": 14.25788,
+      "label": null
+    },
+    "route_class": null,
+    "measures": "Persone in uscita per varco e direzione, a intervalli di pochi minuti (conteggio anonimo: nessuna immagine salvata).",
+    "replaces": "I pesi ipotizzati degli arrivi nelle zone di arrivo e l'affluenza stimata degli eventi."
+  },
+  {
+    "id": "ramp_fuorigrotta",
+    "type": "ramp_counter",
+    "name": "Sensore uscita Tangenziale — Fuorigrotta",
+    "status": "planned",
+    "location": {
+      "lat": 40.83589,
+      "lon": 14.1957,
+      "label": null
+    },
+    "route_class": null,
+    "measures": "Veicoli all'ora per uscita, classe del veicolo e velocità.",
+    "replaces": "La domanda auto in ingresso in città dalle uscite della Tangenziale, oggi stimata, la matrice origine/destinazione delle auto e il traffico di fondo."
+  },
+  {
+    "id": "ramp_agnano",
+    "type": "ramp_counter",
+    "name": "Sensore uscita Tangenziale — Agnano",
+    "status": "planned",
+    "location": {
+      "lat": 40.84046,
+      "lon": 14.16375,
+      "label": null
+    },
+    "route_class": null,
+    "measures": "Veicoli all'ora per uscita, classe del veicolo e velocità.",
+    "replaces": "La domanda auto in ingresso in città dalle uscite della Tangenziale, oggi stimata, la matrice origine/destinazione delle auto e il traffico di fondo."
+  },
+  {
+    "id": "ramp_vomero",
+    "type": "ramp_counter",
+    "name": "Sensore uscita Tangenziale — Vomero",
+    "status": "planned",
+    "location": {
+      "lat": 40.84507,
+      "lon": 14.2154,
+      "label": null
+    },
+    "route_class": null,
+    "measures": "Veicoli all'ora per uscita, classe del veicolo e velocità.",
+    "replaces": "La domanda auto in ingresso in città dalle uscite della Tangenziale, oggi stimata, la matrice origine/destinazione delle auto e il traffico di fondo."
+  },
+  {
+    "id": "ramp_corso_malta",
+    "type": "ramp_counter",
+    "name": "Sensore uscita Tangenziale — Corso Malta",
+    "status": "planned",
+    "location": {
+      "lat": 40.8656,
+      "lon": 14.27536,
+      "label": null
+    },
+    "route_class": null,
+    "measures": "Veicoli all'ora per uscita, classe del veicolo e velocità.",
+    "replaces": "La domanda auto in ingresso in città dalle uscite della Tangenziale, oggi stimata, la matrice origine/destinazione delle auto e il traffico di fondo."
+  }
+]

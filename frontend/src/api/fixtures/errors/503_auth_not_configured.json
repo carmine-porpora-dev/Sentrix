@@ -1,0 +1,7 @@
+{
+  "error": {
+    "code": "AUTH_NOT_CONFIGURED",
+    "message": "L'accesso non è configurato su questo server",
+    "details": {}
+  }
+}
