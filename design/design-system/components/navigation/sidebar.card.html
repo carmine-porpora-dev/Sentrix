@@ -1,0 +1,17 @@
+<!-- @dsCard group="Components" viewport="700x420" name="Sidebar" subtitle="72px · marchio provvisorio · pulsanti 44×44 · stati default, hover, focus, attiva" -->
+<!DOCTYPE html><html lang="it"><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<style>body{padding:24px}.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:20px}.cap{font:500 14px/20px var(--font-ui);color:var(--color-text-secondary);margin:0 0 8px}</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<script src="../../_ds_bundle.js"></script></head><body><div id="r"></div><script type="text/babel">const {Sidebar,SidebarButton}=window.DesignSystem_1776e0;
+const items=[{id:'dashboard',icon:'layout-dashboard',label:'Plancia'},{id:'requests',icon:'building-2',label:'Richieste e dipartimenti'},{id:'log',icon:'scroll-text',label:'Registro decisioni'}];
+function App(){const [a,setA]=React.useState('dashboard');return <div style={{display:'flex',gap:40,alignItems:'flex-start'}}>
+<div style={{height:340,border:'1px solid var(--color-border-card)',borderRadius:10,overflow:'hidden'}}><Sidebar items={items} active={a} onSelect={setA}/></div>
+<div><p className="cap">Stati del pulsante</p>
+<div style={{display:'grid',gridTemplateColumns:'auto 1fr',gap:'12px 16px',alignItems:'center',background:'var(--color-surface-1)',padding:16,borderRadius:10}}>
+<SidebarButton icon="layout-dashboard" label="Default"/><span className="t-xs">Default · text-secondary</span>
+<span id="hv"><SidebarButton icon="layout-dashboard" label="Hover"/></span><span className="t-xs" style={{color:'var(--color-text-secondary)'}}>Hover · surface-2 (passa il mouse)</span>
+<SidebarButton icon="layout-dashboard" label="Attiva" active/><span className="t-xs">Attiva · bordo 2px e icona viola</span></div>
+<p className="cap" style={{marginTop:16}}>Clicca le icone a sinistra per cambiare pagina attiva.</p></div></div>}</script><script type="text/babel">ReactDOM.createRoot(document.getElementById('r')).render(<App/>)</script></body></html>

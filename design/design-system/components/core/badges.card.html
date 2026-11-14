@@ -1,0 +1,17 @@
+<!-- @dsCard group="Components" viewport="700x300" name="Badge dato" subtitle="REALE · STIMA · SIMULATO · Non disponibile · In attesa" -->
+<!DOCTYPE html><html lang="it"><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<style>body{padding:24px}.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:20px}.cap{font:500 14px/20px var(--font-ui);color:var(--color-text-secondary);margin:0 0 8px}</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<script src="../../_ds_bundle.js"></script></head><body><div id="r"></div><script type="text/babel">const {Badge}=window.DesignSystem_1776e0;
+function App(){return <div>
+<p className="cap">Varianti (riempimento 16%, bordo 1px, icona Lucide 14px)</p>
+<div className="row"><Badge kind="real"/><Badge kind="estimate"/><Badge kind="simulated"/><Badge kind="unavailable"/><Badge kind="pending"/></div>
+<p className="cap">In uso: ogni numero porta il suo badge</p>
+<div className="row" style={{gap:24}}>
+<div style={{display:'flex',alignItems:'center',gap:12}}><span className="t-kpi-sm">12.480</span><Badge kind="real"/></div>
+<div style={{display:'flex',alignItems:'center',gap:12}}><span className="t-kpi-sm">9.340</span><Badge kind="estimate"/></div>
+<div style={{display:'flex',alignItems:'center',gap:12}}><span className="t-kpi-sm">6.120</span><Badge kind="simulated"/></div></div>
+<div className="row"><div style={{display:'flex',alignItems:'center',gap:12}}><span className="t-kpi-sm">—</span><Badge kind="unavailable"/></div></div></div>}</script><script type="text/babel">ReactDOM.createRoot(document.getElementById('r')).render(<App/>)</script></body></html>
