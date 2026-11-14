@@ -1,0 +1,3 @@
+agency_id,agency_name,agency_url,agency_timezone
+ANM,Azienda Napoletana Mobilità,http://www.anm.it,Europe/Rome
+FS,Trenitalia,http://www.trenitalia.com,Europe/Rome

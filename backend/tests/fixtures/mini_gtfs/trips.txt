@@ -1,0 +1,17 @@
+route_id,service_id,trip_id,trip_headsign,direction_id
+R1,WK,L1_A,Capolinea,0
+R1,WK,L1_B,Capolinea,0
+R1,WK,L1_C,Capolinea,0
+R1,WK,L1_D,Capolinea,0
+R1,WK,L1_E,Capolinea,0
+R1,WK,L1_X,Senza orari,0
+R1,SAT,L1_S1,Capolinea,0
+R1,SAT,L1_S2,Capolinea,0
+R1,SAT,L1_S3,Capolinea,0
+R2,WK,L6_A,Capolinea,0
+R2,WK,L6_B,Capolinea,0
+R2,SAT,L6_S,Capolinea,0
+R3,WK,F1_A,Capolinea,0
+R3,WK,F1_B,Capolinea,0
+R4,WK,ASC_A,Capolinea,0
+R5,WK,L2_A,Capolinea,0

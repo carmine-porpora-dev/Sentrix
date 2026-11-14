@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="it">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Verifica preset — Sentrix</title>
+  <link rel="stylesheet" href="__MAPLIBRE_CSS__" integrity="__MAPLIBRE_CSS_SRI__" crossorigin="anonymous">
+  <style>
+    :root {
+      --bg: #0e1420;
+      --panel: #151c2b;
+      --line: #2a3550;
+      --text: #e6ebf5;
+      --muted: #9aa7c2;
+      --closure: #ef4444;
+      --stop: #f59e0b;
+      --zone: #38bdf8;
+      --car: #22c55e;
+      --od: #c084fc;
+      --area: #e2e8f0;
+      --live: #14b8a6;
+      --node: #fde047;
+      --snap: #fb923c;
+      --ok: #4ade80;
+      --err: #f87171;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+
+    body {
+      display: grid;
+      grid-template-columns: minmax(300px, 380px) 1fr;
+    }
+
+    aside {
+      background: var(--panel);
+      border-right: 1px solid var(--line);
+      overflow: auto;
+      padding: 16px;
+    }
+
+    #map {
+      height: 100%;
+      min-height: 320px;
+    }
+
+    h1 {
+      font-size: 17px;
+      margin: 0 0 4px;
+    }
+
+    h2 {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--muted);
+      margin: 18px 0 6px;
+    }
+
+    p {
+      margin: 4px 0;
+      color: var(--muted);
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 3px 0;
+      cursor: pointer;
+    }
+
+    select {
+      width: 100%;
+      padding: 6px;
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+    }
+
+    button {
+      margin-top: 8px;
+      padding: 6px 10px;
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .sw {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex: none;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    td {
+      padding: 4px 6px;
+      border-top: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    tr.ok b {
+      color: var(--ok);
+    }
+
+    tr.err b {
+      color: var(--err);
+    }
+
+    tr.err td {
+      background: #2a1620;
+    }
+
+    .marker {
+      font: 600 11px/1.2 system-ui, sans-serif;
+      color: #fff;
+      white-space: nowrap;
+      padding: 2px 6px;
+      border-radius: 10px;
+      border: 2px solid;
+      background: rgba(14, 20, 32, .85);
+      cursor: pointer;
+    }
+
+    .marker.bad {
+      background: #7f1d1d;
+      border-style: dashed;
+    }
+
+    .marker.node {
+      width: 8px;
+      height: 8px;
+      padding: 0;
+      border-radius: 50%;
+      background: var(--node);
+      border-color: var(--node);
+    }
+
+    .kind-zone {
+      border-color: var(--zone);
+    }
+
+    .kind-car_destination {
+      border-color: var(--car);
+    }
+
+    .kind-od_point {
+      border-color: var(--od);
+    }
+
+    .kind-stop {
+      border-color: var(--stop);
+    }
+
+    .kind-area_center {
+      border-color: var(--area);
+    }
+
+    .kind-live_segment {
+      border-color: var(--live);
+    }
+
+    .popup h3 {
+      margin: 0 0 4px;
+      font-size: 13px;
+      color: #111;
+    }
+
+    .popup p {
+      color: #333;
+      margin: 2px 0;
+    }
+
+    .maplibregl-popup-content {
+      color: #111;
+    }
+
+    @media (max-width: 760px) {
+      body {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 60vh;
+      }
+
+      aside {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <aside>
+    <h1>Verifica dei preset</h1>
+    <p>__SUMMARY__. Sfondo: rete stradale OSM dei dati locali. La base map PMTiles arriva con il frontend.</p>
+
+    <h2>Evento</h2>
+    <select id="event" aria-label="Evento"></select>
+    <button id="fit" type="button">Inquadra l'evento</button>
+    <button id="fit-all" type="button">Tutta l'area</button>
+
+    <h2>Livelli</h2>
+    <div id="layers"></div>
+
+    <h2>Esito della risoluzione</h2>
+    <table>
+      <tbody>
+        __ROWS__
+      </tbody>
+    </table>
+    <p>Clic su un segno sulla mappa per i dettagli. Le linee tratteggiate arancioni uniscono ogni punto al nodo stradale
+      a cui si aggancia (nodo giallo).</p>
+  </aside>
+  <div id="map" role="application" aria-label="Mappa di verifica"></div>
+
+  <script src="__MAPLIBRE_JS__" integrity="__MAPLIBRE_JS_SRI__" crossorigin="anonymous"></script>
+  <script id="data" type="application/json">__DATA__</script>
+  <script>
+    const data = JSON.parse(document.getElementById('data').textContent);
+    const LAYERS = [
+      ['network', 'Rete stradale', '#3b4558'], ['closure', 'Chiusure', '#ef4444'], ['area', 'Area evento', '#e2e8f0'],
+      ['stop', 'Fermate interrotte', '#f59e0b'], ['zone', 'Zone (centroidi)', '#38bdf8'],
+      ['car_destination', 'Arrivi auto', '#22c55e'], ['od_point', 'Punti O/D', '#c084fc'], ['live_segment', 'Tratti LIVE (TomTom)', '#14b8a6'],
+      ['area_center', 'Centro area', '#e2e8f0'], ['node', 'Nodi agganciati', '#fde047'], ['snap', 'Collegamenti punto-nodo', '#fb923c'],
+    ];
+    const visible = Object.fromEntries(LAYERS.map(([k]) => [k, true]));
+    let currentEvent = data.events[0] ? data.events[0].id : null;
+    const markers = [];
+    let ready = false;
+
+    const eventSelect = document.getElementById('event');
+    for (const e of data.events) {
+      const o = document.createElement('option');
+      o.value = e.id; o.textContent = e.name + ' (' + e.date + ')';
+      eventSelect.appendChild(o);
+    }
+    const layerBox = document.getElementById('layers');
+    for (const [key, text, color] of LAYERS) {
+      const l = document.createElement('label');
+      const c = document.createElement('input'); c.type = 'checkbox'; c.checked = true;
+      c.addEventListener('change', () => { visible[key] = c.checked; refresh(); });
+      const sw = document.createElement('span'); sw.className = 'sw'; sw.style.background = color;
+      l.append(c, sw, document.createTextNode(text));
+      layerBox.appendChild(l);
+    }
+
+    function popupContent(p) {
+      const root = document.createElement('div'); root.className = 'popup';
+      const h = document.createElement('h3'); h.textContent = p.label || p.name || p.kind; root.appendChild(h);
+      const skip = new Set(['kind', 'label', 'event', 'ok']);
+      for (const [k, v] of Object.entries(p)) {
+        if (skip.has(k) || v === null || v === undefined) continue;
+        const line = document.createElement('p'); line.textContent = k + ': ' + v; root.appendChild(line);
+      }
+      if (p.event) { const e = document.createElement('p'); e.textContent = 'evento: ' + p.event; root.appendChild(e); }
+      if (p.ok === false) { const bad = document.createElement('p'); bad.textContent = 'ATTENZIONE: oltre la distanza massima di aggancio'; bad.style.color = '#b91c1c'; root.appendChild(bad); }
+      return root;
+    }
+
+    const map = new maplibregl.Map({
+      container: 'map',
+      style: { version: 8, sources: {}, layers: [{ id: 'bg', type: 'background', paint: { 'background-color': '#0e1420' } }] },
+      bounds: data.bounds, fitBoundsOptions: { padding: 30 }, attributionControl: false,
+    });
+    map.addControl(new maplibregl.NavigationControl({ showCompass: false }));
+    map.addControl(new maplibregl.AttributionControl({ customAttribution: 'Rete stradale © OpenStreetMap contributors (ODbL)' }));
+
+    const byEvent = (kind) => ['all', ['==', ['get', 'kind'], kind], ['any', ['!', ['has', 'event']], ['==', ['get', 'event'], currentEvent || '']]];
+
+    map.on('load', () => {
+      map.addSource('network', { type: 'geojson', data: data.network });
+      map.addSource('check', { type: 'geojson', data: data.features });
+      map.addLayer({ id: 'network', type: 'line', source: 'network', paint: { 'line-color': '#3b4558', 'line-width': 1 } });
+      map.addLayer({ id: 'area', type: 'fill', source: 'check', filter: byEvent('area'), paint: { 'fill-color': '#e2e8f0', 'fill-opacity': 0.08 } });
+      map.addLayer({ id: 'area-line', type: 'line', source: 'check', filter: byEvent('area'), paint: { 'line-color': '#e2e8f0', 'line-width': 1.5, 'line-dasharray': [2, 2] } });
+      map.addLayer({ id: 'snap', type: 'line', source: 'check', filter: ['==', ['get', 'kind'], 'snap'], paint: { 'line-color': '#fb923c', 'line-width': 1.5, 'line-dasharray': [2, 2] } });
+      map.addLayer({ id: 'closure', type: 'line', source: 'check', filter: byEvent('closure'), paint: { 'line-color': '#ef4444', 'line-width': 5 } });
+      map.on('click', 'closure', (e) => {
+        new maplibregl.Popup().setLngLat(e.lngLat).setDOMContent(popupContent(e.features[0].properties)).addTo(map);
+      });
+      map.on('mouseenter', 'closure', () => { map.getCanvas().style.cursor = 'pointer'; });
+      map.on('mouseleave', 'closure', () => { map.getCanvas().style.cursor = ''; });
+
+      for (const f of data.features.features) {
+        if (f.geometry.type !== 'Point') continue;
+        const p = f.properties;
+        const el = document.createElement('div');
+        el.className = 'marker kind-' + p.kind + (p.ok === false ? ' bad' : '') + (p.kind === 'node' ? ' node' : '');
+        if (p.kind !== 'node') el.textContent = p.label;
+        el.tabIndex = 0;
+        const marker = new maplibregl.Marker({ element: el }).setLngLat(f.geometry.coordinates)
+          .setPopup(new maplibregl.Popup({ offset: 12 }).setDOMContent(popupContent(p))).addTo(map);
+        markers.push({ el, kind: p.kind, event: p.event || null, marker });
+      }
+      ready = true;
+      refresh();
+    });
+
+    function refresh() {
+      if (!ready) return;
+      const set = (id, kinds) => { if (map.getLayer(id)) map.setLayoutProperty(id, 'visibility', kinds.every((k) => visible[k]) ? 'visible' : 'none'); };
+      set('network', ['network']); set('closure', ['closure']); set('area', ['area']); set('area-line', ['area']); set('snap', ['snap']);
+      for (const id of ['closure', 'area', 'area-line']) if (map.getLayer(id)) map.setFilter(id, byEvent(id === 'closure' ? 'closure' : 'area'));
+      for (const m of markers) {
+        m.el.style.display = visible[m.kind] && (!m.event || m.event === currentEvent) ? '' : 'none';
+      }
+    }
+    function fitEvent() {
+      const pts = data.features.features.filter((f) => f.properties.event === currentEvent && f.properties.kind !== 'snap')
+        .flatMap((f) => f.geometry.type === 'Point' ? [f.geometry.coordinates] : f.geometry.type === 'LineString' ? f.geometry.coordinates : f.geometry.coordinates[0]);
+      if (!pts.length) return;
+      const b = new maplibregl.LngLatBounds(pts[0], pts[0]);
+      for (const c of pts) b.extend(c);
+      map.fitBounds(b, { padding: 60, maxZoom: 16 });
+    }
+    eventSelect.addEventListener('change', () => { currentEvent = eventSelect.value; refresh(); fitEvent(); });
+    document.getElementById('fit').addEventListener('click', fitEvent);
+    document.getElementById('fit-all').addEventListener('click', () => map.fitBounds(data.bounds, { padding: 30 }));
+  </script>
+</body>
+
+</html>
