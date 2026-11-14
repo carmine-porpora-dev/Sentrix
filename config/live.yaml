@@ -1,0 +1,13 @@
+tomtom:
+  timeout_s: 5         # attesa massima per richiesta
+  retries: 1           # tentativi in più dopo un errore di rete, un timeout o un 5xx (non dopo un 4xx)
+  max_concurrency: 5   # richieste in parallelo
+
+# Cache dei tratti (08 4): più utenti in LIVE condividono lo stesso dato finché ha meno di
+# `cache_ttl_s` secondi. Con 14 tratti sono al massimo 168 richieste l'ora a LIVE aperta (08 6).
+flow:
+  cache_ttl_s: 300
+  # Le quattro classi di un tratto dal rapporto velocità attuale ÷ flusso libero (come le classi di
+  # congestione dello scenario): sopra la prima soglia scorrevole, poi rallentata, intensa, satura.
+  # Proposta (08 4), da confermare dal proprietario: non vengono da TomTom.
+  ratio_classes: [0.8, 0.6, 0.4]

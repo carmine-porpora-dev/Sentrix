@@ -1,0 +1,31 @@
+# Voci al massimo per elenco nel testo (strade chiuse, strade sature, incroci critici, linee TPL):
+# le altre diventano «e altre N».
+max_listed: 12
+
+services:
+  - id: questura_napoli
+    name: "Questura di Napoli (sala operativa)"
+    kind: police
+  - id: vigili_del_fuoco_napoli
+    name: "Comando provinciale Vigili del Fuoco di Napoli"
+    kind: fire
+  - id: ospedale_cardarelli
+    name: "Ospedale Cardarelli"
+    kind: hospital
+  - id: ospedale_del_mare
+    name: "Ospedale del Mare"
+    kind: hospital
+  - id: ospedale_san_paolo
+    name: "Ospedale San Paolo (Fuorigrotta)"
+    kind: hospital
+  - id: ospedale_pellegrini
+    name: "Ospedale dei Pellegrini"
+    kind: hospital
+  - id: ospedale_cto
+    name: "CTO"
+    kind: hospital
+  # La Polizia Municipale è anche un dipartimento virtuale (config/departments.yaml, id uguale):
+  # qui riceve il bollettino come gli altri.
+  - id: municipal_police
+    name: "Polizia Municipale"
+    kind: police

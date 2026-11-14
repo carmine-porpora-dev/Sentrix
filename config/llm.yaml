@@ -1,0 +1,17 @@
+# Attesa massima di una chiamata a Gemini (05 1); scaduta, il run non si ferma: testo template.
+timeout_s: 20
+
+# 0 = ripetibile (05 1: tetto 0,2). Non si alza per far «scrivere meglio» un testo.
+temperature: 0
+
+# Quanto ragiona il modello prima di rispondere. Il ragionamento si paga come output e, lasciato al
+# valore del modello, faceva superare i 20 s (504) alle chiamate con input grandi (F6-08): i testi
+# degli agenti interpretano numeri già calcolati, non servono catene di ragionamento.
+thinking_level: low  # `minimal` è rifiutato (400) da gemini-3.8-flash; `low` è il più basso ammesso
+
+# Tetto ai token della risposta (le risposte vere sono JSON da poche centinaia di token).
+max_output_tokens: 2048
+
+# Risposta non conforme (schema o validatori): quanti nuovi tentativi, con l'errore nel prompt,
+# prima del testo template (05 1: uno).
+retries: 1

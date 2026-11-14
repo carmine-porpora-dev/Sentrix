@@ -1,0 +1,15 @@
+segments:
+  - { id: via_caracciolo, label: "Via Caracciolo", lat: 40.832315, lon: 14.233702 }  # arco 8475097329-18122092-0: «Viale Anton Dohrn; Via Francesco Caracciolo», 1180 m
+  - { id: riviera_chiaia_1, label: "Riviera di Chiaia (punto 1)", lat: 40.833456, lon: 14.23105 }  # arco 8399521503-9137948052-0: «Riviera di Chiaia», 821 m
+  - { id: riviera_chiaia_2, label: "Riviera di Chiaia (punto 2)", lat: 40.833259, lon: 14.238461 }  # arco 3465091789-3468033710-0: «Riviera di Chiaia», 440 m
+  - { id: via_partenope, label: "Via Partenope", lat: 40.829926, lon: 14.250027 }  # arco 3420000620-194087475-0: «Via Partenope; Via Nazario Sauro», 107 m
+  - { id: via_posillipo, label: "Via Posillipo", lat: 40.814473, lon: 14.208671 }  # arco 194082677-194083601-0: «Via Posillipo», 2683 m
+  - { id: galleria_laziale, label: "Galleria Laziale", lat: 40.827543, lon: 14.213195 }  # arco 197555700-3550590945-0: «Galleria di Posillipo (Laziale); Via Fuorigrotta», 1132 m
+  - { id: galleria_vittoria, label: "Galleria della Vittoria", lat: 40.833699, lon: 14.246855 }  # arco 1242030781-3420057522-0: «Via Ferdinando Acton; Galleria della Vittoria», 671 m
+  - { id: via_acton, label: "Via Acton", lat: 40.836746, lon: 14.253085 }  # arco 3455594756-9055605241-0: «Via Ferdinando Acton», 584 m
+  - { id: corso_vittorio_emanuele_1, label: "Corso Vittorio Emanuele (punto 1)", lat: 40.839869, lon: 14.237296 }  # arco 11413409184-13414395318-0: «Corso Vittorio Emanuele», 818 m
+  - { id: corso_vittorio_emanuele_2, label: "Corso Vittorio Emanuele (punto 2)", lat: 40.842963, lon: 14.244492 }  # arco 1943835478-1289339058-0: «Corso Vittorio Emanuele», 637 m
+  - { id: tangenziale_fuorigrotta, label: "Tangenziale svincolo Fuorigrotta", lat: 40.837178, lon: 14.200412 }  # arco 2838062615-18114387-0: «Tangenziale di Napoli», 1114 m
+  - { id: tangenziale_vomero, label: "Tangenziale svincolo Vomero", lat: 40.841926, lon: 14.214133 }  # arco 1994989590-417914636-0: «Tangenziale di Napoli», 1862 m
+  - { id: tangenziale_capodichino, label: "Tangenziale svincolo Capodichino", lat: 40.871789, lon: 14.282397 }  # arco 1142048932-15413713-0: «Tangenziale di Napoli», 113 m
+  - { id: via_marina, label: "Via Marina", lat: 40.845665, lon: 14.263074 }  # arco 2177201493-8909626382-0: «Via Nuova Marina», 1020 m

@@ -1,0 +1,194 @@
+/* Sentrix — token estratti dal Design System (Claude Design), 10/11/2026 */
+:root {
+    /* Neutri */
+    --color-bg: #121110;
+    --color-surface-1: #1A1816;
+    --color-surface-2: #232019;
+    --color-surface-3: #2D2922;
+    --color-border: #2E2A25;
+    --color-border-strong: #4A453E;
+    --color-border-card: rgba(74, 69, 62, .30);
+    --color-border-tooltip: rgba(74, 69, 62, .70);
+    --color-text: #F2EDE6;
+    --color-text-secondary: #A39B90;
+    --color-text-muted: #6F685F;
+    --color-overlay: rgba(0, 0, 0, .60);
+    /* Accenti e stati */
+    --color-accent: #5B7CFA;
+    --color-accent-hover: #7994FB;
+    --color-accent-2: #6B7CF5;
+    --color-success: #12BFA0;
+    --color-warning: #D4A93A;
+    --color-danger: #EE5663;
+    /* Nomi obbligatori del brief */
+    --color-data-real: #12BFA0;
+    --color-data-estimate: #4DA3FF;
+    --color-data-simulated: #F26A2E;
+    --color-data-unavailable: #A39B90;
+    --color-scenario-frame: #F26A2E;
+    --color-status-accepted: #12BFA0;
+    --color-status-rejected: #EE5663;
+    --color-status-pending: #D4A93A;
+    --color-delta-better: #12BFA0;
+    --color-delta-worse: #EE5663;
+    /* Riempimenti badge (16% su surface-1) */
+    --color-badge-fill-real: #19332C;
+    --color-badge-fill-estimate: #222E3B;
+    --color-badge-fill-simulated: #3D251A;
+    --color-badge-fill-unavailable: #302D2A;
+    --color-badge-fill-pending: #382F1C;
+    /* Riempimenti chip (20%) e modalità */
+    --color-state-fill-running: #272C44;
+    --color-state-fill-waiting: #3F351D;
+    --color-state-fill-done: #183932;
+    --color-state-fill-error: #442425;
+    --color-mode-fill-live: #183932;
+    --color-mode-fill-scenario: #45281B;
+    --color-row-hover: #2D2922;
+    /* Grafici */
+    --color-chart-1: #9B6BFF;
+    --color-chart-2: #D4A93A;
+    --color-chart-3: #A39B90;
+    --color-chart-4: #6B7CF5;
+    /* Mappa */
+    --color-map-congestion-1: #12BFA0;
+    --color-map-congestion-2: #D4A93A;
+    --color-map-congestion-3: #EE5663;
+    --color-map-congestion-4: #C84BE0;
+    --color-map-closure: #E8ECF5;
+    --color-map-detour: #3495D2;
+    --color-map-event-area: #6B7CF5;
+    --color-map-stop-low: #12BFA0;
+    --color-map-stop-mid: #D4A93A;
+    --color-map-stop-over: #EE5663;
+    /* Alias semantici */
+    --surface-screen: var(--color-bg);
+    --surface-card: var(--color-surface-1);
+    --surface-nested: var(--color-surface-2);
+    --surface-hover: var(--color-surface-3);
+    --text-primary: var(--color-text);
+    --text-support: var(--color-text-secondary);
+    --action: var(--color-accent);
+    --action-hover: var(--color-accent-hover);
+    --focus-ring: var(--color-accent);
+    --font-ui: 'Plus Jakarta Sans', system-ui, sans-serif;
+    --font-mono: 'Geist Mono', ui-monospace, monospace;
+    --fs-kpi: 48px;
+    --lh-kpi: 52px;
+    --fw-kpi: 700;
+    /* @kind other */
+    --ls-kpi: -.01em;
+    /* @kind other */
+    --fs-kpi-sm: 32px;
+    --lh-kpi-sm: 40px;
+    --fw-kpi-sm: 600;
+    /* @kind other */
+    --ls-kpi-sm: 0;
+    /* @kind other */
+    --fs-2xl: 32px;
+    --lh-2xl: 40px;
+    --fw-2xl: 700;
+    /* @kind other */
+    --ls-2xl: -.01em;
+    /* @kind other */
+    --fs-xl: 24px;
+    --lh-xl: 32px;
+    --fw-xl: 600;
+    /* @kind other */
+    --ls-xl: -.01em;
+    /* @kind other */
+    --fs-lg: 20px;
+    --lh-lg: 28px;
+    --fw-lg: 600;
+    /* @kind other */
+    --ls-lg: -.01em;
+    /* @kind other */
+    --fs-md: 16px;
+    --lh-md: 24px;
+    --fw-md: 400;
+    /* @kind other */
+    --ls-md: 0;
+    /* @kind other */
+    --fs-sm: 15px;
+    --lh-sm: 22px;
+    --fw-sm: 400;
+    /* @kind other */
+    --ls-sm: 0;
+    /* @kind other */
+    --fs-xs: 14px;
+    --lh-xs: 20px;
+    --fw-xs: 500;
+    /* @kind other */
+    --ls-xs: 0;
+    /* @kind other */
+    --fs-badge: 14px;
+    --lh-badge: 20px;
+    --fw-badge: 600;
+    /* @kind other */
+    --ls-badge: .04em;
+    /* @kind other */
+    --space-4: 4px;
+    --space-8: 8px;
+    --space-12: 12px;
+    --space-16: 16px;
+    --space-24: 24px;
+    --space-32: 32px;
+    --space-48: 48px;
+    --radius-card: 10px;
+    --radius-card-inner: 8px;
+    --radius-control: 6px;
+    --radius-tag: 6px;
+    --radius-tooltip: 4px;
+    --border-hairline: 1px;
+    --border-control: 2px;
+    --border-scenario-frame: 4px;
+    --size-control-height: 44px;
+    --size-badge-height: 28px;
+    --size-sidebar-width: 72px;
+    --size-sidebar-button: 44px;
+    --size-topbar-height: 64px;
+    --size-metrics-height: 146px;
+    --size-icon: 20px;
+    --size-icon-sidebar: 22px;
+    --size-icon-marker: 24px;
+    --size-focus-ring-offset: 2px;
+    --size-road-line: 6px;
+    --size-icon-stroke: 1.5;
+    --size-chip-height: 36px;
+    --size-mode-button-height: 48px;
+    --size-node: 28px;
+    --size-status-chip-height: 32px;
+    --size-dept-icon: 36px;
+    --size-progress-bar: 6px;
+    --size-marker: 44px;
+    --size-marker-badge: 20px;
+    --size-layer-panel-width: 236px;
+    --size-layer-row-height: 40px;
+    --size-popover-width: 300px;
+    --layout-event-manager: 360px;
+    --layout-right-panel: 440px;
+    --layout-event-manager-compact: 300px;
+    --layout-right-panel-compact: 360px;
+    --layout-event-manager-rail: 108px;
+    --layout-right-panel-wide: 692px;
+    --layout-gap: 16px;
+    --layout-screen-padding: 16px;
+    --breakpoint-compact: 1440px;
+    --opacity-badge-fill: .16;
+    /* @kind other */
+    --opacity-card-border: .3;
+    /* @kind other */
+    --opacity-tooltip-border: .7;
+    /* @kind other */
+    --opacity-congestion-rest: .4;
+    /* @kind other */
+    --opacity-congestion-hover: 1;
+    /* @kind other */
+    --opacity-event-area-fill: .12;
+    /* @kind other */
+    --motion-duration: 150ms;
+    /* @kind other */
+    --motion-easing: ease-out;
+    /* @kind other */
+    --transition-base: color var(--motion-duration) var(--motion-easing), background-color var(--motion-duration) var(--motion-easing), border-color var(--motion-duration) var(--motion-easing), opacity var(--motion-duration) var(--motion-easing);
+}

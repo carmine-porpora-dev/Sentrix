@@ -1,0 +1,18 @@
+# Durata del cookie di sessione (06 1)
+session_hours: 12
+
+# Tentativi di login ERRATI per indirizzo IP; raggiunto il limite, ogni tentativo (anche con la
+# password giusta) riceve 429 finché la finestra non scade (06 1: 5 al minuto)
+login_failures: { limit: 5, window_s: 60 }
+
+# Reti per la mappa dell'Event Manager (06 4): archi, fermate e linee da scegliere con un clic.
+network:
+  # classi di strada mostrate sempre (le «link» di ognuna comprese); le minori solo in un'area piccola
+  major_classes: [motorway, trunk, primary, secondary, tertiary]
+  detail_max_span_deg: 0.012   # lato massimo (gradi, ~1 km) di un'area in cui si vedono anche le minori
+  max_span_deg: 0.25           # lato massimo di un'area che si può chiedere (oltre: 400)
+  max_features: 4000           # tetto di archi o fermate in una risposta
+
+# POST /api/runs: per sessione e globale (06 5, spech 6.6: 3 al minuto, 20 all'ora)
+runs_per_session: { limit: 3, window_s: 60 }
+runs_global: { limit: 20, window_s: 3600 }

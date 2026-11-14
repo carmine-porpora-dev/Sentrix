@@ -1,0 +1,68 @@
+# --- Strumenti (F6-02): quanti elementi per tipo si portano all'attenzione dell'agente ------------
+tools:
+  # archi più saturi di una finestra che diventano un possibile bersaglio (trigger saturated_path)
+  top_congested_edges: 3
+  # fermate più cariche di una finestra (trigger stop_overloaded)
+  top_overloaded_stops: 2
+
+# --- Gravità di una criticità (Severity del finding) --------------------------------------------
+# Rapporto v/c di un arco o di un incrocio e carico (passeggeri/ora ÷ capacità) di una tratta o di
+# una fermata: da `warning_at` in su è un'attenzione, da `critical_at` in su è critico.
+severity:
+  road: { warning_at: 0.9, critical_at: 1.1 }
+  transit: { warning_at: 1.0, critical_at: 1.5 }
+  # oltre questo carico una fermata non è solo affollata: non è sicuro tenerla aperta
+  # (trigger stop_overloaded_unsafe, misura stop_suspension)
+  stop_unsafe_load: 3.0
+
+# --- Come si chiamano le cose nei testi ---------------------------------------------------------
+labels:
+  route_classes:
+    metro_line_1: "Linea 1 della metropolitana"
+    metro_line_6: "Linea 6 della metropolitana"
+    funicular: "Funicolari"
+  # come si chiama ogni misura del catalogo nei testi (anche in quelli di riserva)
+  measures:
+    traffic_post: "presidio stradale"
+    signal_plan_change: "cambio del piano semaforico"
+    detour_signage: "segnaletica di deviazione"
+    extend_hours: "prolungamento dell'orario"
+    add_runs: "corse aggiuntive"
+    stop_suspension: "sospensione della fermata"
+    crowd_control_post: "presidio di afflusso"
+    citizen_notice: "avviso ai cittadini"
+
+# --- Piano (F6-05): quante misure al massimo, in ordine di gravità -----------------------------
+plan:
+  max_measures: 10
+
+# --- Run (F6-06) -----------------------------------------------------------------------------
+run:
+  # tempo massimo di un run intero, dall'INTAKE alla fine (05 3): oltre, il run va in ERROR
+  timeout_s: 120
+
+# --- Controllo dei testi (F6-04) -------------------------------------------------------------
+language:
+  # Un testo che cita un dato `simulated` non può dire che è previsto, rilevato o misurato: il
+  # motore è un modello macroscopico statico non calibrato, non una previsione.
+  forbidden_when_simulated:
+    - previsto
+    - prevista
+    - previsti
+    - previste
+    - previsione
+    - prevede
+    - rilevato
+    - rilevata
+    - rilevati
+    - rilevate
+    - misurato
+    - misurata
+    - misurati
+    - misurate
+numbers:
+  # ogni numero di un testo deve coincidere con un valore dell'input: due numeri coincidono se sono
+  # uguali arrotondati a `decimals` cifre (o a meno, se il testo ne scrive meno: «108» per 107,8)
+  decimals: 1
+  # un numero seguito da % si confronta con il valore × 100 solo per le misure con queste unità
+  percent_units: [rapporto]

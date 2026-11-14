@@ -1,0 +1,41 @@
+measures:
+  - type: traffic_post
+    department: municipal_police
+    target_kind: intersection
+    triggers: [critical_intersection]
+    alternatives: [signal_plan_change, detour_signage]
+  - type: signal_plan_change
+    department: traffic_control
+    target_kind: intersection
+    triggers: [critical_intersection]
+    alternatives: [detour_signage]
+  - type: detour_signage
+    department: traffic_control
+    target_kind: edges
+    triggers: [critical_intersection, saturated_path]
+    alternatives: []
+  - type: extend_hours
+    department: transport_control
+    target_kind: route
+    triggers: [line_no_service_in_window, section_overloaded]
+    alternatives: [add_runs]
+  - type: add_runs
+    department: transport_control
+    target_kind: route
+    triggers: [section_overloaded, stop_overloaded]
+    alternatives: []
+  - type: stop_suspension
+    department: transport_control
+    target_kind: stop
+    triggers: [stop_overloaded_unsafe]
+    alternatives: []
+  - type: crowd_control_post
+    department: municipal_police
+    target_kind: stop
+    triggers: [stop_overloaded]
+    alternatives: [add_runs]
+  - type: citizen_notice
+    department: public_comms
+    target_kind: none
+    triggers: [plan_accepted]
+    alternatives: []

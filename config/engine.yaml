@@ -1,0 +1,209 @@
+version: 1
+seed: 42
+time_slice_minutes: 30
+# Assegnazione incrementale: steps × step_share = 1 (100% della matrice auto). Passata da 4 passi
+# (0.25) a 16 (0.0625): con 4 passi tutto-o-niente un presidio poteva far salire le
+# ore-veicolo (+3,4 % in 1 incrocio su 6 sul deflusso del Match 2027); con 16 passi in nessuno, e il
+# valore di base si assesta (14.667 -> 10.232 veic·h). Costo: ~0,3 s per fascia invece di ~0,1 s.
+assignment: { steps: 16, step_share: 0.0625 }
+bpr: { alpha: 0.15, beta: 4 }
+car_occupancy_default: 2.2
+# Un punto (zona, destinazione, estremo O/D) si aggancia al nodo stradale più vicino solo se è entro
+# questa distanza, altrimenti il resolver segnala errore (docs/spec/01-domain-model.md 6).
+node_snap_max_distance_m: 300
+
+# Usati SOLO se OSM non fornisce lanes/maxspeed. capacity_per_lane della classe si usa SEMPRE
+# (anche quando lanes viene da OSM): capacity = lanes × capacity_per_lane. La chiave "default" è obbligatoria.
+road_defaults:
+  motorway:       { lanes: 2, speed_kmh: 80, capacity_per_lane: 1800 }
+  motorway_link:  { lanes: 1, speed_kmh: 40, capacity_per_lane: 1200 }
+  trunk:          { lanes: 2, speed_kmh: 60, capacity_per_lane: 1400 }
+  trunk_link:     { lanes: 1, speed_kmh: 40, capacity_per_lane: 1200 }
+  primary:        { lanes: 2, speed_kmh: 50, capacity_per_lane: 900 }
+  primary_link:   { lanes: 1, speed_kmh: 40, capacity_per_lane: 800 }
+  secondary:      { lanes: 1, speed_kmh: 50, capacity_per_lane: 800 }
+  secondary_link: { lanes: 1, speed_kmh: 40, capacity_per_lane: 700 }
+  tertiary:       { lanes: 1, speed_kmh: 40, capacity_per_lane: 600 }
+  tertiary_link:  { lanes: 1, speed_kmh: 30, capacity_per_lane: 500 }
+  residential:    { lanes: 1, speed_kmh: 30, capacity_per_lane: 400 }
+  unclassified:   { lanes: 1, speed_kmh: 30, capacity_per_lane: 400 }
+  living_street:  { lanes: 1, speed_kmh: 20, capacity_per_lane: 300 }
+  default:        { lanes: 1, speed_kmh: 30, capacity_per_lane: 400 }
+
+measure_effects:
+  traffic_post:       { capacity_factor: 1.25, scope: incoming_edges }
+  signal_plan_change: { capacity_factor: 1.15, scope: incoming_edges_favored_direction }
+  detour_signage:     { perceived_time_factor: 1.20, scope: saturated_path_edges }
+  close_road:         { capacity_factor: 0.0 }
+
+metrics:
+  vc_critical_threshold: 0.9
+  vc_classes: [0.6, 0.9, 1.1]   # 4 classi per la mappa: <0.6, 0.6–0.9, 0.9–1.1, >1.1
+  critical_intersections_top_n: 2
+
+# Domanda: default globali (D16). Coordinate PROPOSTA approssimata, da verificare a vista su mappa (Q8, F1-H1).
+# Tre punti (zone posillipo e bagnoli, origine "Capo Posillipo") sono stati spostati sul
+# nodo stradale più vicino: la proposta cadeva oltre node_snap_max_distance_m da qualsiasi nodo.
+# Le due porte della Tangenziale sono state spostate sui nodi di Tangenziale
+# (ingresso «Direzione Autostrade» di Capodichino, 580 m dalla proposta; «Uscita Agnano», 470 m): i
+# centroidi proposti agganciavano un vicolo da 400 veic/h in uscita, che doveva far passare
+# 2.700-4.100 veic/h. Entrambi i nodi stanno nella componente principale della rete (percorribili
+# nei due sensi): un ramo di sola uscita perderebbe la domanda del deflusso.
+demand:
+  zones:
+    - { id: gate_east,        name: "Porta Tangenziale Est (Capodichino)", type: road_gate,   weight_pct: 12, centroid: { lat: 40.8736, lon: 14.2878 } }
+    - { id: gate_west,        name: "Porta Tangenziale Ovest (Agnano)",    type: road_gate,   weight_pct: 8,  centroid: { lat: 40.8397, lon: 14.1665 } }
+    - { id: gate_metro_north, name: "Porta Nord metro — Piscinola",        type: metro_gate,  weight_pct: 8,  centroid: { lat: 40.8935, lon: 14.2240 } }
+    - { id: central_station,  name: "Stazione Centrale / Garibaldi",       type: arrival_hub, weight_pct: 12, centroid: { lat: 40.8530, lon: 14.2720 } }
+    - { id: port,             name: "Porto / Molo Beverello",              type: arrival_hub, weight_pct: 4,  centroid: { lat: 40.8380, lon: 14.2540 } }
+    - { id: chiaia,           name: "Chiaia",                              type: near,        weight_pct: 8,  centroid: { lat: 40.8375, lon: 14.2370 } }
+    - { id: posillipo,        name: "Posillipo",                           type: near,        weight_pct: 5,  centroid: { lat: 40.8180, lon: 14.2091 } }
+    - { id: san_ferdinando,   name: "San Ferdinando / Municipio",          type: near,        weight_pct: 6,  centroid: { lat: 40.8400, lon: 14.2520 } }
+    - { id: vomero,           name: "Vomero",                              type: far,         weight_pct: 10, centroid: { lat: 40.8440, lon: 14.2300 } }
+    - { id: arenella,         name: "Arenella",                            type: far,         weight_pct: 6,  centroid: { lat: 40.8510, lon: 14.2290 } }
+    - { id: centro_storico,   name: "Centro storico",                      type: far,         weight_pct: 8,  centroid: { lat: 40.8490, lon: 14.2500 } }
+    - { id: fuorigrotta,      name: "Fuorigrotta",                         type: far,         weight_pct: 8,  centroid: { lat: 40.8240, lon: 14.1950 } }
+    - { id: bagnoli,          name: "Bagnoli",                             type: far,         weight_pct: 5,  centroid: { lat: 40.8132, lon: 14.1669 } }
+
+  # Ripartizione modale per tipo di zona (% auto / TPL / piedi). Il modo "mare" non esiste: chi arriva
+  # via mare parte dalla zona `port`.
+  modal_split_by_type:
+    road_gate:   { car_pct: 100, transit_pct: 0,   walk_pct: 0 }
+    metro_gate:  { car_pct: 0,   transit_pct: 100, walk_pct: 0 }
+    arrival_hub: { car_pct: 0,   transit_pct: 80,  walk_pct: 20 }
+    near:        { car_pct: 20,  transit_pct: 30,  walk_pct: 50 }
+    far:         { car_pct: 30,  transit_pct: 60,  walk_pct: 10 }
+
+  # Punti di arrivo auto. I parcheggi non sono modellati (assumption dichiarata): ogni punto è un
+  # incrocio dove si raccolgono le auto, da cui il pubblico raggiunge a piedi l'area evento.
+  # Sono passati da 2 a 5 (quote uguali: non c'è un dato sull'offerta di parcheggio).
+  # Criterio: incroci con almeno 2 archi da 800 veic/h o più, entro ~1,8 km da Rotonda Diaz, in
+  # direzioni diverse e a più di 500 m l'uno dall'altro (a sud c'è il mare). Piazza Vittoria è stata
+  # spostata sull'incrocio vero (40.8330, 14.2411): il punto precedente (40.8345, 14.2440) cadeva
+  # ~300 m a est, su un nodo in fondo a una catena di strade da 400 veic/h (Piazza Carolina).
+  car_destinations:
+    - { point: &piazza_vittoria { lat: 40.8330, lon: 14.2411, label: "Piazza Vittoria" }, share_pct: 20 }
+    - { point: { lat: 40.8290, lon: 14.2220, label: "Piazza Sannazaro" }, share_pct: 20 }
+    - { point: { lat: 40.8367, lon: 14.2294, label: "Corso Vittorio Emanuele (Via Tasso)" }, share_pct: 20 }
+    - { point: { lat: 40.8397, lon: 14.2426, label: "Corso Vittorio Emanuele (Piazzetta Cariati)" }, share_pct: 20 }
+    - { point: &piazza_municipio { lat: 40.8405, lon: 14.2525, label: "Piazza Municipio" }, share_pct: 20 }
+
+  # Coppie O/D delle metriche. `id` compare negli id delle metriche (od_time.<id>); gli id diversi
+  # da bagnoli_centrale (esempio di 01 1) sono ricavati dalle etichette. Un estremo è una zona
+  # (si usa il suo centroide) oppure un punto. Piazza Vittoria e Piazza Municipio sono definite una volta.
+  od_pairs:
+    - id: bagnoli_centrale
+      label: "Bagnoli → Stazione Centrale"
+      origin: { zone: bagnoli }
+      destination: { zone: central_station }
+    - id: fuorigrotta_municipio
+      label: "Fuorigrotta → Piazza Municipio"
+      origin: { zone: fuorigrotta }
+      destination: { point: *piazza_municipio }
+    - id: vomero_vittoria
+      label: "Vomero (Piazza Vanvitelli) → Piazza Vittoria"
+      origin: { point: { lat: 40.8440, lon: 14.2300, label: "Vomero, Piazza Vanvitelli" } }
+      destination: { point: *piazza_vittoria }
+    - id: posillipo_municipio
+      label: "Capo Posillipo → Piazza Municipio"
+      origin: { point: { lat: 40.8059, lon: 14.2007, label: "Capo Posillipo" } }
+      destination: { point: *piazza_municipio }
+    - id: tangenziale_garibaldi
+      label: "Uscita Tangenziale Fuorigrotta → Piazza Garibaldi"
+      origin: { point: { lat: 40.8290, lon: 14.1960, label: "Uscita Tangenziale Fuorigrotta" } }
+      destination: { point: { lat: 40.8520, lon: 14.2700, label: "Piazza Garibaldi" } }
+
+# TPL (D17, D18). Gli itinerari per zona (transit.itineraries) arrivano con F3-02.
+transit:
+  stop_radius_m: 800                # fermate considerate "vicine all'area evento"
+  redistribution_radius_m: 1000     # per stazione indisponibile
+  walk_detour_factor: 1.3           # distanza a piedi = linea d'aria × 1,3
+  vehicle_capacity:                 # passeggeri per veicolo/convoglio
+    bus: 90
+    metro_line_1: 1250
+    metro_line_6: 290
+    funicular: 250
+  vehicle_capacity_sources:         # fonte di ciascuna capacità (finisce nel campo `source` dei Measured, kind=estimate)
+    bus: "ipotesi"
+    metro_line_1: "dato ANM (ago 2024)"
+    metro_line_6: "dato Hitachi/Comune; 580 se doppia composizione"
+    funicular: "dato funicolare di Chiaia, esteso alle altre per ipotesi"
+  # Come riconoscere le linee nel feed GTFS ANM. route_id del feed scaricato (report dati F0,
+  # Q5 confermata): cambiano se ANM pubblica un nuovo feed; rilanciare `scripts.data_report` per verificarli.
+  route_classification:
+    metro_line_1: { route_ids: ["4955"] }                    # L1
+    metro_line_6: { route_ids: ["2302"] }                    # L6
+    funicular:    { route_ids: ["2305", "2315", "2300"] }    # F1 Chiaia, F3 Centrale, F4 Mergellina
+  extend_hours_default_end: "23:59" # orario di fine per extend_hours se non specificato
+  add_runs_default: 4               # corse aggiuntive per richiesta add_runs
+
+  # Itinerari TPL per zona (03 2, Q6 confermata al cancello F0): in ordine di preferenza; il motore usa
+  # il primo disponibile nella fascia e, se nessuno lo è, la domanda va sul bus (lista vuota = solo bus).
+  # Nell'arrivo si percorrono come scritti, nel deflusso al contrario. `egress_walk: true` = dopo
+  # l'ultima tratta si va a piedi fino all'area evento. I nomi sono quelli del feed e si risolvono tra le
+  # fermate servite dalla classe della tratta (una stazione ha uno stop_id per senso). Due tratte di fila
+  # si incontrano nella stazione con lo stesso nome: è l'interscambio (Municipio L1 e Municipio L6 sono
+  # fermate diverse, a 13 m). Le zone `gate_east` e `gate_west` sono porte stradali: nessuna domanda TPL.
+  itineraries:
+    gate_east: []
+    gate_west: []
+    gate_metro_north:
+      - legs:
+          - { route_class: metro_line_1, from_stop_name: "Piscinola", to_stop_name: "Municipio" }
+          - &l6_municipio_san_pasquale { route_class: metro_line_6, from_stop_name: "Municipio", to_stop_name: "San Pasquale" }
+        egress_walk: false
+      - legs:
+          - { route_class: metro_line_1, from_stop_name: "Piscinola", to_stop_name: "Municipio" }
+        egress_walk: true
+    central_station:
+      - legs:
+          - { route_class: metro_line_1, from_stop_name: "Garibaldi", to_stop_name: "Municipio" }
+          - *l6_municipio_san_pasquale
+        egress_walk: false
+      - legs:
+          - { route_class: metro_line_1, from_stop_name: "Garibaldi", to_stop_name: "Municipio" }
+        egress_walk: true
+    vomero:
+      - legs:
+          - { route_class: funicular, from_stop_name: "Cimarosa", to_stop_name: "Parco Margherita" }  # funicolare di Chiaia
+        egress_walk: true
+      - legs:
+          - { route_class: metro_line_1, from_stop_name: "Vanvitelli", to_stop_name: "Municipio" }
+          - *l6_municipio_san_pasquale
+        egress_walk: false
+    arenella:
+      - legs:
+          - { route_class: metro_line_1, from_stop_name: "Medaglie d'Oro", to_stop_name: "Municipio" }
+          - *l6_municipio_san_pasquale
+        egress_walk: false
+      - legs:
+          - { route_class: metro_line_1, from_stop_name: "Medaglie d'Oro", to_stop_name: "Municipio" }
+        egress_walk: true
+    centro_storico:
+      - legs:
+          - { route_class: metro_line_1, from_stop_name: "Dante", to_stop_name: "Municipio" }
+          - *l6_municipio_san_pasquale
+        egress_walk: false
+      - legs:
+          - { route_class: metro_line_1, from_stop_name: "Dante", to_stop_name: "Municipio" }
+        egress_walk: true
+    fuorigrotta:
+      - legs:
+          - { route_class: metro_line_6, from_stop_name: "Mostra", to_stop_name: "Arco Mirelli" }
+        egress_walk: false
+      - legs:
+          - { route_class: metro_line_6, from_stop_name: "Mostra", to_stop_name: "Mergellina" }
+        egress_walk: true
+    posillipo:
+      - legs:
+          - { route_class: funicular, from_stop_name: "Manzoni", to_stop_name: "Mergellina" }  # funicolare di Mergellina
+        egress_walk: true
+    port:
+      - legs:
+          - *l6_municipio_san_pasquale
+        egress_walk: false
+      - legs: []
+        egress_walk: true
+    chiaia: []
+    san_ferdinando: []
+    bagnoli: []
