@@ -1,0 +1,74 @@
+@import "./styles/fonts.css";
+@import "./styles/tokens.generated.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-surface-screen font-ui text-md text-text-primary;
+  }
+
+  /* L'anello di fuoco del design system (components.css): visibile a tastiera, mai solo il colore. */
+  :focus-visible {
+    outline: var(--border-control) solid var(--focus-ring);
+    outline-offset: var(--size-focus-ring-offset);
+  }
+}
+
+/* Il popup della mappa (MapLibre): lo stile del tooltip del design, al posto del bianco della
+   libreria. Il suo CSS sta nel chunk della mappa; queste regole vincono per specificità. */
+.maplibregl-popup.nuo-popup .maplibregl-popup-content {
+  @apply rounded-tooltip border-hairline border-border-tooltip bg-surface-2 py-2 pl-2.5 pr-space-24 text-text-primary;
+}
+
+.maplibregl-popup.nuo-popup .maplibregl-popup-close-button {
+  @apply right-1 top-1 size-5 rounded-control text-md leading-none text-text-secondary hover:bg-surface-3 hover:text-text-primary;
+}
+
+.maplibregl-popup-anchor-bottom.nuo-popup .maplibregl-popup-tip {
+  border-top-color: var(--color-surface-2);
+}
+
+.maplibregl-popup-anchor-top.nuo-popup .maplibregl-popup-tip {
+  border-bottom-color: var(--color-surface-2);
+}
+
+.maplibregl-popup-anchor-left.nuo-popup .maplibregl-popup-tip {
+  border-right-color: var(--color-surface-2);
+}
+
+.maplibregl-popup-anchor-right.nuo-popup .maplibregl-popup-tip {
+  border-left-color: var(--color-surface-2);
+}
+
+/* Il cursore del raggio dell'area evento (07 4). Il design non ha un cursore: stesso linguaggio dei
+   campi, con la traccia in `surface-3` e la parte riempita e il pollice nel colore d'azione (senza,
+   il browser disegna la traccia di bianco). Il riempimento (in %) lo scrive il componente in `--fill`. */
+.nuo-range {
+  @apply h-5 w-full cursor-pointer appearance-none bg-transparent;
+}
+
+.nuo-range::-webkit-slider-runnable-track {
+  @apply h-1 rounded-full;
+  background: linear-gradient(to right,
+      var(--action) var(--fill, 0%),
+      var(--color-surface-3) var(--fill, 0%));
+}
+
+.nuo-range::-webkit-slider-thumb {
+  @apply -mt-1.5 size-4 appearance-none rounded-full border-0 bg-action;
+}
+
+.nuo-range::-moz-range-track {
+  @apply h-1 rounded-full bg-surface-3;
+}
+
+.nuo-range::-moz-range-progress {
+  @apply h-1 rounded-full bg-action;
+}
+
+.nuo-range::-moz-range-thumb {
+  @apply size-4 rounded-full border-0 bg-action;
+}
