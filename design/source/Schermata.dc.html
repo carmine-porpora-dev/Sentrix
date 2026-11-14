@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="./support.js"></script>
+</head>
+
+<body>
+  <x-dc>
+    <helmet>
+      <link rel="stylesheet" href="_ds/napoli-urban-ops-1776e07f-27d7-4365-8cf7-4dcacb9bc170/fonts/fonts.css">
+      <link rel="stylesheet" href="_ds/napoli-urban-ops-1776e07f-27d7-4365-8cf7-4dcacb9bc170/tokens/colors.css">
+      <link rel="stylesheet" href="_ds/napoli-urban-ops-1776e07f-27d7-4365-8cf7-4dcacb9bc170/tokens/typography.css">
+      <link rel="stylesheet" href="_ds/napoli-urban-ops-1776e07f-27d7-4365-8cf7-4dcacb9bc170/tokens/spacing.css">
+      <link rel="stylesheet" href="_ds/napoli-urban-ops-1776e07f-27d7-4365-8cf7-4dcacb9bc170/tokens/base.css">
+      <link rel="stylesheet" href="_ds/napoli-urban-ops-1776e07f-27d7-4365-8cf7-4dcacb9bc170/components/core/core.css">
+      <link rel="stylesheet"
+        href="_ds/napoli-urban-ops-1776e07f-27d7-4365-8cf7-4dcacb9bc170/components/forms/forms.css">
+      <link rel="stylesheet"
+        href="_ds/napoli-urban-ops-1776e07f-27d7-4365-8cf7-4dcacb9bc170/components/navigation/navigation.css">
+      <link rel="stylesheet" href="_ds/napoli-urban-ops-1776e07f-27d7-4365-8cf7-4dcacb9bc170/components/data/data.css">
+      <link rel="stylesheet"
+        href="_ds/napoli-urban-ops-1776e07f-27d7-4365-8cf7-4dcacb9bc170/components/operations/operations.css">
+      <link rel="stylesheet" href="_ds/napoli-urban-ops-1776e07f-27d7-4365-8cf7-4dcacb9bc170/components/map/map.css">
+      <link rel="stylesheet" href="_ds/napoli-urban-ops-1776e07f-27d7-4365-8cf7-4dcacb9bc170/styles.css">
+      <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+      <script src="_ds/napoli-urban-ops-1776e07f-27d7-4365-8cf7-4dcacb9bc170/_ds_bundle.js"></script>
+      <style>
+        .nuo-mt__tr .nuo-track {
+          display: block
+        }
+
+        .nuo-logrow.sim-hover {
+          background: var(--color-row-hover)
+        }
+
+        .nuo-logrow.sim-hover::before {
+          opacity: 1
+        }
+      </style>
+    </helmet>
+    <div data-screen-label="{{ label }}"
+      style="position:relative;display:flex;width:1920px;height:1080px;overflow:hidden;background:var(--color-bg);color:var(--color-text);font-family:var(--font-ui)">
+      <x-import component-from-global-scope="DesignSystem_1776e0.Sidebar" items="{{ navItems }}" active="dashboard"
+        hint-size="72px,1080px" style="height:1080px;flex:none"></x-import>
+      <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+        <header
+          style="position:relative;flex:none;height:64px;display:flex;align-items:center;gap:24px;padding:0 16px;background:var(--color-surface-1);border-bottom:1px solid var(--color-border)">
+          <div style="font:700 20px/28px var(--font-ui);letter-spacing:-.01em;white-space:nowrap">Sentrix</div>
+          <sc-if value="{{ hasRun }}" hint-placeholder-val="{{ false }}">
+            <x-import component-from-global-scope="DesignSystem_1776e0.RunStatus" state="{{ runState }}"
+              hint-size="190px,48px"></x-import>
+            <x-import component-from-global-scope="DesignSystem_1776e0.IterationIndicator" current="{{ iterN }}"
+              total="{{ iterTotal }}" hint-size="230px,20px"></x-import>
+          </sc-if>
+          <sc-if value="{{ scn }}" hint-placeholder-val="{{ true }}">
+            <div
+              style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:6px;background:var(--color-scenario-frame);color:var(--color-bg)">
+              <x-import component-from-global-scope="DesignSystem_1776e0.Icon" name="flask-conical" size="20" stroke="2"
+                hint-size="20px,20px"></x-import>
+              <span class="t-badge">SIMULAZIONE</span>
+            </div>
+          </sc-if>
+          <div style="flex:1"></div>
+          <sc-if value="{{ showSource }}" hint-placeholder-val="{{ false }}">
+            <div class="nuo-src">
+              <button type="button" class="nuo-srcchip" aria-expanded="true"><x-import
+                  component-from-global-scope="DesignSystem_1776e0.Icon" name="triangle-alert" size="16"
+                  hint-size="16px,16px"></x-import>Fonte non disponibile: TomTom<x-import
+                  component-from-global-scope="DesignSystem_1776e0.Icon" name="chevron-down" size="16"
+                  hint-size="16px,16px"></x-import></button>
+              <div class="nuo-pop" role="dialog">
+                <div><b>TomTom</b><span>Non disponibile. Si usano gli ultimi dati noti.</span></div>
+              </div>
+            </div>
+          </sc-if>
+          <x-import component-from-global-scope="DesignSystem_1776e0.ModeSelector" value="{{ modeValue }}"
+            hint-size="388px,48px"></x-import>
+        </header>
+        <div style="flex:1;min-height:0;display:flex;flex-direction:column;gap:16px;padding:16px">
+          <div style="flex:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px">
+            <sc-for list="{{ strip }}" as="m" hint-placeholder-count="5">
+              <div style="min-width:0">
+                <sc-if value="{{ m.isStd }}" hint-placeholder-val="{{ true }}">
+                  <x-import component-from-global-scope="DesignSystem_1776e0.MetricCard" label="{{ m.label }}"
+                    value="{{ m.value }}" unit="{{ m.unit }}" delta="{{ m.delta }}" badge="{{ m.badge }}"
+                    compact="{{ yes }}" loading="{{ m.loading }}" hint-size="100%,146px"></x-import>
+                </sc-if>
+                <sc-if value="{{ m.isBA }}" hint-placeholder-val="{{ false }}">
+                  <div class="nuo-metric is-sm" style="min-width:0">
+                    <div class="nuo-metric__label">{{ m.label }}</div>
+                    <div class="nuo-metric__value" style="gap:8px">
+                      <span style="color:var(--color-text-secondary)">{{ m.from }}</span>
+                      <x-import component-from-global-scope="DesignSystem_1776e0.Icon" name="arrow-right" size="24"
+                        hint-size="24px,24px"
+                        style="align-self:center;flex:none;color:var(--color-text-secondary)"></x-import>
+                      <span>{{ m.to }}</span>
+                      <span class="nuo-metric__unit">{{ m.unit }}</span>
+                    </div>
+                    <div class="nuo-metric__foot">
+                      <span class="nuo-delta nuo-delta--{{ m.tone }}"><x-import
+                          component-from-global-scope="DesignSystem_1776e0.Icon" name="{{ m.dIcon }}" size="16"
+                          hint-size="16px,16px"></x-import>{{ m.dText }}</span>
+                      <x-import component-from-global-scope="DesignSystem_1776e0.Badge" kind="{{ m.badge }}"
+                        hint-size="auto,28px"></x-import>
+                    </div>
+                  </div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+          <div
+            style="flex:1;min-height:0;display:grid;grid-template-columns:{{ colEm }} minmax(0,1fr) {{ colRight }};gap:16px">
+            <div class="nuo-card"
+              style="display:flex;flex-direction:column;min-height:0;padding:0;overflow:hidden;align-self:{{ emAlign }}">
+              <sc-if value="{{ showStaticHeader }}" hint-placeholder-val="{{ true }}">
+                <div
+                  style="flex:none;display:flex;align-items:center;gap:12px;height:56px;padding:0 16px;border-bottom:1px solid var(--color-border)">
+                  <x-import component-from-global-scope="DesignSystem_1776e0.Icon" name="calendar-clock" size="20"
+                    hint-size="20px,20px" style="flex:none;color:var(--color-accent)"></x-import>
+                  <span class="t-lg">Analisi evento</span>
+                </div>
+              </sc-if>
+              <sc-if value="{{ showEmHeader }}" hint-placeholder-val="{{ false }}">
+                <button type="button" aria-expanded="{{ emOpen }}" aria-label="Analisi evento" onClick="{{ toggleEm }}"
+                  style="flex:none;display:flex;flex-direction:column;justify-content:center;gap:8px;width:100%;min-height:56px;box-sizing:border-box;padding:{{ emHeadPad }};background:transparent;border:0;border-bottom:{{ emHeadBorder }};color:var(--color-text);cursor:pointer;text-align:left;position:relative;overflow:hidden">
+                  <sc-if value="{{ emBusy }}" hint-placeholder-val="{{ false }}"><span
+                      class="nuo-loadbar"></span></sc-if>
+                  <div style="display:flex;align-items:center;gap:{{ emHeadGap }};width:100%">
+                    <x-import component-from-global-scope="DesignSystem_1776e0.Icon" name="calendar-clock" size="20"
+                      hint-size="20px,20px" style="flex:none;color:var(--color-accent)"></x-import>
+                    <sc-if value="{{ emOpen }}" hint-placeholder-val="{{ true }}"><span class="t-lg"
+                        style="flex:1">Analisi evento</span></sc-if>
+                    <sc-if value="{{ emOpen }}" hint-placeholder-val="{{ true }}"><sc-if value="{{ emBusy }}"
+                        hint-placeholder-val="{{ false }}"><span class="nuo-chip nuo-chip--sm"
+                          style="--c:var(--color-accent);--f:var(--color-state-fill-running);align-self:flex-start"><span
+                            class="nuo-dot nuo-dot--pulse"></span>In corso</span></sc-if></sc-if>
+                    <x-import component-from-global-scope="DesignSystem_1776e0.Icon" name="{{ emChevron }}" size="20"
+                      hint-size="20px,20px" style="flex:none;color:var(--color-text-secondary)"></x-import>
+                  </div>
+                  <sc-if value="{{ emClosed }}" hint-placeholder-val="{{ false }}"><sc-if value="{{ emBusy }}"
+                      hint-placeholder-val="{{ false }}"><span class="nuo-chip nuo-chip--sm"
+                        style="--c:var(--color-accent);--f:var(--color-state-fill-running);align-self:flex-start"><span
+                          class="nuo-dot nuo-dot--pulse"></span>In corso</span></sc-if></sc-if>
+                </button>
+              </sc-if>
+              <sc-if value="{{ emOpen }}" hint-placeholder-val="{{ true }}">
+                <div
+                  style="flex:1;min-height:0;overflow:auto;padding:12px 16px;display:flex;flex-direction:column;gap:8px;scrollbar-width:thin;scrollbar-color:var(--color-surface-3) transparent">
+                  <div class="nuo-field">
+                    <span class="nuo-field__label">Nome evento</span>
+                    <div class="nuo-input" style="height:auto;min-height:44px;padding:8px 12px"><span
+                        style="font:400 16px/24px var(--font-ui);color:{{ nameColor }}">{{ nameText }}</span></div>
+                  </div>
+                  <div class="nuo-field">
+                    <span class="nuo-field__label">Data e finestre orarie</span>
+                    <div class="nuo-card nuo-card--nested" style="padding:0;overflow:hidden">
+                      <sc-for list="{{ whenRows }}" as="r" hint-placeholder-count="4">
+                        <div
+                          style="display:flex;align-items:center;gap:8px;height:30px;padding:0 12px;border-bottom:{{ r.border }}">
+                          <x-import component-from-global-scope="DesignSystem_1776e0.Icon" name="{{ r.icon }}" size="16"
+                            hint-size="16px,16px" style="color:var(--color-text-secondary);flex:none"></x-import>
+                          <span class="t-xs" style="flex:1;color:var(--color-text-secondary)">{{ r.label }}</span>
+                          <span style="font:600 14px/20px var(--font-mono);font-variant-numeric:tabular-nums">{{ r.value
+                            }}</span>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </div>
+                  <div class="nuo-field" style="gap:6px">
+                    <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+                      <span class="nuo-field__label">Affluenza prevista</span>
+                      <x-import component-from-global-scope="DesignSystem_1776e0.Badge" kind="estimate"
+                        hint-size="auto,28px"></x-import>
+                    </div>
+                    <div class="nuo-em__presets">
+                      <sc-for list="{{ presets }}" as="p" hint-placeholder-count="3">
+                        <button type="button" class="nuo-preset {{ p.cls }}">{{ p.label }}</button>
+                      </sc-for>
+                    </div>
+                    <x-import component-from-global-scope="DesignSystem_1776e0.TextField" value="{{ attValue }}"
+                      placeholder="es. 150.000" suffix="persone" mono="{{ yes }}" id="em-attendance"
+                      hint-size="100%,44px"></x-import>
+                  </div>
+                  <div class="nuo-field" style="gap:6px">
+                    <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+                      <span class="nuo-field__label">Ripartizione modale</span>
+                      <x-import component-from-global-scope="DesignSystem_1776e0.Badge" kind="estimate"
+                        hint-size="auto,28px"></x-import>
+                    </div>
+                    <div class="nuo-card nuo-card--nested" style="padding:0;overflow:hidden">
+                      <sc-for list="{{ modalRows }}" as="r" hint-placeholder-count="4">
+                        <div
+                          style="display:flex;align-items:center;gap:8px;height:30px;padding:0 12px;border-bottom:{{ r.border }}">
+                          <x-import component-from-global-scope="DesignSystem_1776e0.Icon" name="{{ r.icon }}" size="16"
+                            hint-size="16px,16px" style="color:var(--color-text-secondary);flex:none"></x-import>
+                          <span class="t-xs" style="flex:1">{{ r.label }}</span>
+                          <span style="font:600 14px/20px var(--font-mono);font-variant-numeric:tabular-nums">{{ r.value
+                            }}</span>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </div>
+                  <div class="nuo-field">
+                    <span class="nuo-field__label">Chiusure strada</span>
+                    <div class="nuo-em__list" style="gap:4px">
+                      <sc-for list="{{ closuresList }}" as="c" hint-placeholder-count="2">
+                        <div class="nuo-em__row">
+                          <x-import component-from-global-scope="DesignSystem_1776e0.Icon" name="ban" size="16"
+                            hint-size="16px,16px"></x-import>
+                          <span>{{ c }}</span>
+                          <button type="button" class="nuo-em__rm" aria-label="Rimuovi {{ c }}"><x-import
+                              component-from-global-scope="DesignSystem_1776e0.Icon" name="x" size="16"
+                              hint-size="16px,16px"></x-import></button>
+                        </div>
+                      </sc-for>
+                      <sc-if value="{{ emptyEm }}" hint-placeholder-val="{{ false }}">
+                        <div class="nuo-field__hint">Clicca una strada sulla mappa per chiuderla</div>
+                      </sc-if>
+                    </div>
+                  </div>
+                  <div class="nuo-field">
+                    <span class="nuo-field__label">Interruzioni fermata</span>
+                    <div class="nuo-em__list" style="gap:4px">
+                      <sc-for list="{{ stopsList }}" as="c" hint-placeholder-count="1">
+                        <div class="nuo-em__row">
+                          <x-import component-from-global-scope="DesignSystem_1776e0.Icon" name="bus" size="16"
+                            hint-size="16px,16px"></x-import>
+                          <span>{{ c }}</span>
+                          <button type="button" class="nuo-em__rm" aria-label="Rimuovi {{ c }}"><x-import
+                              component-from-global-scope="DesignSystem_1776e0.Icon" name="x" size="16"
+                              hint-size="16px,16px"></x-import></button>
+                        </div>
+                      </sc-for>
+                      <sc-if value="{{ emptyEm }}" hint-placeholder-val="{{ false }}">
+                        <div class="nuo-field__hint">Clicca una fermata sulla mappa</div>
+                      </sc-if>
+                    </div>
+                  </div>
+                </div>
+                <div style="flex:none;padding:12px 16px;border-top:1px solid var(--color-border)">
+                  <x-import component-from-global-scope="DesignSystem_1776e0.Button" block="{{ yes }}"
+                    loading="{{ analyzing }}" disabled="{{ analyzeDisabled }}" hint-size="100%,44px">Analizza</x-import>
+                </div>
+              </sc-if>
+            </div>
+            <div
+              style="position:relative;min-width:0;min-height:0;overflow:hidden;border-radius:10px;background:var(--color-bg);border:1px solid var(--color-border-card)">
+              <svg width="100%" height="100%" viewBox="0 0 982 820" style="position:absolute;left:0;top:0">
+                <sc-if value="{{ showEvent }}" hint-placeholder-val="{{ true }}">
+                  <polygon points="412,612 522,548 700,470 776,500 706,584 548,652 432,680"
+                    fill="var(--color-map-event-area)" fill-opacity="0.12" stroke="var(--color-map-event-area)"
+                    stroke-width="2"></polygon>
+                </sc-if>
+                <sc-for list="{{ roads }}" as="r" hint-placeholder-count="0">
+                  <path d="{{ r.d }}" fill="none" stroke="{{ r.stroke }}" stroke-width="6" stroke-linecap="round"
+                    stroke-linejoin="round" opacity="0.4"></path>
+                </sc-for>
+                <sc-for list="{{ closures }}" as="c" hint-placeholder-count="2">
+                  <path d="{{ c.d }}" fill="none" stroke="var(--color-map-closure)" stroke-width="4"
+                    stroke-dasharray="10 8" stroke-linecap="butt"></path>
+                </sc-for>
+                <sc-if value="{{ showDetour }}" hint-placeholder-val="{{ false }}">
+                  <path
+                    d="M118 634 C 104 610 104 584 112 560 C 240 585 380 572 520 522 S 700 440 800 400 C 826 416 838 440 842 464"
+                    fill="none" stroke="var(--color-map-detour)" stroke-width="4" stroke-dasharray="6 6"
+                    stroke-linecap="butt" stroke-linejoin="round"></path>
+                  <circle cx="118" cy="634" r="4" fill="var(--color-map-detour)"></circle>
+                  <polygon points="835,464 849,464 842,478" fill="var(--color-map-detour)"></polygon>
+                </sc-if>
+                <sc-for list="{{ stops }}" as="s" hint-placeholder-count="0">
+                  <circle cx="{{ s.x }}" cy="{{ s.y }}" r="{{ s.r }}" fill="{{ s.fill }}" stroke="var(--color-bg)"
+                    stroke-width="2"></circle>
+                </sc-for>
+              </svg>
+              <sc-for list="{{ closures }}" as="c" hint-placeholder-count="2">
+                <span
+                  style="position:absolute;left:{{ c.dx }}px;top:{{ c.dy }}px;width:24px;height:24px;border-radius:50%;background:var(--color-bg);border:2px solid var(--color-map-closure);color:var(--color-map-closure);display:grid;place-items:center">
+                  <x-import component-from-global-scope="DesignSystem_1776e0.Icon" name="ban" size="16" stroke="2"
+                    hint-size="16px,16px"></x-import>
+                </span>
+              </sc-for>
+              <sc-for list="{{ markers }}" as="m" hint-placeholder-count="0">
+                <div style="position:absolute;left:{{ m.left }}px;top:{{ m.top }}px;z-index:3">
+                  <x-import component-from-global-scope="DesignSystem_1776e0.MapMarker" dept="{{ m.dept }}"
+                    state="{{ m.state }}" hint-size="44px,52px"></x-import>
+                </div>
+              </sc-for>
+              <sc-if value="{{ showToggle }}" hint-placeholder-val="{{ false }}">
+                <div style="position:absolute;top:16px;left:16px;z-index:4;white-space:nowrap">
+                  <x-import component-from-global-scope="DesignSystem_1776e0.MapToggle" after="{{ yes }}"
+                    iteration="{{ iterMap }}" iterations="{{ iterCount }}" hint-size="auto,44px"
+                    style="display:block;white-space:nowrap"></x-import>
+                </div>
+              </sc-if>
+              <div
+                style="position:absolute;top:16px;right:16px;z-index:4;display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+                <button type="button" class="nuo-mt" aria-label="Livelli" aria-expanded="{{ layersOpen }}"
+                  onClick="{{ toggleLayers }}"
+                  style="width:44px;padding:0;justify-content:center;cursor:pointer;color:var(--color-text);border-color:{{ layersBtnBorder }}">
+                  <x-import component-from-global-scope="DesignSystem_1776e0.Icon" name="layers" size="20"
+                    hint-size="20px,20px"></x-import>
+                </button>
+                <sc-if value="{{ layersOpen }}" hint-placeholder-val="{{ false }}">
+                  <x-import component-from-global-scope="DesignSystem_1776e0.LayerPanel" layers="{{ layers }}"
+                    hint-size="236px,290px"></x-import>
+                </sc-if>
+              </div>
+              <sc-if value="{{ showLegend }}" hint-placeholder-val="{{ false }}">
+                <div style="position:absolute;bottom:16px;left:16px;z-index:4;white-space:nowrap">
+                  <x-import component-from-global-scope="DesignSystem_1776e0.MapLegend" hint-size="auto,46px"
+                    style="display:block;white-space:nowrap"></x-import>
+                </div>
+              </sc-if>
+              <div style="position:absolute;bottom:16px;right:16px;z-index:4;white-space:nowrap">
+                <x-import component-from-global-scope="DesignSystem_1776e0.MapAttribution" hint-size="auto,30px"
+                  style="display:block;white-space:nowrap"></x-import>
+              </div>
+            </div>
+            <div class="nuo-card" style="display:flex;flex-direction:column;min-height:0;padding:0;overflow:hidden">
+              <div role="tablist"
+                style="flex:none;display:flex;gap:4px;padding:0 8px;border-bottom:1px solid var(--color-border)">
+                <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3">
+                  <button type="button" role="tab"
+                    style="height:48px;margin-bottom:-1px;padding:0 14px;background:transparent;border:0;border-bottom:2px solid {{ t.line }};color:{{ t.color }};font:600 15px/22px var(--font-ui);cursor:pointer">{{
+                    t.label }}</button>
+                </sc-for>
+              </div>
+              <div
+                style="flex:1;min-height:0;overflow:auto;padding:16px;scrollbar-width:thin;scrollbar-color:var(--color-surface-3) transparent">
+                <sc-if value="{{ isAgents }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;flex-direction:column;gap:16px">
+                    <div>
+                      <sc-if value="{{ showIdleHint }}" hint-placeholder-val="{{ false }}">
+                        <div class="t-lg" style="margin-bottom:8px">Stato del run</div>
+                        <div class="t-xs" style="color:var(--color-text-secondary)">Nessun run in corso. Imposta
+                          l'evento e premi Analizza.</div>
+                      </sc-if>
+                    </div>
+                    <div>
+                      <sc-for list="{{ agents }}" as="a" hint-placeholder-count="4">
+                        <x-import component-from-global-scope="DesignSystem_1776e0.AgentTimelineItem"
+                          name="{{ a.name }}" status="{{ a.status }}" duration="{{ a.duration }}" note="{{ a.note }}"
+                          last="{{ a.last }}" hint-size="100%,72px"></x-import>
+                      </sc-for>
+                    </div>
+                    <sc-if value="{{ showError }}" hint-placeholder-val="{{ false }}">
+                      <div
+                        style="display:flex;gap:12px;padding:14px;background:var(--color-state-fill-error);border:1px solid var(--color-danger);border-radius:8px">
+                        <x-import component-from-global-scope="DesignSystem_1776e0.Icon" name="triangle-alert" size="24"
+                          hint-size="24px,24px" style="flex:none;color:var(--color-danger)"></x-import>
+                        <div style="display:flex;flex-direction:column;gap:6px">
+                          <div style="font:600 16px/24px var(--font-ui)">Analisi interrotta: il run ha superato i 120 s.
+                          </div>
+                          <div class="t-sm" style="color:var(--color-text-secondary)">Controlla le chiusure inserite e
+                            premi Analizza per riprovare.</div>
+                        </div>
+                      </div>
+                    </sc-if>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ isPlan }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;flex-direction:column;gap:12px">
+                    <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
+                      <span class="t-lg">Piano proposto — 5 misure</span>
+                      <x-import component-from-global-scope="DesignSystem_1776e0.Badge" kind="simulated"
+                        hint-size="auto,28px"></x-import>
+                    </div>
+                    <sc-for list="{{ measures }}" as="m" hint-placeholder-count="5">
+                      <div class="nuo-card nuo-card--nested" style="display:flex;gap:12px;padding:12px 14px">
+                        <span
+                          style="flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--color-surface-3);font:600 14px/20px var(--font-mono)">{{
+                          m.n }}</span>
+                        <div style="min-width:0;display:flex;flex-direction:column;gap:6px">
+                          <div style="font:500 15px/22px var(--font-ui)">{{ m.text }}</div>
+                          <div style="display:flex;align-items:center;gap:6px;color:var(--color-text-secondary)">
+                            <x-import component-from-global-scope="DesignSystem_1776e0.Icon" name="arrow-right"
+                              size="16" hint-size="16px,16px"></x-import>
+                            <x-import component-from-global-scope="DesignSystem_1776e0.Icon" name="{{ m.icon }}"
+                              size="16" hint-size="16px,16px"></x-import>
+                            <span class="t-xs">{{ m.dept }}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </sc-for>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ isRequests }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;flex-direction:column;gap:12px">
+                    <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+                      <span class="t-lg">Dipartimenti</span>
+                      <x-import component-from-global-scope="DesignSystem_1776e0.Badge" kind="simulated"
+                        hint-size="auto,28px"></x-import>
+                    </div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+                      <sc-for list="{{ depts }}" as="d" hint-placeholder-count="4">
+                        <x-import component-from-global-scope="DesignSystem_1776e0.DepartmentCard" dept="{{ d.dept }}"
+                          remaining="{{ d.remaining }}" total="{{ d.total }}" hint-size="100%,158px"></x-import>
+                      </sc-for>
+                    </div>
+                    <div class="t-lg" style="margin-top:4px">Richieste operative</div>
+                    <sc-if value="{{ showManual }}" hint-placeholder-val="{{ false }}"><x-import
+                        component-from-global-scope="DesignSystem_1776e0.ManualSwitch"
+                        hint-size="100%,100px"></x-import></sc-if>
+                    <div>
+                      <sc-for list="{{ groups }}" as="g" hint-placeholder-count="3">
+                        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px">
+                          <x-import component-from-global-scope="DesignSystem_1776e0.RequestCard"
+                            dept="{{ g.main.dept }}" code="{{ g.main.code }}" status="{{ g.main.status }}"
+                            measure="{{ g.main.measure }}" rejection="{{ g.main.rejection }}"
+                            alternative-to="{{ g.main.alt }}" hint-size="100%,100px"></x-import>
+                          <sc-if value="{{ g.hasAlts }}" hint-placeholder-val="{{ false }}">
+                            <button type="button" aria-expanded="{{ g.open }}" onClick="{{ g.toggle }}"
+                              style="display:flex;align-items:center;gap:8px;width:100%;min-height:44px;margin-top:-4px;padding:0 14px;background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:8px;color:var(--color-text);font:500 14px/20px var(--font-ui);cursor:pointer;text-align:left">
+                              <x-import component-from-global-scope="DesignSystem_1776e0.Icon" name="corner-down-right"
+                                size="16" hint-size="16px,16px"
+                                style="flex:none;color:var(--color-text-secondary)"></x-import>
+                              <span style="flex:1">{{ g.label }}</span>
+                              <sc-if value="{{ g.dot }}" hint-placeholder-val="{{ false }}"><span
+                                  style="display:flex;align-items:center;gap:6px;color:var(--color-danger)"><span
+                                    aria-hidden="true"
+                                    style="width:10px;height:10px;border-radius:50%;background:var(--color-danger)"></span><span>Nuova
+                                    risposta</span></span></sc-if>
+                              <x-import component-from-global-scope="DesignSystem_1776e0.Icon" name="{{ g.chev }}"
+                                size="20" hint-size="20px,20px"
+                                style="flex:none;color:var(--color-text-secondary)"></x-import>
+                            </button>
+                          </sc-if>
+                          <sc-if value="{{ g.open }}" hint-placeholder-val="{{ false }}">
+                            <div style="display:flex;flex-direction:column;gap:8px;margin-left:16px">
+                              <sc-for list="{{ g.alts }}" as="r" hint-placeholder-count="1">
+                                <x-import component-from-global-scope="DesignSystem_1776e0.RequestCard"
+                                  dept="{{ r.dept }}" code="{{ r.code }}" status="{{ r.status }}"
+                                  measure="{{ r.measure }}" rejection="{{ r.rejection }}" alternative-to="{{ r.alt }}"
+                                  hint-size="100%,100px"></x-import>
+                              </sc-for>
+                            </div>
+                          </sc-if>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ isIdle }}" hint-placeholder-val="{{ false }}">
+                  <div
+                    style="height:100%;min-height:240px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center">
+                    <span style="display:grid;place-items:center;color:var(--color-success)"><x-import
+                        component-from-global-scope="DesignSystem_1776e0.Icon" name="circle-check" size="48"
+                        stroke="1.5" hint-size="48px,48px"
+                        style="flex:none;color:var(--color-success)"></x-import></span>
+                    <span class="t-lg">Nessuna criticità</span>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ isHuman }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;flex-direction:column;gap:12px">
+                    <div
+                      style="display:flex;gap:12px;padding:16px;background:var(--color-badge-fill-pending);border:2px solid var(--color-warning);border-radius:10px">
+                      <x-import component-from-global-scope="DesignSystem_1776e0.Icon" name="triangle-alert" size="28"
+                        stroke="2" hint-size="28px,28px" style="flex:none;color:var(--color-warning)"></x-import>
+                      <div style="display:flex;flex-direction:column;gap:6px">
+                        <div class="t-lg">Decisione umana richiesta</div>
+                        <div style="font:600 16px/24px var(--font-ui)">Presidio incroci 21:00–23:00: nessun dipartimento
+                          disponibile</div>
+                      </div>
+                    </div>
+                    <div class="t-lg" style="margin-top:4px">Richieste operative</div>
+                    <div>
+                      <sc-for list="{{ groups }}" as="g" hint-placeholder-count="3">
+                        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px">
+                          <x-import component-from-global-scope="DesignSystem_1776e0.RequestCard"
+                            dept="{{ g.main.dept }}" code="{{ g.main.code }}" status="{{ g.main.status }}"
+                            measure="{{ g.main.measure }}" rejection="{{ g.main.rejection }}"
+                            alternative-to="{{ g.main.alt }}" hint-size="100%,100px"></x-import>
+                          <sc-if value="{{ g.hasAlts }}" hint-placeholder-val="{{ false }}">
+                            <button type="button" aria-expanded="{{ g.open }}" onClick="{{ g.toggle }}"
+                              style="display:flex;align-items:center;gap:8px;width:100%;min-height:44px;margin-top:-4px;padding:0 14px;background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:8px;color:var(--color-text);font:500 14px/20px var(--font-ui);cursor:pointer;text-align:left">
+                              <x-import component-from-global-scope="DesignSystem_1776e0.Icon" name="corner-down-right"
+                                size="16" hint-size="16px,16px"
+                                style="flex:none;color:var(--color-text-secondary)"></x-import>
+                              <span style="flex:1">{{ g.label }}</span>
+                              <sc-if value="{{ g.dot }}" hint-placeholder-val="{{ false }}"><span
+                                  style="display:flex;align-items:center;gap:6px;color:var(--color-danger)"><span
+                                    aria-hidden="true"
+                                    style="width:10px;height:10px;border-radius:50%;background:var(--color-danger)"></span><span>Nuova
+                                    risposta</span></span></sc-if>
+                              <x-import component-from-global-scope="DesignSystem_1776e0.Icon" name="{{ g.chev }}"
+                                size="20" hint-size="20px,20px"
+                                style="flex:none;color:var(--color-text-secondary)"></x-import>
+                            </button>
+                          </sc-if>
+                          <sc-if value="{{ g.open }}" hint-placeholder-val="{{ false }}">
+                            <div style="display:flex;flex-direction:column;gap:8px;margin-left:16px">
+                              <sc-for list="{{ g.alts }}" as="r" hint-placeholder-count="1">
+                                <x-import component-from-global-scope="DesignSystem_1776e0.RequestCard"
+                                  dept="{{ r.dept }}" code="{{ r.code }}" status="{{ r.status }}"
+                                  measure="{{ r.measure }}" rejection="{{ r.rejection }}" alternative-to="{{ r.alt }}"
+                                  hint-size="100%,100px"></x-import>
+                              </sc-for>
+                            </div>
+                          </sc-if>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ isLog }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;flex-direction:column;gap:12px">
+                    <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+                      <span class="t-lg">Registro decisioni</span>
+                      <x-import component-from-global-scope="DesignSystem_1776e0.Button" variant="stroke"
+                        icon="download" hint-size="auto,44px">Esporta</x-import>
+                    </div>
+                    <div class="nuo-log">
+                      <div class="nuo-logrow is-head"
+                        style="grid-template-columns:56px 132px minmax(0,1fr);gap:10px;padding:10px 12px">
+                        <span>Ora</span><span>Attore</span><span>Decisione e motivo</span></div>
+                      <sc-for list="{{ logRows }}" as="r" hint-placeholder-count="6">
+                        <div class="nuo-logrow {{ r.cls }}"
+                          style="grid-template-columns:56px 132px minmax(0,1fr);gap:10px;padding:12px">
+                          <span class="nuo-logrow__time">{{ r.time }}</span>
+                          <span class="nuo-logrow__actor"><x-import
+                              component-from-global-scope="DesignSystem_1776e0.Icon" name="{{ r.icon }}" size="16"
+                              hint-size="16px,16px"></x-import><span>
+                              <div>{{ r.label }}</div>
+                              <div class="t-xs" style="color:var(--color-text-secondary)">{{ r.sub }}</div>
+                            </span></span>
+                          <span style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">
+                            <div class="nuo-logrow__dec">{{ r.dec }}</div>
+                            <sc-if value="{{ r.badge }}" hint-placeholder-val="{{ false }}"><x-import
+                                component-from-global-scope="DesignSystem_1776e0.Badge" kind="{{ r.badge }}"
+                                hint-size="auto,28px"></x-import></sc-if>
+                          </span>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ isTable }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;flex-direction:column;gap:12px">
+                    <span class="t-lg">Confronto iterazioni</span>
+                    <div class="nuo-log">
+                      <div class="nuo-logrow is-head"
+                        style="grid-template-columns:124px repeat(3,minmax(0,1fr));gap:8px;padding:10px 12px;font:600 14px/20px var(--font-ui)">
+                        <span>Metrica</span><span>Iterazione 1</span><span>Iterazione 2</span><span>Delta</span>
+                      </div>
+                      <sc-for list="{{ cmpRows }}" as="r" hint-placeholder-count="5">
+                        <div class="nuo-logrow"
+                          style="grid-template-columns:124px repeat(3,minmax(0,1fr));gap:8px;padding:12px;align-items:start">
+                          <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-start">
+                            <span style="font:600 15px/22px var(--font-ui)">{{ r.label }}</span>
+                            <span class="t-xs" style="color:var(--color-text-secondary)">{{ r.unit }}</span>
+                            <x-import component-from-global-scope="DesignSystem_1776e0.Badge" kind="{{ r.badge }}"
+                              hint-size="auto,28px"></x-import>
+                          </div>
+                          <span
+                            style="font:600 15px/22px var(--font-mono);font-variant-numeric:tabular-nums;color:var(--color-text-secondary)">{{
+                            r.v1 }}</span>
+                          <span style="font:600 15px/22px var(--font-mono);font-variant-numeric:tabular-nums">{{ r.v2
+                            }}</span>
+                          <span class="nuo-delta nuo-delta--{{ r.tone }}"
+                            style="align-self:start;min-height:22px"><x-import
+                              component-from-global-scope="DesignSystem_1776e0.Icon" name="{{ r.dIcon }}" size="16"
+                              hint-size="16px,16px"></x-import>{{ r.dText }}</span>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </div>
+                </sc-if>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <sc-if value="{{ isDetail }}" hint-placeholder-val="{{ false }}">
+        <div
+          style="position:absolute;left:88px;top:232px;z-index:60;width:340px;box-sizing:border-box;display:flex;flex-direction:column;gap:8px;padding:8px 10px;background:var(--color-surface-2);border:1px solid var(--color-border-tooltip);border-radius:4px;font:500 14px/20px var(--font-ui)">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+            <span style="font:600 16px/24px var(--font-ui)">Ritardo veicoli</span>
+            <x-import component-from-global-scope="DesignSystem_1776e0.Badge" kind="simulated"
+              hint-size="auto,28px"></x-import>
+          </div>
+          <sc-for list="{{ tipRows }}" as="r" hint-placeholder-count="5">
+            <div style="display:grid;grid-template-columns:88px minmax(0,1fr);gap:8px">
+              <span style="color:var(--color-text-secondary)">{{ r.k }}</span>
+              <div>
+                <sc-for list="{{ r.lines }}" as="l" hint-placeholder-count="1">
+                  <div><span>{{ l.pre }}</span><span
+                      style="font-family:var(--font-mono);font-variant-numeric:tabular-nums;white-space:nowrap">{{ l.num
+                      }}</span><span>{{ l.post }}</span></div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ scn }}" hint-placeholder-val="{{ true }}">
+        <div
+          style="position:absolute;inset:0;border:4px solid var(--color-scenario-frame);pointer-events:none;z-index:50">
+        </div>
+      </sc-if>
+    </div>
+  </x-dc>
+  <script type="text/x-dc" data-dc-script
+    data-props="{&quot;screen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;01&quot;,&quot;02&quot;,&quot;03&quot;,&quot;04&quot;,&quot;05&quot;,&quot;06&quot;,&quot;07&quot;,&quot;08&quot;,&quot;09&quot;,&quot;10&quot;,&quot;11&quot;,&quot;12&quot;],&quot;default&quot;:&quot;05&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { layersOpen: false, emOpen: null, grp: {} };
+  renderVals() {
+    const id = String(this.props.screen ?? '05');
+    const NAMES = { '01': '01-live-ordinario', '02': '02-live-degradato', '03': '03-scenario-configurazione', '04': '04-analisi-in-corso', '05': '05-piano-proposto', '06': '06-richieste-inviate', '07': '07-rifiuto', '08': '08-confronto-iterazioni', '09': '09-decisione-umana', '10': '10-log-decisioni', '11': '11-errore-run', '12': '12-tooltip-provenienza' };
+    const is = (...x) => x.includes(id);
+    const live = is('01', '02'), scn = !live, pre = is('03', '04', '11'), it2 = is('08', '10', '09');
+    const RUN = { '04': ['ANALYZE', 1], '05': ['PLAN', 1], '06': ['AWAIT', 1], '07': ['REPLAN', 1], '08': ['VERIFY', 2], '09': ['DECISIONE', 3], '10': ['VERIFY', 2], '11': ['ERRORE', 1], '12': ['PLAN', 1] };
+    const run = RUN[id];
+    const emOpen = this.state.emOpen === null ? is('01', '02', '03', '11') : this.state.emOpen;
+    const busy = is('04', '05', '06', '07', '08', '10', '12');
+    const cc = n => 'var(--color-map-congestion-' + n + ')';
+    const DEPT = { traffic: ['Traffic Control', 'traffic-cone'], police: ['Municipal Police', 'shield'], transport: ['Transport Control', 'bus'], comms: ['Public Communication', 'megaphone'] };
+    const up = (text, tone) => ({ tone, direction: 'up', text }), dn = (text, tone) => ({ tone, direction: 'down', text });
+    const ba = (label, from, to, unit, d) => ({ isBA: true, isStd: false, label, from, to, unit, badge: 'simulated', tone: d.tone, dIcon: d.direction === 'up' ? 'arrow-up' : 'arrow-down', dText: d.text });
+    const std = (label, value, unit, badge, delta) => ({ isStd: true, isBA: false, label, value, unit, badge, delta });
+    const ld = () => ({ isStd: true, isBA: false, loading: true, label: 'Caricamento' });
+    const aff = d => std('Affluenza prevista', '150.000', 'persone', 'estimate', d);
+    const nul = { tone: 'neutral', text: '0,0%' };
+    const S03 = [std('Ritardo veicoli', '210', 'ore-veicolo', 'real'), std('Velocità media corridoio', '24', 'km/h', 'real'), std('Fermate sature', '0', undefined, 'real'), std('Carico TPL massimo', '61%', undefined, 'real'), aff()];
+    const S08 = [std('Ritardo veicoli', '960', 'ore-veicolo', 'simulated', up('+5,5%', 'worse')), std('Velocità media', '21', 'km/h', 'simulated', dn('−4,5%', 'worse')), std('Fermate sature', '3', undefined, 'simulated', { tone: 'neutral', text: '0' }), std('Carico TPL massimo', '94%', undefined, 'simulated', dn('−2 pp', 'better')), aff(nul)];
+    const S05 = [ba('Ritardo veicoli', '1.240', '910', 'ore-veicolo', dn('−26,6%', 'better')), ba('Velocità media', '14', '22', 'km/h', up('+57,1%', 'better')), ba('Fermate sature', '7', '3', '', dn('−4', 'better')), ba('Carico TPL massimo', '128%', '96%', '', dn('−32 pp', 'better')), aff(nul)];
+    const S09 = [ba('Ritardo veicoli', '1.240', '1.010', 'ore-veicolo', dn('−18,5%', 'better')), ba('Velocità media', '14', '19', 'km/h', up('+35,7%', 'better')), ba('Fermate sature', '7', '4', '', dn('−3', 'better')), ba('Carico TPL massimo', '128%', '104%', '', dn('−24 pp', 'better')), aff(nul)];
+    const S01 = [std('Ritardo veicoli', '120', 'ore-veicolo', 'real'), std('Velocità media', '31', 'km/h', 'real'), std('Fermate sature', '0', undefined, 'real'), std('Carico TPL massimo', '48%', undefined, 'real'), std('Attesa media', '4,2', 'min', 'real')];
+    const S02 = [std('Ritardo veicoli', '—', undefined, 'unavailable'), std('Velocità media', '—', undefined, 'unavailable'), S01[2], S01[3], S01[4]];
+    const strip = id === '01' ? S01 : id === '02' ? S02 : id === '04' ? [ld(), ld(), ld(), S03[3], S03[4]] : is('03', '11') ? S03 : is('08', '10') ? S08 : id === '09' ? S09 : S05;
+    const row = (icon, label, value, last) => ({ icon, label, value: live ? '—' : value, border: last ? '0' : '1px solid var(--color-border)' });
+    const whenRows = [row('calendar', 'Data', '15/05/2027'), row('log-in', 'Ingresso', '17:00–20:00'), row('circle-play', 'Evento', '20:00–23:00'), row('log-out', 'Deflusso', '23:00–01:00', true)];
+    const modalRows = [row('footprints', 'A piedi', '30%'), row('bus', 'Trasporto pubblico', '40%'), row('car', 'Auto', '25%'), row('ellipsis', 'Altro', '5%', true)];
+    const presets = [['50.000', ''], ['150.000', live ? '' : 'is-on'], ['300.000', '']].map(p => ({ label: p[0], cls: p[1] }));
+    const RIV = 'M110 560 C 240 585 380 572 520 522 S 700 440 800 400';
+    const CAR = 'M96 640 C 230 668 380 650 520 600 S 720 520 842 478', PAR = 'M842 478 C 880 466 920 458 970 450';
+    const R = [['M0 596 C 36 616 66 632 96 640', 1, 1], [RIV, 3, 3], ['M120 436 C 250 468 410 460 560 408 S 740 336 860 298', 2, 3], ['M376 562 L 372 440 L 340 296', 4, 4], ['M150 330 C 230 372 306 408 386 440', 3, 3], ['M623 481 L 618 408 L 650 300', 2, 3], ['M800 400 L 858 332 L 902 250', 3, 4], ['M640 300 L 700 176', 1, 1]];
+    const LR = [[CAR, 1], [PAR, 1], [RIV, 1], ['M120 436 C 250 468 410 460 560 408 S 740 336 860 298', 2], ['M376 562 L 372 440 L 340 296', 1], ['M800 400 L 858 332 L 902 250', 2]];
+    const roads = pre ? [] : live ? LR.map(r => ({ d: r[0], stroke: cc(r[1]) })) : R.map(r => ({ d: r[0], stroke: cc(it2 ? r[2] : r[1]) }));
+    const closures = live ? [] : [{ d: CAR, dx: 487, dy: 595 }, { d: PAR, dx: 894, dy: 450 }];
+    const LV = ['var(--color-map-stop-low)', 'var(--color-map-stop-mid)', 'var(--color-map-stop-over)'], RAD = [6, 9, 13];
+    const ST = [[86, 644, 2], [373, 561, 2], [623, 481, 2], [838, 470, 1], [478, 536, 1], [560, 408, 0], [372, 440, 0]];
+    const stops = ST.map(s => { const l = pre || live ? 0 : s[2]; return { x: s[0], y: s[1], r: RAD[l], fill: LV[l] }; });
+    const mk = (dept, state, x, y) => ({ dept, state, left: x - 22, top: y - 52 });
+    const P = { traffic: [435, 626], police: [270, 572], transport: [373, 561], comms: [690, 540] };
+    const mset = (a, b, c, d) => [mk('traffic', a, ...P.traffic), mk('police', b, ...P.police), mk('transport', c, ...P.transport), mk('comms', d, ...P.comms)];
+    const markers = is('03', '11') ? [mk('transport', 'normal', 373, 561)] : id === '06' ? mset('accepted', 'normal', 'normal', 'normal') : id === '07' ? mset('accepted', 'rejected', 'normal', 'accepted') : id === '09' ? mset('accepted', 'rejected', 'accepted', 'accepted') : [];
+    const L = (idv, name, color, on, dashed) => ({ id: idv, name, color, on, dashed });
+    const layers = [L('c', 'Congestione', 'var(--color-map-congestion-2)', !pre), L('x', 'Chiusure', 'var(--color-map-closure)', !live, true), L('d', 'Deviazioni', 'var(--color-map-detour)', !live && !pre, true), L('e', 'Area evento', 'var(--color-map-event-area)', !live), L('f', 'Fermate', 'var(--color-map-stop-low)', true), L('r', 'Richieste', 'var(--color-accent)', !is('08', '10') && !live)];
+    const tabNames = ['Agenti', 'Operations', 'Decisioni'], active = is('03', '04', '11') ? 0 : id === '10' ? 2 : 1;
+    const tabs = tabNames.map((label, i) => ({ label, color: i === active ? 'var(--color-text)' : 'var(--color-text-secondary)', line: i === active ? 'var(--color-accent)' : 'transparent' }));
+    const AG = ['Event & Demand Agent', 'Traffic Agent', 'Transit Agent', 'Operations Agent'];
+    const AS = { '03': [['waiting'], ['waiting'], ['waiting'], ['waiting']], '04': [['done', '2,4 s'], ['running', '…'], ['running', '…'], ['waiting']], '11': [['done', '2,4 s'], ['error', '20,0 s', 'Timeout dopo 20 s'], ['done', '3,1 s'], ['waiting']] }[id] || [];
+    const agents = AS.map((s, i) => ({ name: AG[i], status: s[0], duration: s[1], note: s[2], last: i === 3 }));
+    const M = (n, text, d) => ({ n, text, dept: DEPT[d][0], icon: DEPT[d][1] });
+    const measures = [M(1, 'Chiudere Via Caracciolo (Mergellina–Santa Lucia) 19:00–01:00', 'traffic'), M(2, 'Deviare il traffico su Riviera di Chiaia', 'traffic'), M(3, 'Presidiare 6 incroci 21:00–23:00', 'police'), M(4, 'Potenziare la Linea 2 con 4 corse, 22:30–01:00', 'transport'), M(5, 'Avviso ai cittadini sui canali municipali', 'comms')];
+    const D = (dept, remaining, total) => ({ dept, remaining, total });
+    const depts = id === '06' ? [D('traffic', 8, 12), D('police', 6, 10), D('transport', 5, 6), D('comms', 3, 4)] : [D('traffic', 6, 12), D('police', 0, 10), D('transport', 4, 6), D('comms', 3, 4)];
+    const rq = (dept, code, status, measure, extra) => Object.assign({ dept, code, status, measure }, extra || {});
+    const rej = (t) => ({ rejection: { code: 'PATROLS_EXHAUSTED', reason: 'Pattuglie esaurite ' + t } });
+    const MT = { traffic: 'Chiudere Via Caracciolo e deviare il traffico su Riviera di Chiaia', transport: 'Potenziare la Linea 2 con 4 corse, 22:30–01:00', comms: 'Avviso ai cittadini sui canali municipali' };
+    const requests = id === '06' ? [rq('traffic', 'REQ-001', 'ACCEPTED', MT.traffic), rq('police', 'REQ-003', 'RECEIVED', 'Presidiare 6 incroci 21:00–23:00'), rq('transport', 'REQ-002', 'SENT', MT.transport), rq('comms', 'REQ-004', 'SENT', MT.comms)]
+      : id === '09' ? [rq('police', 'REQ-003', 'REJECTED', 'Presidiare 6 incroci 21:00–23:00', rej('21:00–23:00')), rq('police', 'REQ-005', 'REJECTED', 'Presidiare 3 incroci 23:00–01:00', Object.assign({ alt: 'REQ-003' }, rej('23:00–01:00'))), rq('police', 'REQ-007', 'REJECTED', 'Presidiare 2 incroci 19:00–21:00', Object.assign({ alt: 'REQ-005' }, rej('19:00–21:00'))), rq('traffic', 'REQ-001', 'ACCEPTED', MT.traffic), rq('transport', 'REQ-002', 'ACCEPTED', MT.transport), rq('comms', 'REQ-004', 'ACCEPTED', MT.comms)]
+      : [rq('police', 'REQ-003', 'REJECTED', 'Presidiare 6 incroci 21:00–23:00', rej('21:00–23:00')), rq('police', 'REQ-005', 'CREATED', 'Presidiare 3 incroci 23:00–01:00', { alt: 'REQ-003' }), rq('traffic', 'REQ-001', 'ACCEPTED', MT.traffic), rq('transport', 'REQ-002', 'IN_PROGRESS', MT.transport), rq('comms', 'REQ-004', 'ACCEPTED', MT.comms)];
+    const alts = {}; const roots = [];
+    requests.forEach(r => { if (r.alt) { let root = r.alt; const byCode = requests.find(q => q.code === root); if (byCode && byCode.alt) root = byCode.alt; (alts[root] = alts[root] || []).push(r); } else roots.push(r); });
+    const groups = roots.map(m => { const a = alts[m.code] || [], open = m.code in this.state.grp ? this.state.grp[m.code] : id === '07'; return { main: m, alts: a, hasAlts: a.length > 0, open, chev: open ? 'chevron-up' : 'chevron-down', dot: a.length > 0 && !open, label: a.length === 1 ? '1 alternativa' : a.length + ' alternative', toggle: () => this.setState(s => ({ grp: Object.assign({}, s.grp, { [m.code]: !open }) })) }; });
+    const C = (label, unit, v1, v2, badge, d) => ({ label, unit, v1, v2, badge, tone: d.tone, dIcon: d.tone === 'neutral' ? 'minus' : d.direction === 'up' ? 'arrow-up' : 'arrow-down', dText: d.text });
+    const cmpRows = [C('Ritardo veicoli', 'ore-veicolo', '910', '960', 'simulated', up('+5,5%', 'worse')), C('Velocità media', 'km/h', '22', '21', 'simulated', dn('−4,5%', 'worse')), C('Fermate sature', '', '3', '3', 'simulated', { tone: 'neutral', text: '0' }), C('Carico TPL massimo', '', '96%', '94%', 'simulated', dn('−2 pp', 'better')), C('Affluenza prevista', 'persone', '150.000', '150.000', 'estimate', nul)];
+    const tipRows = [
+      { k: 'Fonte', lines: [{ pre: 'Simulatore traffico, scenario Match ', num: '2027', post: '' }] },
+      { k: 'Metodo', lines: [{ pre: 'microsimulazione, media di ', num: '20', post: ' ripetizioni' }] },
+      { k: 'Unità', lines: [{ pre: 'ore-veicolo', num: '', post: '' }] },
+      { k: 'Ora del dato', lines: [{ pre: '', num: '08/11/2026 21:40', post: '' }] },
+      { k: 'Assunzioni', lines: [{ pre: 'Affluenza ', num: '150.000', post: '' }, { pre: 'Ripartizione modale ', num: '30/40/25/5', post: '' }, { pre: 'Via Caracciolo chiusa ', num: '19:00–01:00', post: '' }] }];
+    const LG = (time, actor, label, dec, o) => Object.assign({ time, actor, label, dec, cls: '', sub: '', badge: '' }, o || {}, DEPT[actor] ? { label: DEPT[actor][0], icon: DEPT[actor][1] } : { icon: { system: 'cpu', agent: 'bot', user: 'user' }[actor] });
+    const logRows = [LG('20:14', 'system', 'Sistema', 'Avviata analisi scenario Match 2027'), LG('20:15', 'agent', 'Agente', 'Domanda stimata: 150.000 persone', { sub: 'Event & Demand', badge: 'estimate' }), LG('20:17', 'system', 'Sistema', 'Piano proposto: 5 misure'), LG('20:18', 'police', '', 'Richiesta REQ-003 rifiutata: pattuglie esaurite 21:00–23:00', { cls: 'sim-hover' }), LG('20:18', 'system', 'Sistema', 'Ripianificazione: iterazione 2 di 3'), LG('20:21', 'user', 'Utente', "Accettata a mano l'alternativa REQ-006")];
+    const na = !live && id !== '03' && id !== '11' && id !== '04';
+    return {
+      label: NAMES[id] || id, yes: true, scn, hasRun: !!run, runState: run ? run[0] : 'PLAN', iterN: run ? run[1] : 1, iterTotal: 3, iterMap: run ? run[1] : 1, iterCount: id === '09' ? 3 : 2,
+      modeValue: live ? 'live' : 'scenario', showSource: id === '02',
+      navItems: [{ id: 'dashboard', icon: 'layout-dashboard', label: 'Plancia' }, { id: 'requests', icon: 'building-2', label: 'Richieste e dipartimenti' }, { id: 'log', icon: 'scroll-text', label: 'Registro decisioni' }],
+      emOpen, emClosed: !emOpen, colEm: emOpen ? "360px" : "108px", colRight: emOpen ? "440px" : "692px", emHeadPad: emOpen ? "0 16px" : "12px 8px", showEmHeader: !is('01', '02', '03'), showStaticHeader: is('01', '02', '03'), emHeadGap: emOpen ? '12px' : '8px', toggleEm: () => this.setState(s => ({ emOpen: !(s.emOpen === null ? is('01', '02', '03', '11') : s.emOpen) })), emBusy: busy, emAlign: emOpen ? 'stretch' : 'start', emChevron: emOpen ? 'chevron-up' : 'chevron-down', emHeadBorder: emOpen ? '1px solid var(--color-border)' : '0',
+      layersOpen: this.state.layersOpen, toggleLayers: () => this.setState(s => ({ layersOpen: !s.layersOpen })), layersBtnBorder: this.state.layersOpen ? 'var(--color-accent)' : 'var(--color-border-strong)',
+      emptyEm: live, nameText: live ? 'Nome evento' : 'Serata Match 2027 — Lungomare Caracciolo', nameColor: live ? 'var(--color-text-secondary)' : 'var(--color-text)', attValue: live ? '' : '150.000',
+      analyzing: busy, analyzeDisabled: live, closuresList: live ? [] : ['Via Caracciolo', 'Via Partenope'], stopsList: live ? [] : ['Piazza Amedeo, L2'],
+      strip, whenRows, modalRows, presets, roads, closures, showEvent: !live, showDetour: !live && !pre, stops, markers, layers, showToggle: na, showLegend: !pre, isDetail: id === '12',
+      tipRows, tabs, agents, measures, depts, requests, groups, cmpRows, logRows,
+      showIdleHint: id === '03', isAgents: is('03', '04', '11'), isIdle: live, isPlan: is('05', '12'), isRequests: is('06', '07'), showManual: id === '06', isHuman: id === '09', isTable: id === '08', isLog: id === '10', showError: id === '11'
+    };
+  }
+}
+</script>
+</body>
+
+</html>

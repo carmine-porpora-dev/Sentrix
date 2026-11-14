@@ -1,0 +1,604 @@
+{
+  "plugins": [
+    "react",
+    "import"
+  ],
+  "rules": {
+    "react/forbid-elements": [
+      "warn",
+      {
+        "forbid": []
+      }
+    ],
+    "no-restricted-imports": [
+      "warn",
+      {
+        "patterns": [
+          {
+            "group": [
+              "components/core/**",
+              "components/data/**",
+              "components/forms/**",
+              "components/map/**",
+              "components/navigation/**",
+              "components/operations/**",
+              "ui_kits/dashboard/**"
+            ],
+            "message": "Import design-system components from 'index.js', not component internals."
+          }
+        ]
+      }
+    ],
+    "no-restricted-syntax": [
+      "warn",
+      {
+        "selector": "Literal[value=/#[0-9a-fA-F]{3,8}\\b/]",
+        "message": "Raw hex color — use a design-system color token via var()."
+      },
+      {
+        "selector": "Literal[value=/\\b\\d+px\\b/]",
+        "message": "Raw px value — use a design-system spacing token via var()."
+      },
+      {
+        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:Plus Jakarta Sans|Geist Mono))/i]",
+        "message": "Font not provided by the design system. Available: Plus Jakarta Sans, Geist Mono."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='AgentTimelineItem'] > JSXAttribute > JSXIdentifier[name!=/^(?:name|status|duration|note|last|key|ref|className|style|children)$/]",
+        "message": "<AgentTimelineItem> doesn't accept that prop. Declared props: name, status, duration, note, last."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='AgentTimelineItem'] > JSXAttribute[name.name='status'] > Literal[value!=/^(?:waiting|running|done|fallback|error)$/]",
+        "message": "<AgentTimelineItem> status must be one of 'waiting' | 'running' | 'done' | 'fallback' | 'error'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Badge'] > JSXAttribute > JSXIdentifier[name!=/^(?:kind|children|key|ref|className|style|children)$/]",
+        "message": "<Badge> doesn't accept that prop. Declared props: kind, children."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Badge'] > JSXAttribute[name.name='kind'] > Literal[value!=/^(?:real|estimate|simulated|unavailable|pending)$/]",
+        "message": "<Badge> kind must be one of 'real' | 'estimate' | 'simulated' | 'unavailable' | 'pending'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute > JSXIdentifier[name!=/^(?:variant|icon|loading|loadingLabel|disabled|block|ariaLabel|type|onClick|children|key|ref|className|style|children)$/]",
+        "message": "<Button> doesn't accept that prop. Declared props: variant, icon, loading, loadingLabel, disabled, block, ariaLabel, type, onClick, children."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='variant'] > Literal[value!=/^(?:solid|stroke|ghost)$/]",
+        "message": "<Button> variant must be one of 'solid' | 'stroke' | 'ghost'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='type'] > Literal[value!=/^(?:button|submit)$/]",
+        "message": "<Button> type must be one of 'button' | 'submit'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Card'] > JSXAttribute > JSXIdentifier[name!=/^(?:variant|padding|clickable|onClick|className|style|children|key|ref|className|style|children)$/]",
+        "message": "<Card> doesn't accept that prop. Declared props: variant, padding, clickable, onClick, className, style, children."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Card'] > JSXAttribute[name.name='variant'] > Literal[value!=/^(?:default|nested)$/]",
+        "message": "<Card> variant must be one of 'default' | 'nested'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='DecisionLogRow'] > JSXAttribute > JSXIdentifier[name!=/^(?:time|actor|actorLabel|decision|reason|head|key|ref|className|style|children)$/]",
+        "message": "<DecisionLogRow> doesn't accept that prop. Declared props: time, actor, actorLabel, decision, reason, head."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='DecisionLogRow'] > JSXAttribute[name.name='actor'] > Literal[value!=/^(?:system|agent|user|traffic|police|transport|comms)$/]",
+        "message": "<DecisionLogRow> actor must be one of 'system' | 'agent' | 'user' | 'traffic' | 'police' | 'transport' | 'comms'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='DepartmentCard'] > JSXAttribute > JSXIdentifier[name!=/^(?:dept|remaining|total|key|ref|className|style|children)$/]",
+        "message": "<DepartmentCard> doesn't accept that prop. Declared props: dept, remaining, total."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='DepartmentCard'] > JSXAttribute[name.name='dept'] > Literal[value!=/^(?:traffic|police|transport|comms)$/]",
+        "message": "<DepartmentCard> dept must be one of 'traffic' | 'police' | 'transport' | 'comms'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='EventManager'] > JSXAttribute > JSXIdentifier[name!=/^(?:attendance|onAttendanceChange|closures|stops|onRemoveClosure|onRemoveStop|onAnalyze|analyzing|key|ref|className|style|children)$/]",
+        "message": "<EventManager> doesn't accept that prop. Declared props: attendance, onAttendanceChange, closures, stops, onRemoveClosure, onRemoveStop, onAnalyze, analyzing."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Icon'] > JSXAttribute > JSXIdentifier[name!=/^(?:name|size|stroke|spin|className|style|key|ref|className|style|children)$/]",
+        "message": "<Icon> doesn't accept that prop. Declared props: name, size, stroke, spin, className, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='IterationIndicator'] > JSXAttribute > JSXIdentifier[name!=/^(?:current|total|key|ref|className|style|children)$/]",
+        "message": "<IterationIndicator> doesn't accept that prop. Declared props: current, total."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='LayerPanel'] > JSXAttribute > JSXIdentifier[name!=/^(?:layers|onToggle|key|ref|className|style|children)$/]",
+        "message": "<LayerPanel> doesn't accept that prop. Declared props: layers, onToggle."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='ManualSwitch'] > JSXAttribute > JSXIdentifier[name!=/^(?:checked|onChange|key|ref|className|style|children)$/]",
+        "message": "<ManualSwitch> doesn't accept that prop. Declared props: checked, onChange."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='MapMarker'] > JSXAttribute > JSXIdentifier[name!=/^(?:dept|state|key|ref|className|style|children)$/]",
+        "message": "<MapMarker> doesn't accept that prop. Declared props: dept, state."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='MapMarker'] > JSXAttribute[name.name='dept'] > Literal[value!=/^(?:traffic|police|transport|comms)$/]",
+        "message": "<MapMarker> dept must be one of 'traffic' | 'police' | 'transport' | 'comms'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='MapMarker'] > JSXAttribute[name.name='state'] > Literal[value!=/^(?:normal|accepted|rejected)$/]",
+        "message": "<MapMarker> state must be one of 'normal' | 'accepted' | 'rejected'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='MapToggle'] > JSXAttribute > JSXIdentifier[name!=/^(?:after|onAfterChange|iteration|onIterationChange|iterations|key|ref|className|style|children)$/]",
+        "message": "<MapToggle> doesn't accept that prop. Declared props: after, onAfterChange, iteration, onIterationChange, iterations."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='MetricCard'] > JSXAttribute > JSXIdentifier[name!=/^(?:label|value|unit|delta|badge|loading|compact|key|ref|className|style|children)$/]",
+        "message": "<MetricCard> doesn't accept that prop. Declared props: label, value, unit, delta, badge, loading, compact."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='MetricCard'] > JSXAttribute[name.name='badge'] > Literal[value!=/^(?:real|estimate|simulated|unavailable)$/]",
+        "message": "<MetricCard> badge must be one of 'real' | 'estimate' | 'simulated' | 'unavailable'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='ModeSelector'] > JSXAttribute > JSXIdentifier[name!=/^(?:value|onChange|key|ref|className|style|children)$/]",
+        "message": "<ModeSelector> doesn't accept that prop. Declared props: value, onChange."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='ModeSelector'] > JSXAttribute[name.name='value'] > Literal[value!=/^(?:live|scenario)$/]",
+        "message": "<ModeSelector> value must be one of 'live' | 'scenario'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='RequestCard'] > JSXAttribute > JSXIdentifier[name!=/^(?:dept|code|status|measure|rejection|alternativeTo|key|ref|className|style|children)$/]",
+        "message": "<RequestCard> doesn't accept that prop. Declared props: dept, code, status, measure, rejection, alternativeTo."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='RequestCard'] > JSXAttribute[name.name='dept'] > Literal[value!=/^(?:traffic|police|transport|comms)$/]",
+        "message": "<RequestCard> dept must be one of 'traffic' | 'police' | 'transport' | 'comms'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='RequestCard'] > JSXAttribute[name.name='status'] > Literal[value!=/^(?:CREATED|SENT|RECEIVED|ACCEPTED|REJECTED|IN_PROGRESS|COMPLETED)$/]",
+        "message": "<RequestCard> status must be one of 'CREATED' | 'SENT' | 'RECEIVED' | 'ACCEPTED' | 'REJECTED' | 'IN_PROGRESS' | 'COMPLETED'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='RunStatus'] > JSXAttribute > JSXIdentifier[name!=/^(?:state|step|key|ref|className|style|children)$/]",
+        "message": "<RunStatus> doesn't accept that prop. Declared props: state, step."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='RunStatus'] > JSXAttribute[name.name='state'] > Literal[value!=/^(?:INTAKE|ANALYZE|RECONCILE|PLAN|DISPATCH|AWAIT|REPLAN|VERIFY|DONE|ERRORE|DECISIONE)$/]",
+        "message": "<RunStatus> state must be one of 'INTAKE' | 'ANALYZE' | 'RECONCILE' | 'PLAN' | 'DISPATCH' | 'AWAIT' | 'REPLAN' | 'VERIFY' | 'DONE' | 'ERRORE' | 'DECISIONE'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Sidebar'] > JSXAttribute > JSXIdentifier[name!=/^(?:items|active|onSelect|brand|height|key|ref|className|style|children)$/]",
+        "message": "<Sidebar> doesn't accept that prop. Declared props: items, active, onSelect, brand, height."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='SidebarButton'] > JSXAttribute > JSXIdentifier[name!=/^(?:icon|label|active|onClick|key|ref|className|style|children)$/]",
+        "message": "<SidebarButton> doesn't accept that prop. Declared props: icon, label, active, onClick."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='SourceChip'] > JSXAttribute > JSXIdentifier[name!=/^(?:sources|key|ref|className|style|children)$/]",
+        "message": "<SourceChip> doesn't accept that prop. Declared props: sources."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='TextField'] > JSXAttribute > JSXIdentifier[name!=/^(?:label|value|onChange|placeholder|suffix|mono|error|disabled|hint|id|inputMode|key|ref|className|style|children)$/]",
+        "message": "<TextField> doesn't accept that prop. Declared props: label, value, onChange, placeholder, suffix, mono, error, disabled, hint, id, inputMode."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='TextField'] > JSXAttribute[name.name='inputMode'] > Literal[value!=/^(?:numeric|text)$/]",
+        "message": "<TextField> inputMode must be one of 'numeric' | 'text'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Tooltip'] > JSXAttribute > JSXIdentifier[name!=/^(?:content|placement|open|children|key|ref|className|style|children)$/]",
+        "message": "<Tooltip> doesn't accept that prop. Declared props: content, placement, open, children."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Tooltip'] > JSXAttribute[name.name='placement'] > Literal[value!=/^(?:top|bottom)$/]",
+        "message": "<Tooltip> placement must be one of 'top' | 'bottom'."
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/index.js"
+      ],
+      "rules": {
+        "no-restricted-imports": "off"
+      }
+    }
+  ],
+  "x-omelette": {
+    "components": {
+      "AgentTimelineItem": {
+        "replaces": []
+      },
+      "Badge": {
+        "replaces": []
+      },
+      "Button": {
+        "replaces": []
+      },
+      "Card": {
+        "replaces": []
+      },
+      "DecisionLogRow": {
+        "replaces": []
+      },
+      "DepartmentCard": {
+        "replaces": []
+      },
+      "EventManager": {
+        "replaces": []
+      },
+      "Icon": {
+        "replaces": []
+      },
+      "IterationIndicator": {
+        "replaces": []
+      },
+      "LayerPanel": {
+        "replaces": []
+      },
+      "ManualSwitch": {
+        "replaces": []
+      },
+      "MapAttribution": {
+        "replaces": []
+      },
+      "MapLegend": {
+        "replaces": []
+      },
+      "MapMarker": {
+        "replaces": []
+      },
+      "MapToggle": {
+        "replaces": []
+      },
+      "MetricCard": {
+        "replaces": []
+      },
+      "ModeSelector": {
+        "replaces": []
+      },
+      "RequestCard": {
+        "replaces": []
+      },
+      "RunStatus": {
+        "replaces": []
+      },
+      "Sidebar": {
+        "replaces": []
+      },
+      "SidebarButton": {
+        "replaces": []
+      },
+      "SourceChip": {
+        "replaces": []
+      },
+      "TextField": {
+        "replaces": []
+      },
+      "Tooltip": {
+        "replaces": []
+      }
+    },
+    "tokens": [
+      "--action",
+      "--action-hover",
+      "--border-control",
+      "--border-hairline",
+      "--border-scenario-frame",
+      "--breakpoint-compact",
+      "--color-accent",
+      "--color-accent-2",
+      "--color-accent-hover",
+      "--color-badge-fill-estimate",
+      "--color-badge-fill-pending",
+      "--color-badge-fill-real",
+      "--color-badge-fill-simulated",
+      "--color-badge-fill-unavailable",
+      "--color-bg",
+      "--color-border",
+      "--color-border-card",
+      "--color-border-strong",
+      "--color-border-tooltip",
+      "--color-chart-1",
+      "--color-chart-2",
+      "--color-chart-3",
+      "--color-chart-4",
+      "--color-danger",
+      "--color-data-estimate",
+      "--color-data-real",
+      "--color-data-simulated",
+      "--color-data-unavailable",
+      "--color-delta-better",
+      "--color-delta-worse",
+      "--color-map-closure",
+      "--color-map-congestion-1",
+      "--color-map-congestion-2",
+      "--color-map-congestion-3",
+      "--color-map-congestion-4",
+      "--color-map-detour",
+      "--color-map-event-area",
+      "--color-map-stop-low",
+      "--color-map-stop-mid",
+      "--color-map-stop-over",
+      "--color-mode-fill-live",
+      "--color-mode-fill-scenario",
+      "--color-overlay",
+      "--color-row-hover",
+      "--color-scenario-frame",
+      "--color-state-fill-done",
+      "--color-state-fill-error",
+      "--color-state-fill-running",
+      "--color-state-fill-waiting",
+      "--color-status-accepted",
+      "--color-status-pending",
+      "--color-status-rejected",
+      "--color-success",
+      "--color-surface-1",
+      "--color-surface-2",
+      "--color-surface-3",
+      "--color-text",
+      "--color-text-muted",
+      "--color-text-secondary",
+      "--color-warning",
+      "--focus-ring",
+      "--font-mono",
+      "--font-ui",
+      "--fs-2xl",
+      "--fs-badge",
+      "--fs-kpi",
+      "--fs-kpi-sm",
+      "--fs-lg",
+      "--fs-md",
+      "--fs-sm",
+      "--fs-xl",
+      "--fs-xs",
+      "--fw-2xl",
+      "--fw-badge",
+      "--fw-kpi",
+      "--fw-kpi-sm",
+      "--fw-lg",
+      "--fw-md",
+      "--fw-sm",
+      "--fw-xl",
+      "--fw-xs",
+      "--layout-event-manager",
+      "--layout-event-manager-compact",
+      "--layout-gap",
+      "--layout-right-panel",
+      "--layout-right-panel-compact",
+      "--layout-screen-padding",
+      "--lh-2xl",
+      "--lh-badge",
+      "--lh-kpi",
+      "--lh-kpi-sm",
+      "--lh-lg",
+      "--lh-md",
+      "--lh-sm",
+      "--lh-xl",
+      "--lh-xs",
+      "--ls-2xl",
+      "--ls-badge",
+      "--ls-kpi",
+      "--ls-kpi-sm",
+      "--ls-lg",
+      "--ls-md",
+      "--ls-sm",
+      "--ls-xl",
+      "--ls-xs",
+      "--motion-duration",
+      "--motion-easing",
+      "--opacity-badge-fill",
+      "--opacity-card-border",
+      "--opacity-congestion-hover",
+      "--opacity-congestion-rest",
+      "--opacity-event-area-fill",
+      "--opacity-tooltip-border",
+      "--radius-card",
+      "--radius-card-inner",
+      "--radius-control",
+      "--radius-tag",
+      "--radius-tooltip",
+      "--size-badge-height",
+      "--size-chip-height",
+      "--size-control-height",
+      "--size-dept-icon",
+      "--size-focus-ring-offset",
+      "--size-icon",
+      "--size-icon-marker",
+      "--size-icon-sidebar",
+      "--size-icon-stroke",
+      "--size-layer-panel-width",
+      "--size-layer-row-height",
+      "--size-marker",
+      "--size-marker-badge",
+      "--size-metrics-height",
+      "--size-mode-button-height",
+      "--size-node",
+      "--size-popover-width",
+      "--size-progress-bar",
+      "--size-road-line",
+      "--size-sidebar-button",
+      "--size-sidebar-width",
+      "--size-status-chip-height",
+      "--size-topbar-height",
+      "--space-12",
+      "--space-16",
+      "--space-24",
+      "--space-32",
+      "--space-4",
+      "--space-48",
+      "--space-8",
+      "--surface-card",
+      "--surface-hover",
+      "--surface-nested",
+      "--surface-screen",
+      "--text-primary",
+      "--text-support",
+      "--transition-base"
+    ],
+    "tokenKinds": {
+      "--color-bg": "color",
+      "--color-surface-1": "color",
+      "--color-surface-2": "color",
+      "--color-surface-3": "color",
+      "--color-border": "color",
+      "--color-border-strong": "color",
+      "--color-border-card": "color",
+      "--color-border-tooltip": "color",
+      "--color-text": "font",
+      "--color-text-secondary": "font",
+      "--color-text-muted": "font",
+      "--color-overlay": "color",
+      "--color-accent": "color",
+      "--color-accent-hover": "color",
+      "--color-accent-2": "color",
+      "--color-success": "color",
+      "--color-warning": "color",
+      "--color-danger": "color",
+      "--color-data-real": "color",
+      "--color-data-estimate": "color",
+      "--color-data-simulated": "color",
+      "--color-data-unavailable": "color",
+      "--color-scenario-frame": "color",
+      "--color-status-accepted": "color",
+      "--color-status-rejected": "color",
+      "--color-status-pending": "color",
+      "--color-delta-better": "color",
+      "--color-delta-worse": "color",
+      "--color-badge-fill-real": "color",
+      "--color-badge-fill-estimate": "color",
+      "--color-badge-fill-simulated": "color",
+      "--color-badge-fill-unavailable": "color",
+      "--color-badge-fill-pending": "color",
+      "--color-state-fill-running": "color",
+      "--color-state-fill-waiting": "color",
+      "--color-state-fill-done": "color",
+      "--color-state-fill-error": "color",
+      "--color-mode-fill-live": "color",
+      "--color-mode-fill-scenario": "color",
+      "--color-row-hover": "color",
+      "--color-chart-1": "color",
+      "--color-chart-2": "color",
+      "--color-chart-3": "color",
+      "--color-chart-4": "color",
+      "--color-map-congestion-1": "color",
+      "--color-map-congestion-2": "color",
+      "--color-map-congestion-3": "color",
+      "--color-map-congestion-4": "color",
+      "--color-map-closure": "color",
+      "--color-map-detour": "color",
+      "--color-map-event-area": "color",
+      "--color-map-stop-low": "color",
+      "--color-map-stop-mid": "color",
+      "--color-map-stop-over": "color",
+      "--surface-screen": "color",
+      "--surface-card": "color",
+      "--surface-nested": "color",
+      "--surface-hover": "color",
+      "--text-primary": "font",
+      "--text-support": "font",
+      "--action": "color",
+      "--action-hover": "color",
+      "--focus-ring": "color",
+      "--font-ui": "font",
+      "--font-mono": "font",
+      "--fs-kpi": "spacing",
+      "--lh-kpi": "spacing",
+      "--fw-kpi": "other",
+      "--ls-kpi": "other",
+      "--fs-kpi-sm": "spacing",
+      "--lh-kpi-sm": "spacing",
+      "--fw-kpi-sm": "other",
+      "--ls-kpi-sm": "other",
+      "--fs-2xl": "spacing",
+      "--lh-2xl": "spacing",
+      "--fw-2xl": "other",
+      "--ls-2xl": "other",
+      "--fs-xl": "spacing",
+      "--lh-xl": "spacing",
+      "--fw-xl": "other",
+      "--ls-xl": "other",
+      "--fs-lg": "spacing",
+      "--lh-lg": "spacing",
+      "--fw-lg": "other",
+      "--ls-lg": "other",
+      "--fs-md": "spacing",
+      "--lh-md": "spacing",
+      "--fw-md": "other",
+      "--ls-md": "other",
+      "--fs-sm": "spacing",
+      "--lh-sm": "spacing",
+      "--fw-sm": "other",
+      "--ls-sm": "other",
+      "--fs-xs": "spacing",
+      "--lh-xs": "spacing",
+      "--fw-xs": "other",
+      "--ls-xs": "other",
+      "--fs-badge": "spacing",
+      "--lh-badge": "spacing",
+      "--fw-badge": "other",
+      "--ls-badge": "other",
+      "--space-4": "spacing",
+      "--space-8": "spacing",
+      "--space-12": "spacing",
+      "--space-16": "spacing",
+      "--space-24": "spacing",
+      "--space-32": "spacing",
+      "--space-48": "spacing",
+      "--radius-card": "radius",
+      "--radius-card-inner": "radius",
+      "--radius-control": "radius",
+      "--radius-tag": "radius",
+      "--radius-tooltip": "radius",
+      "--border-hairline": "spacing",
+      "--border-control": "spacing",
+      "--border-scenario-frame": "spacing",
+      "--size-control-height": "spacing",
+      "--size-badge-height": "spacing",
+      "--size-sidebar-width": "spacing",
+      "--size-sidebar-button": "spacing",
+      "--size-topbar-height": "spacing",
+      "--size-metrics-height": "spacing",
+      "--size-icon": "spacing",
+      "--size-icon-sidebar": "spacing",
+      "--size-icon-marker": "spacing",
+      "--size-focus-ring-offset": "spacing",
+      "--size-road-line": "spacing",
+      "--size-icon-stroke": "color",
+      "--size-chip-height": "spacing",
+      "--size-mode-button-height": "spacing",
+      "--size-node": "spacing",
+      "--size-status-chip-height": "spacing",
+      "--size-dept-icon": "spacing",
+      "--size-progress-bar": "spacing",
+      "--size-marker": "spacing",
+      "--size-marker-badge": "spacing",
+      "--size-layer-panel-width": "spacing",
+      "--size-layer-row-height": "spacing",
+      "--size-popover-width": "spacing",
+      "--layout-event-manager": "spacing",
+      "--layout-right-panel": "spacing",
+      "--layout-event-manager-compact": "spacing",
+      "--layout-right-panel-compact": "spacing",
+      "--layout-gap": "spacing",
+      "--layout-screen-padding": "spacing",
+      "--breakpoint-compact": "spacing",
+      "--opacity-badge-fill": "other",
+      "--opacity-card-border": "other",
+      "--opacity-tooltip-border": "other",
+      "--opacity-congestion-rest": "other",
+      "--opacity-congestion-hover": "other",
+      "--opacity-event-area-fill": "other",
+      "--motion-duration": "other",
+      "--motion-easing": "other",
+      "--transition-base": "color"
+    },
+    "fontFamilies": [
+      "Geist Mono",
+      "Plus Jakarta Sans"
+    ]
+  }
+}

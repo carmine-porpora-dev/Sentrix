@@ -1,0 +1,16 @@
+<!-- @dsCard group="Components" viewport="700x340" name="Layout a due stati" subtitle="Event Manager aperto 360 / 440 · compattato 108 / 692 · mappa invariata" -->
+<!DOCTYPE html><html lang="it"><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<style>body{padding:24px}.row{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;margin-bottom:20px}.cap{font:500 14px/20px var(--font-ui);color:var(--color-text-secondary);margin:0 0 8px}.col{display:flex;flex-direction:column;gap:8px}</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<script src="../_ds_bundle.js"></script></head><body><div id="r"></div><script type="text/babel">
+const Box=({c,l,w,h})=><div style={{background:c,border:'1px solid var(--color-border-card)',borderRadius:8,display:'grid',placeItems:'center',font:'500 14px/20px var(--font-ui)',color:'var(--color-text-secondary)',textAlign:'center',height:h}}>{l}</div>;
+function Row({cols,labels}){return <div style={{display:'grid',gridTemplateColumns:cols,gap:8}}>{labels.map((l,i)=><Box key={i} h={120} l={l} c={i===1?'var(--color-surface-2)':'var(--color-surface-1)'} />)}</div>}
+function App(){return <div>
+<p className="cap">Aperto — da compilare (schermate 01, 02, 03, 11)</p>
+<Row cols="360fr 640fr 440fr" labels={['Event Manager 360','Mappa','Pannelli 440']} />
+<p className="cap" style={{marginTop:20}}>Compattato — dal run in poi (schermate 04–10)</p>
+<Row cols="108fr 640fr 692fr" labels={['Rail 108','Mappa','Pannelli 692']} />
+<p className="cap" style={{marginTop:16}}>Larghezze in scala. Tokens: --layout-event-manager, --layout-right-panel, --layout-event-manager-rail, --layout-right-panel-wide. Sotto 1440px: da definire.</p></div>}</script><script type="text/babel">ReactDOM.createRoot(document.getElementById('r')).render(<App/>)</script></body></html>

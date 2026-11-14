@@ -1,0 +1,4632 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Sentrix",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/api/health": {
+      "get": {
+        "tags": [
+          "system"
+        ],
+        "summary": "Health",
+        "operationId": "health",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Login",
+        "operationId": "login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthState"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Non autenticato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Troppe richieste (`Retry-After` in secondi)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Fonte o dati non disponibili",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Richiesta non valida (errori per campo in `details.fields`)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/logout": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Logout",
+        "description": "Non richiede la sessione: chi esce con un cookie già scaduto deve poterlo ripulire. Con\nl'accesso libero non si esce da nulla: resta tutto aperto.",
+        "operationId": "logout",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthState"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/me": {
+      "get": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Me",
+        "operationId": "me",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthState"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/events": {
+      "get": {
+        "tags": [
+          "events"
+        ],
+        "summary": "List Events",
+        "operationId": "list_events",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/EventSummary"
+                  },
+                  "type": "array",
+                  "title": "Response List Events"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Non autenticato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIKeyCookie": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "events"
+        ],
+        "summary": "Create Event",
+        "operationId": "create_event",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflitto di stato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Richiesta non valida (errori per campo in `details.fields`)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Non autenticato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIKeyCookie": []
+          }
+        ]
+      }
+    },
+    "/api/events/{event_id}": {
+      "get": {
+        "tags": [
+          "events"
+        ],
+        "summary": "Get Event",
+        "operationId": "get_event",
+        "security": [
+          {
+            "APIKeyCookie": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "event_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Event Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Risorsa non trovata",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Richiesta non valida (errori per campo in `details.fields`)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Non autenticato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "events"
+        ],
+        "summary": "Update Event",
+        "description": "`revision` +1 e `updated_at` li decide il repository; la revisione sostituita resta\nconsultabile (i run che l'hanno usata ritrovano l'evento com'era).",
+        "operationId": "update_event",
+        "security": [
+          {
+            "APIKeyCookie": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "event_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Event Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Risorsa non trovata",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Richiesta non valida (errori per campo in `details.fields`)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Non autenticato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/events/{event_id}/reset": {
+      "post": {
+        "tags": [
+          "events"
+        ],
+        "summary": "Reset Event",
+        "description": "Solo per i preset: rimette il contenuto del file seed. È una nuova revisione, non una\ncancellazione: la versione modificata dall'utente resta nello storico.",
+        "operationId": "reset_event",
+        "security": [
+          {
+            "APIKeyCookie": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "event_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Event Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Risorsa non trovata",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflitto di stato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Richiesta non valida (errori per campo in `details.fields`)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Non autenticato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/events/{event_id}/resolve": {
+      "post": {
+        "tags": [
+          "events"
+        ],
+        "summary": "Resolve Event",
+        "description": "Anteprima GeoJSON di ciò che il risolutore trova per l'evento (revisione corrente): strade\nchiuse, fermate interrotte, centro dell'area e punti di arrivo in auto. Ciò che non si\nrisolve non compare: il run lo segnalerebbe.",
+        "operationId": "resolve_event",
+        "security": [
+          {
+            "APIKeyCookie": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "event_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Event Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeatureCollection"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Risorsa non trovata",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Fonte o dati non disponibili",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Richiesta non valida (errori per campo in `details.fields`)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Non autenticato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/network/edges": {
+      "get": {
+        "tags": [
+          "network"
+        ],
+        "summary": "Network Edges",
+        "description": "Le strade da scegliere con un clic: quelle maggiori (da `tertiary` in su) sempre, tutte le\naltre quando l'area è piccola. Una feature per strada: `edge_key` e `reverse_key` sono i due\nsensi di marcia, da chiudere insieme.",
+        "operationId": "network_edges",
+        "security": [
+          {
+            "APIKeyCookie": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "bbox",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "ovest,sud,est,nord (gradi decimali)",
+              "title": "Bbox"
+            },
+            "description": "ovest,sud,est,nord (gradi decimali)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeatureCollection"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Richiesta non valida (errori per campo in `details.fields`)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Fonte o dati non disponibili",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Non autenticato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/transit/stops": {
+      "get": {
+        "tags": [
+          "network"
+        ],
+        "summary": "Transit Stops",
+        "description": "Le fermate GTFS nell'area (la posizione è un dato `real`), con le linee che le servono.",
+        "operationId": "transit_stops",
+        "security": [
+          {
+            "APIKeyCookie": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "bbox",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "ovest,sud,est,nord (gradi decimali)",
+              "title": "Bbox"
+            },
+            "description": "ovest,sud,est,nord (gradi decimali)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeatureCollection"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Richiesta non valida (errori per campo in `details.fields`)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Fonte o dati non disponibili",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Non autenticato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/transit/lines": {
+      "get": {
+        "tags": [
+          "network"
+        ],
+        "summary": "Transit Lines",
+        "description": "Le linee di metro e funicolari, come sequenza delle fermate della corsa più lunga: un\ndisegno schematico, non il tracciato dei binari.",
+        "operationId": "transit_lines",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeatureCollection"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Fonte o dati non disponibili",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Non autenticato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIKeyCookie": []
+          }
+        ]
+      }
+    },
+    "/tiles/napoli.pmtiles": {
+      "get": {
+        "tags": [
+          "network"
+        ],
+        "summary": "Pmtiles",
+        "description": "La mappa di base, con supporto a `Range` (il client PMTiles legge a pezzi). Richiede la\nsessione come le API: il browser la manda da solo, essendo della stessa origine.",
+        "operationId": "pmtiles",
+        "responses": {
+          "200": {
+            "description": "File PMTiles",
+            "content": {
+              "application/octet-stream": {}
+            }
+          },
+          "206": {
+            "description": "Intervallo richiesto",
+            "content": {
+              "application/octet-stream": {}
+            }
+          },
+          "404": {
+            "description": "Risorsa non trovata",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Non autenticato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIKeyCookie": []
+          }
+        ]
+      }
+    },
+    "/api/runs": {
+      "post": {
+        "tags": [
+          "runs"
+        ],
+        "summary": "Create Run",
+        "operationId": "create_run",
+        "security": [
+          {
+            "APIKeyCookie": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRunRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateRunResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Risorsa non trovata",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Troppe richieste (`Retry-After` in secondi)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Fonte o dati non disponibili",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Richiesta non valida (errori per campo in `details.fields`)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Non autenticato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "runs"
+        ],
+        "summary": "List Runs",
+        "operationId": "list_runs",
+        "security": [
+          {
+            "APIKeyCookie": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "event_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Event Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Run"
+                  },
+                  "title": "Response List Runs"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Richiesta non valida (errori per campo in `details.fields`)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Non autenticato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/runs/{run_id}": {
+      "get": {
+        "tags": [
+          "runs"
+        ],
+        "summary": "Get Run",
+        "description": "Solo letture dal database (polling a 1 s): stati attraversati, agenti, piano, richieste.",
+        "operationId": "get_run",
+        "security": [
+          {
+            "APIKeyCookie": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Run Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RunView"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Risorsa non trovata",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Richiesta non valida (errori per campo in `details.fields`)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Non autenticato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/runs/{run_id}/metrics": {
+      "get": {
+        "tags": [
+          "runs"
+        ],
+        "summary": "Run Metrics",
+        "operationId": "run_metrics",
+        "security": [
+          {
+            "APIKeyCookie": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Run Id"
+            }
+          },
+          {
+            "name": "iteration",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "0 = senza misure",
+              "title": "Iteration"
+            },
+            "description": "0 = senza misure"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MetricsResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Risorsa non trovata",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Richiesta non valida (errori per campo in `details.fields`)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Non autenticato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/runs/{run_id}/layers/{layer}": {
+      "get": {
+        "tags": [
+          "runs"
+        ],
+        "summary": "Run Layer",
+        "operationId": "run_layer",
+        "security": [
+          {
+            "APIKeyCookie": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Run Id"
+            }
+          },
+          {
+            "name": "layer",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "enum": [
+                "edges_vc",
+                "closures",
+                "critical_intersections",
+                "stops",
+                "sections",
+                "event_area",
+                "requests"
+              ],
+              "type": "string",
+              "title": "Layer"
+            }
+          },
+          {
+            "name": "iteration",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "0 = senza misure",
+              "title": "Iteration"
+            },
+            "description": "0 = senza misure"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeatureCollection"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Risorsa non trovata",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Richiesta non valida (errori per campo in `details.fields`)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Non autenticato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/runs/{run_id}/decisions": {
+      "get": {
+        "tags": [
+          "runs"
+        ],
+        "summary": "Run Decisions",
+        "operationId": "run_decisions",
+        "security": [
+          {
+            "APIKeyCookie": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Run Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Decision"
+                  },
+                  "title": "Response Run Decisions"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Risorsa non trovata",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Richiesta non valida (errori per campo in `details.fields`)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Non autenticato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/runs/{run_id}/notifications": {
+      "get": {
+        "tags": [
+          "runs"
+        ],
+        "summary": "Run Notifications",
+        "description": "Le notifiche in uscita del run (spech 12.4), la più vecchia per prima; con `channel` solo\nquelle del canale. Il numero di telefono è sempre mascherato.",
+        "operationId": "run_notifications",
+        "security": [
+          {
+            "APIKeyCookie": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Run Id"
+            }
+          },
+          {
+            "name": "channel",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "emergency_bulletin",
+                    "whatsapp"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Channel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Notification"
+                  },
+                  "title": "Response Run Notifications"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Risorsa non trovata",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Richiesta non valida (errori per campo in `details.fields`)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Non autenticato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/runs/{run_id}/export": {
+      "get": {
+        "tags": [
+          "runs"
+        ],
+        "summary": "Export Run",
+        "operationId": "export_run",
+        "security": [
+          {
+            "APIKeyCookie": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Run Id"
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "json",
+                "csv"
+              ],
+              "type": "string",
+              "default": "json",
+              "title": "Format"
+            }
+          },
+          {
+            "name": "what",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "metrics",
+                    "critical_edges"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "What"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pacchetto JSON (`format=json`) oppure CSV (`format=csv`)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RunExport"
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Risorsa non trovata",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Richiesta non valida (errori per campo in `details.fields`)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Non autenticato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/notifications/{notification_id}/ack": {
+      "post": {
+        "tags": [
+          "notifications"
+        ],
+        "summary": "Ack Notification",
+        "description": "«Conferma ricezione» di un bollettino ai servizi di emergenza: la notifica passa a\n`ACKNOWLEDGED` e la conferma entra nel registro decisioni (attore `user`). 404 se non esiste;\n**409 `NOT_ACKNOWLEDGEABLE`** se è già confermata o non è un bollettino (WhatsApp non ha un\nciclo di vita): `details.state` dice in che stato è.",
+        "operationId": "ack_notification",
+        "security": [
+          {
+            "APIKeyCookie": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "notification_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Notification Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Notification"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Risorsa non trovata",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflitto di stato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Richiesta non valida (errori per campo in `details.fields`)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Non autenticato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/vdept": {
+      "get": {
+        "tags": [
+          "vdept"
+        ],
+        "summary": "Vdept Registry",
+        "description": "Il registro dei dipartimenti; con `run_id` anche le risorse (totale, usate, rimaste).",
+        "operationId": "vdept_registry",
+        "security": [
+          {
+            "APIKeyCookie": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Run Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VdeptRegistry"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Risorsa non trovata",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Richiesta non valida (errori per campo in `details.fields`)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Non autenticato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/vdept/{dept_id}/requests": {
+      "post": {
+        "tags": [
+          "vdept"
+        ],
+        "summary": "Create Vdept Request",
+        "description": "Solo per test e ispezione (l'orchestratore usa la chiamata in-process). La richiesta nasce\n`CREATED`: non parte da sola. `simulation` deve essere `true`: lo garantisce il modello, che lo\nrifiuta altrimenti (400).",
+        "operationId": "create_vdept_request",
+        "security": [
+          {
+            "APIKeyCookie": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "dept_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Dept Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OperationRequestDraft"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RequestView"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Richiesta non valida (errori per campo in `details.fields`)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Risorsa non trovata",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Non autenticato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/vdept/{dept_id}/requests/{action_id}": {
+      "get": {
+        "tags": [
+          "vdept"
+        ],
+        "summary": "Get Vdept Request",
+        "description": "La richiesta con le sue transizioni (`operation_events`, una riga per ogni passaggio).",
+        "operationId": "get_vdept_request",
+        "security": [
+          {
+            "APIKeyCookie": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "dept_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Dept Id"
+            }
+          },
+          {
+            "name": "action_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Action Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RequestView"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Risorsa non trovata",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Richiesta non valida (errori per campo in `details.fields`)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Non autenticato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/vdept/{dept_id}/requests/{action_id}/manual-response": {
+      "post": {
+        "tags": [
+          "vdept"
+        ],
+        "summary": "Manual Response",
+        "description": "Accetta o rifiuta (con codice e motivo) una richiesta `RECEIVED` inviata con la risposta\nmanuale; la decisione è dell'utente (attore `user`). Il rifiuto è sempre possibile;\nl'accettazione solo se la regola del dipartimento la permetterebbe (409 `ACCEPT_NOT_ALLOWED`,\ncon il motivo e il codice della regola: la richiesta resta in attesa e si può ancora\nrifiutare). 409 `NOT_AWAITING_RESPONSE` se la richiesta non è in `RECEIVED` o se la risposta\nmanuale non è attiva per lei (run senza risposta manuale, tempo scaduto, già risposta).",
+        "operationId": "manual_response",
+        "security": [
+          {
+            "APIKeyCookie": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "dept_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Dept Id"
+            }
+          },
+          {
+            "name": "action_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Action Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ManualResponse"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RequestView"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Risorsa non trovata",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflitto di stato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Richiesta non valida (errori per campo in `details.fields`)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Non autenticato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/live/flow": {
+      "get": {
+        "tags": [
+          "live"
+        ],
+        "summary": "Live Flow",
+        "operationId": "live_flow",
+        "security": [
+          {
+            "APIKeyCookie": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "x-view",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "const": "live",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "`live` solo dalla vista LIVE: è l'unico caso in cui si può chiamare TomTom",
+              "title": "X-View"
+            },
+            "description": "`live` solo dalla vista LIVE: è l'unico caso in cui si può chiamare TomTom"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LiveFlowResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Richiesta non valida (errori per campo in `details.fields`)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Non autenticato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sensors": {
+      "get": {
+        "tags": [
+          "sensors"
+        ],
+        "summary": "List Sensors",
+        "description": "I sensori previsti, nell'ordine di `config/sensors.yaml`. 503 se il file non si legge.",
+        "operationId": "list_sensors",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/PlannedSensor"
+                  },
+                  "type": "array",
+                  "title": "Response List Sensors"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Fonte o dati non disponibili",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Non autenticato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIKeyCookie": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AgentSummary": {
+        "properties": {
+          "agent": {
+            "type": "string",
+            "enum": [
+              "event_demand",
+              "traffic",
+              "transit",
+              "operations"
+            ],
+            "title": "Agent"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "waiting",
+              "running",
+              "done",
+              "done_fallback",
+              "error"
+            ],
+            "title": "State"
+          },
+          "tools_called": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Tools Called"
+          },
+          "text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Text"
+          },
+          "text_origin": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "llm",
+                  "llm_cache",
+                  "template"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Text Origin"
+          },
+          "findings": {
+            "items": {
+              "$ref": "#/components/schemas/Finding"
+            },
+            "type": "array",
+            "title": "Findings"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "agent",
+          "state"
+        ],
+        "title": "AgentSummary"
+      },
+      "AttendanceLevels": {
+        "properties": {
+          "low": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Low"
+          },
+          "mid": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Mid"
+          },
+          "high": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "High"
+          },
+          "source_ref": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Ref"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "low",
+          "mid",
+          "high"
+        ],
+        "title": "AttendanceLevels",
+        "description": "Persone nella giornata/finestra, in tre livelli di scenario."
+      },
+      "AuthState": {
+        "properties": {
+          "authenticated": {
+            "type": "boolean",
+            "title": "Authenticated"
+          },
+          "public_access": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Public Access"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "authenticated"
+        ],
+        "title": "AuthState"
+      },
+      "BackgroundLoad": {
+        "properties": {
+          "arrival_peak_share": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Arrival Peak Share"
+          },
+          "departure_peak_share": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Departure Peak Share"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "arrival_peak_share",
+          "departure_peak_share"
+        ],
+        "title": "BackgroundLoad",
+        "description": "Quota della capacità occupata dal traffico di fondo nella fascia di picco (02 4)."
+      },
+      "CarDestination": {
+        "properties": {
+          "point": {
+            "$ref": "#/components/schemas/GeoPoint"
+          },
+          "share_pct": {
+            "type": "number",
+            "maximum": 100.0,
+            "exclusiveMinimum": 0.0,
+            "title": "Share Pct"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "point",
+          "share_pct"
+        ],
+        "title": "CarDestination"
+      },
+      "Closure": {
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Label"
+          },
+          "street_names": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Street Names"
+          },
+          "bbox": {
+            "anyOf": [
+              {
+                "prefixItems": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ],
+                "type": "array",
+                "maxItems": 4,
+                "minItems": 4
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bbox"
+          },
+          "edge_keys": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Edge Keys"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "closed",
+              "capacity_reduction"
+            ],
+            "title": "Mode",
+            "default": "closed"
+          },
+          "capacity_factor": {
+            "type": "number",
+            "title": "Capacity Factor",
+            "default": 0.0
+          },
+          "source_ref": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Ref"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "label"
+        ],
+        "title": "Closure"
+      },
+      "CreateRunRequest": {
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$",
+            "title": "Event Id"
+          },
+          "attendance_level": {
+            "type": "string",
+            "enum": [
+              "low",
+              "mid",
+              "high"
+            ],
+            "title": "Attendance Level"
+          },
+          "manual_response": {
+            "type": "boolean",
+            "title": "Manual Response",
+            "default": false
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "event_id",
+          "attendance_level"
+        ],
+        "title": "CreateRunRequest"
+      },
+      "CreateRunResponse": {
+        "properties": {
+          "run_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "title": "Run Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "run_id"
+        ],
+        "title": "CreateRunResponse"
+      },
+      "Decision": {
+        "properties": {
+          "run_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "title": "Run Id"
+          },
+          "seq": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Seq"
+          },
+          "at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "At"
+          },
+          "actor": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$",
+            "title": "Actor"
+          },
+          "decision": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Decision"
+          },
+          "rationale": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Rationale"
+          },
+          "refs": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Refs"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "run_id",
+          "seq",
+          "at",
+          "actor",
+          "decision",
+          "rationale"
+        ],
+        "title": "Decision",
+        "description": "Voce del log decisioni, append-only (il database lo garantisce con trigger, F1-04)."
+      },
+      "Department": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$",
+            "title": "Id"
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Label"
+          },
+          "endpoint": {
+            "type": "string",
+            "title": "Endpoint"
+          },
+          "request_types": {
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]*$"
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Request Types"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "label",
+          "endpoint",
+          "request_types"
+        ],
+        "title": "Department"
+      },
+      "DepartmentResources": {
+        "properties": {
+          "window": {
+            "type": "string",
+            "enum": [
+              "arrival",
+              "departure"
+            ],
+            "title": "Window"
+          },
+          "municipal_police_patrols_total": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Municipal Police Patrols Total"
+          },
+          "municipal_police_patrols_committed": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Municipal Police Patrols Committed"
+          },
+          "traffic_control_signal_changes_max": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Traffic Control Signal Changes Max"
+          },
+          "transport_control_reserve_buses": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Transport Control Reserve Buses"
+          },
+          "transport_control_hour_extensions": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Transport Control Hour Extensions"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "window",
+          "municipal_police_patrols_total",
+          "municipal_police_patrols_committed",
+          "traffic_control_signal_changes_max",
+          "transport_control_reserve_buses",
+          "transport_control_hour_extensions"
+        ],
+        "title": "DepartmentResources",
+        "description": "Risorse dei dipartimenti virtuali per una finestra (D19: dati dell'Evento)."
+      },
+      "ErrorBody": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "details": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/JsonValue"
+            },
+            "type": "object",
+            "title": "Details"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "code",
+          "message"
+        ],
+        "title": "ErrorBody"
+      },
+      "ErrorResponse": {
+        "properties": {
+          "error": {
+            "$ref": "#/components/schemas/ErrorBody"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "title": "ErrorResponse"
+      },
+      "Event": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Name"
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "title": "Date"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "area_center": {
+            "$ref": "#/components/schemas/GeoPoint"
+          },
+          "area_radius_m": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Area Radius M",
+            "default": 400
+          },
+          "arrival": {
+            "$ref": "#/components/schemas/TimeWindow"
+          },
+          "departure": {
+            "$ref": "#/components/schemas/TimeWindow"
+          },
+          "attendance": {
+            "$ref": "#/components/schemas/AttendanceLevels"
+          },
+          "closures": {
+            "items": {
+              "$ref": "#/components/schemas/Closure"
+            },
+            "type": "array",
+            "title": "Closures"
+          },
+          "transit_disruptions": {
+            "items": {
+              "$ref": "#/components/schemas/TransitDisruption"
+            },
+            "type": "array",
+            "title": "Transit Disruptions"
+          },
+          "background": {
+            "$ref": "#/components/schemas/BackgroundLoad"
+          },
+          "resources": {
+            "items": {
+              "$ref": "#/components/schemas/DepartmentResources"
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Resources"
+          },
+          "car_destinations": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/CarDestination"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Car Destinations"
+          },
+          "zones_override": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/Zone"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Zones Override"
+          },
+          "modal_split_override": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/ModalSplit"
+                },
+                "propertyNames": {
+                  "enum": [
+                    "road_gate",
+                    "metro_gate",
+                    "arrival_hub",
+                    "near",
+                    "far"
+                  ]
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modal Split Override"
+          },
+          "car_occupancy": {
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Car Occupancy"
+          },
+          "real_measures": {
+            "items": {
+              "$ref": "#/components/schemas/RealMeasure"
+            },
+            "type": "array",
+            "title": "Real Measures"
+          },
+          "sources": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Sources"
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Revision",
+            "default": 1
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "date",
+          "area_center",
+          "arrival",
+          "departure",
+          "attendance",
+          "background",
+          "resources",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "Event",
+        "description": "L'entità completa, come si archivia e si restituisce: il contenuto più i campi del server."
+      },
+      "EventInput": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Name"
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "title": "Date"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "area_center": {
+            "$ref": "#/components/schemas/GeoPoint"
+          },
+          "area_radius_m": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Area Radius M",
+            "default": 400
+          },
+          "arrival": {
+            "$ref": "#/components/schemas/TimeWindow"
+          },
+          "departure": {
+            "$ref": "#/components/schemas/TimeWindow"
+          },
+          "attendance": {
+            "$ref": "#/components/schemas/AttendanceLevels"
+          },
+          "closures": {
+            "items": {
+              "$ref": "#/components/schemas/Closure"
+            },
+            "type": "array",
+            "title": "Closures"
+          },
+          "transit_disruptions": {
+            "items": {
+              "$ref": "#/components/schemas/TransitDisruption"
+            },
+            "type": "array",
+            "title": "Transit Disruptions"
+          },
+          "background": {
+            "$ref": "#/components/schemas/BackgroundLoad"
+          },
+          "resources": {
+            "items": {
+              "$ref": "#/components/schemas/DepartmentResources"
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Resources"
+          },
+          "car_destinations": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/CarDestination"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Car Destinations"
+          },
+          "zones_override": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/Zone"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Zones Override"
+          },
+          "modal_split_override": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/ModalSplit"
+                },
+                "propertyNames": {
+                  "enum": [
+                    "road_gate",
+                    "metro_gate",
+                    "arrival_hub",
+                    "near",
+                    "far"
+                  ]
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Modal Split Override"
+          },
+          "car_occupancy": {
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Car Occupancy"
+          },
+          "real_measures": {
+            "items": {
+              "$ref": "#/components/schemas/RealMeasure"
+            },
+            "type": "array",
+            "title": "Real Measures"
+          },
+          "sources": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Sources"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "date",
+          "area_center",
+          "arrival",
+          "departure",
+          "attendance",
+          "background",
+          "resources"
+        ],
+        "title": "EventInput",
+        "description": "Il contenuto di un Evento che l'utente scrive (corpo di POST e PUT, 06 3): tutto tranne i\ncampi che decide il server (`revision`, `created_at`, `updated_at`), che aggiunge `Event`."
+      },
+      "EventSummary": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "title": "Date"
+          },
+          "is_seed": {
+            "type": "boolean",
+            "title": "Is Seed"
+          },
+          "revision": {
+            "type": "integer",
+            "title": "Revision"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "date",
+          "is_seed",
+          "revision",
+          "updated_at"
+        ],
+        "title": "EventSummary",
+        "description": "Una riga dell'elenco eventi (GET /api/events, 06 3): `is_seed` è un attributo di\narchiviazione (un preset modificato resta preset), non un campo dell'Evento."
+      },
+      "Feature": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "Feature",
+            "title": "Type",
+            "default": "Feature"
+          },
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Id"
+          },
+          "geometry": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/JsonValue"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Geometry"
+          },
+          "properties": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/JsonValue"
+            },
+            "type": "object",
+            "title": "Properties"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "geometry"
+        ],
+        "title": "Feature"
+      },
+      "FeatureCollection": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "FeatureCollection",
+            "title": "Type",
+            "default": "FeatureCollection"
+          },
+          "features": {
+            "items": {
+              "$ref": "#/components/schemas/Feature"
+            },
+            "type": "array",
+            "title": "Features"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "features"
+        ],
+        "title": "FeatureCollection"
+      },
+      "Finding": {
+        "properties": {
+          "summary": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Summary"
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "info",
+              "warning",
+              "critical"
+            ],
+            "title": "Severity"
+          },
+          "window": {
+            "type": "string",
+            "enum": [
+              "arrival",
+              "departure"
+            ],
+            "title": "Window"
+          },
+          "trigger": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$",
+            "title": "Trigger"
+          },
+          "target": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target"
+          },
+          "evidence_ids": {
+            "items": {
+              "type": "string",
+              "pattern": "^m(\\.[A-Za-z0-9_-]+)+$"
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Evidence Ids"
+          },
+          "location": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/GeoPoint"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "summary",
+          "severity",
+          "window",
+          "trigger",
+          "evidence_ids"
+        ],
+        "title": "Finding"
+      },
+      "GeoPoint": {
+        "properties": {
+          "lat": {
+            "type": "number",
+            "maximum": 90.0,
+            "minimum": -90.0,
+            "title": "Lat"
+          },
+          "lon": {
+            "type": "number",
+            "maximum": 180.0,
+            "minimum": -180.0,
+            "title": "Lon"
+          },
+          "label": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Label"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "lat",
+          "lon"
+        ],
+        "title": "GeoPoint"
+      },
+      "HealthData": {
+        "properties": {
+          "osm": {
+            "type": "boolean",
+            "title": "Osm"
+          },
+          "gtfs": {
+            "type": "boolean",
+            "title": "Gtfs"
+          },
+          "pmtiles": {
+            "type": "boolean",
+            "title": "Pmtiles"
+          },
+          "tomtom_key_present": {
+            "type": "boolean",
+            "title": "Tomtom Key Present"
+          },
+          "gemini_key_present": {
+            "type": "boolean",
+            "title": "Gemini Key Present"
+          },
+          "whatsapp_configured": {
+            "type": "boolean",
+            "title": "Whatsapp Configured"
+          },
+          "whatsapp_provider": {
+            "type": "string",
+            "enum": [
+              "callmebot",
+              "meta"
+            ],
+            "title": "Whatsapp Provider"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "osm",
+          "gtfs",
+          "pmtiles",
+          "tomtom_key_present",
+          "gemini_key_present",
+          "whatsapp_configured",
+          "whatsapp_provider"
+        ],
+        "title": "HealthData"
+      },
+      "HealthResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "ok",
+              "degraded"
+            ],
+            "title": "Status"
+          },
+          "env": {
+            "type": "string",
+            "enum": [
+              "local",
+              "production"
+            ],
+            "title": "Env"
+          },
+          "data": {
+            "$ref": "#/components/schemas/HealthData"
+          },
+          "degraded": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Degraded"
+          },
+          "versions": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Versions"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "env",
+          "data",
+          "degraded",
+          "versions"
+        ],
+        "title": "HealthResponse",
+        "description": "Nessun segreto: solo se le chiavi ci sono, mai i valori."
+      },
+      "IterationMetrics": {
+        "properties": {
+          "iteration": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Iteration"
+          },
+          "metrics": {
+            "items": {
+              "$ref": "#/components/schemas/Measured"
+            },
+            "type": "array",
+            "title": "Metrics"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "iteration",
+          "metrics"
+        ],
+        "title": "IterationMetrics"
+      },
+      "JsonValue": {},
+      "LiveFlowResponse": {
+        "properties": {
+          "segments": {
+            "items": {
+              "$ref": "#/components/schemas/LiveSegmentFlow"
+            },
+            "type": "array",
+            "title": "Segments"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "fresh",
+              "cached",
+              "snapshot",
+              "unavailable"
+            ],
+            "title": "Mode"
+          },
+          "degraded_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Degraded Reason"
+          },
+          "summary": {
+            "items": {
+              "$ref": "#/components/schemas/Measured"
+            },
+            "type": "array",
+            "title": "Summary"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "segments",
+          "mode"
+        ],
+        "title": "LiveFlowResponse"
+      },
+      "LiveSegmentFlow": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$",
+            "title": "Id"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "geometry": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/JsonValue"
+            },
+            "type": "object",
+            "title": "Geometry"
+          },
+          "current_speed": {
+            "$ref": "#/components/schemas/Measured"
+          },
+          "free_flow_speed": {
+            "$ref": "#/components/schemas/Measured"
+          },
+          "ratio": {
+            "$ref": "#/components/schemas/Measured"
+          },
+          "congestion_class": {
+            "type": "integer",
+            "maximum": 3.0,
+            "minimum": 0.0,
+            "title": "Congestion Class"
+          },
+          "fetched_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Fetched At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "label",
+          "geometry",
+          "current_speed",
+          "free_flow_speed",
+          "ratio",
+          "congestion_class",
+          "fetched_at"
+        ],
+        "title": "LiveSegmentFlow"
+      },
+      "LoginRequest": {
+        "properties": {
+          "password": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Password"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "password"
+        ],
+        "title": "LoginRequest"
+      },
+      "ManualResponse": {
+        "properties": {
+          "decision": {
+            "type": "string",
+            "enum": [
+              "accept",
+              "reject"
+            ],
+            "title": "Decision"
+          },
+          "reject_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reject Code"
+          },
+          "reject_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reject Reason"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "decision"
+        ],
+        "title": "ManualResponse"
+      },
+      "Measured": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^m(\\.[A-Za-z0-9_-]+)+$",
+            "title": "Id"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "title": "Value"
+          },
+          "unit": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Unit"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "real",
+              "estimate",
+              "simulated"
+            ],
+            "title": "Kind"
+          },
+          "source": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Source"
+          },
+          "method": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Method"
+          },
+          "inputs": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Inputs"
+          },
+          "assumptions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Assumptions"
+          },
+          "as_of": {
+            "type": "string",
+            "format": "date-time",
+            "title": "As Of"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "value",
+          "unit",
+          "kind",
+          "source",
+          "method",
+          "inputs",
+          "as_of"
+        ],
+        "title": "Measured"
+      },
+      "MetricDelta": {
+        "properties": {
+          "metric_id": {
+            "type": "string",
+            "pattern": "^m(\\.[A-Za-z0-9_-]+)+$",
+            "title": "Metric Id"
+          },
+          "vs_previous": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Measured"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "vs_baseline": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Measured"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "metric_id"
+        ],
+        "title": "MetricDelta",
+        "description": "Differenze di una metrica rispetto all'iterazione precedente e alla 0: sono numeri anch'essi,\nquindi `Measured` con la loro provenienza."
+      },
+      "MetricsResponse": {
+        "properties": {
+          "run_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "title": "Run Id"
+          },
+          "iteration": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Iteration"
+          },
+          "metrics": {
+            "items": {
+              "$ref": "#/components/schemas/Measured"
+            },
+            "type": "array",
+            "title": "Metrics"
+          },
+          "deltas": {
+            "items": {
+              "$ref": "#/components/schemas/MetricDelta"
+            },
+            "type": "array",
+            "title": "Deltas"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "run_id",
+          "iteration",
+          "metrics",
+          "deltas"
+        ],
+        "title": "MetricsResponse"
+      },
+      "ModalSplit": {
+        "properties": {
+          "car_pct": {
+            "type": "number",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Car Pct"
+          },
+          "transit_pct": {
+            "type": "number",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Transit Pct"
+          },
+          "walk_pct": {
+            "type": "number",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Walk Pct"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "car_pct",
+          "transit_pct",
+          "walk_pct"
+        ],
+        "title": "ModalSplit",
+        "description": "Ripartizione modale di una zona, in percentuale. Il modo «mare» non esiste."
+      },
+      "Notification": {
+        "properties": {
+          "run_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]+$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Run Id"
+          },
+          "iteration": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Iteration"
+          },
+          "channel": {
+            "type": "string",
+            "enum": [
+              "emergency_bulletin",
+              "whatsapp"
+            ],
+            "title": "Channel"
+          },
+          "recipient_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$",
+            "title": "Recipient Id"
+          },
+          "recipient_label": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Recipient Label"
+          },
+          "kind": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$",
+            "title": "Kind"
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Text"
+          },
+          "evidence_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Evidence Ids"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "SENT",
+              "DELIVERED",
+              "ACKNOWLEDGED",
+              "FAILED",
+              "SKIPPED"
+            ],
+            "title": "State"
+          },
+          "provider_message_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Provider Message Id"
+          },
+          "error_code": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_]*$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error Code"
+          },
+          "simulation": {
+            "type": "boolean",
+            "title": "Simulation"
+          },
+          "id": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Id"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "iteration",
+          "channel",
+          "recipient_id",
+          "kind",
+          "text",
+          "state",
+          "simulation",
+          "id",
+          "created_at"
+        ],
+        "title": "Notification"
+      },
+      "OperationEvent": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Id"
+          },
+          "action_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "title": "Action Id"
+          },
+          "from_state": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "CREATED",
+                  "SENT",
+                  "RECEIVED",
+                  "ACCEPTED",
+                  "REJECTED",
+                  "IN_PROGRESS",
+                  "COMPLETED"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "From State"
+          },
+          "to_state": {
+            "type": "string",
+            "enum": [
+              "CREATED",
+              "SENT",
+              "RECEIVED",
+              "ACCEPTED",
+              "REJECTED",
+              "IN_PROGRESS",
+              "COMPLETED"
+            ],
+            "title": "To State"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "action_id",
+          "to_state",
+          "at"
+        ],
+        "title": "OperationEvent",
+        "description": "Una transizione di stato di una richiesta (tabella `operation_events`, 01 4)."
+      },
+      "OperationRequest": {
+        "properties": {
+          "run_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "title": "Run Id"
+          },
+          "iteration": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Iteration"
+          },
+          "type": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$",
+            "title": "Type"
+          },
+          "target": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Target"
+          },
+          "target_label": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Target Label"
+          },
+          "target_geo": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/GeoPoint"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "window": {
+            "type": "string",
+            "enum": [
+              "arrival",
+              "departure"
+            ],
+            "title": "Window"
+          },
+          "priority": {
+            "type": "string",
+            "enum": [
+              "low",
+              "normal",
+              "high"
+            ],
+            "title": "Priority"
+          },
+          "payload": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/JsonValue"
+            },
+            "type": "object",
+            "title": "Payload"
+          },
+          "alternative_of": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]+$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Alternative Of"
+          },
+          "simulation": {
+            "type": "boolean",
+            "const": true,
+            "title": "Simulation"
+          },
+          "action_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "title": "Action Id"
+          },
+          "department": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$",
+            "title": "Department"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "CREATED",
+              "SENT",
+              "RECEIVED",
+              "ACCEPTED",
+              "REJECTED",
+              "IN_PROGRESS",
+              "COMPLETED"
+            ],
+            "title": "State"
+          },
+          "reject_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reject Code"
+          },
+          "reject_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reject Reason"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "run_id",
+          "iteration",
+          "type",
+          "target",
+          "target_label",
+          "window",
+          "priority",
+          "simulation",
+          "action_id",
+          "department",
+          "state"
+        ],
+        "title": "OperationRequest"
+      },
+      "OperationRequestDraft": {
+        "properties": {
+          "run_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "title": "Run Id"
+          },
+          "iteration": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Iteration"
+          },
+          "type": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$",
+            "title": "Type"
+          },
+          "target": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Target"
+          },
+          "target_label": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Target Label"
+          },
+          "target_geo": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/GeoPoint"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "window": {
+            "type": "string",
+            "enum": [
+              "arrival",
+              "departure"
+            ],
+            "title": "Window"
+          },
+          "priority": {
+            "type": "string",
+            "enum": [
+              "low",
+              "normal",
+              "high"
+            ],
+            "title": "Priority"
+          },
+          "payload": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/JsonValue"
+            },
+            "type": "object",
+            "title": "Payload"
+          },
+          "alternative_of": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]+$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Alternative Of"
+          },
+          "simulation": {
+            "type": "boolean",
+            "const": true,
+            "title": "Simulation"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "run_id",
+          "iteration",
+          "type",
+          "target",
+          "target_label",
+          "window",
+          "priority",
+          "simulation"
+        ],
+        "title": "OperationRequestDraft",
+        "description": "Ciò che serve per creare una richiesta (corpo di POST /api/vdept/{id}/requests, 06 6): tutto\ntranne l'identificativo, il dipartimento (nel percorso) e l'esito, che aggiunge\n`OperationRequest`."
+      },
+      "PlanItem": {
+        "properties": {
+          "seq": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Seq"
+          },
+          "recommendation": {
+            "$ref": "#/components/schemas/Recommendation"
+          },
+          "action_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]+$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Action Id"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "proposed",
+              "accepted",
+              "rejected",
+              "replaced",
+              "human_decision_required",
+              "discarded"
+            ],
+            "title": "Status"
+          },
+          "replaced_by": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Replaced By"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Note"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "seq",
+          "recommendation",
+          "status"
+        ],
+        "title": "PlanItem"
+      },
+      "PlannedSensor": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$",
+            "title": "Id"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "gps_probe",
+              "turnstile",
+              "people_counter",
+              "ramp_counter"
+            ],
+            "title": "Type"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Name"
+          },
+          "status": {
+            "type": "string",
+            "const": "planned",
+            "title": "Status"
+          },
+          "location": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/GeoPoint"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "route_class": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "metro_line_1",
+                  "metro_line_6",
+                  "funicular"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Route Class"
+          },
+          "measures": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Measures"
+          },
+          "replaces": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Replaces"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "name",
+          "status",
+          "measures",
+          "replaces"
+        ],
+        "title": "PlannedSensor",
+        "description": "Un sensore (o una famiglia di sensori) che il prodotto avrà, non ancora attivo.\n\nDove sta dipende dal tipo, e le regole sono del dominio (non c'è una posizione da inventare):\n- `people_counter` e `ramp_counter`: un punto (`location`), preso dal feed GTFS o dalle rampe\n  del grafo OSM (la fonte è nel commento di ogni voce di `config/sensors.yaml`);\n- `turnstile`: nessuna posizione. Sta nelle stazioni delle linee di `GET /api/transit/lines`, e\n  `route_class` dice quali (metro di Linea 1, di Linea 6, funicolari): la posizione di una\n  stazione vive in un posto solo, il feed;\n- `gps_probe`: nessuna posizione (bus e flotte comunali coprono tutta la rete)."
+      },
+      "RealMeasure": {
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Label"
+          },
+          "measure_type": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Measure Type"
+          },
+          "target": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Target"
+          },
+          "source_ref": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Source Ref"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "label",
+          "measure_type",
+          "target",
+          "source_ref"
+        ],
+        "title": "RealMeasure",
+        "description": "Misura adottata davvero dalla città (confronto, opzionale)."
+      },
+      "Recommendation": {
+        "properties": {
+          "measure_type": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$",
+            "title": "Measure Type"
+          },
+          "target": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Target"
+          },
+          "department": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$",
+            "title": "Department"
+          },
+          "window": {
+            "type": "string",
+            "enum": [
+              "arrival",
+              "departure"
+            ],
+            "title": "Window"
+          },
+          "params": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/JsonValue"
+            },
+            "type": "object",
+            "title": "Params"
+          },
+          "rationale": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Rationale"
+          },
+          "evidence_ids": {
+            "items": {
+              "type": "string",
+              "pattern": "^m(\\.[A-Za-z0-9_-]+)+$"
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Evidence Ids"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "measure_type",
+          "target",
+          "department",
+          "window",
+          "rationale",
+          "evidence_ids"
+        ],
+        "title": "Recommendation"
+      },
+      "RequestView": {
+        "properties": {
+          "request": {
+            "$ref": "#/components/schemas/OperationRequest"
+          },
+          "events": {
+            "items": {
+              "$ref": "#/components/schemas/OperationEvent"
+            },
+            "type": "array",
+            "title": "Events"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "request"
+        ],
+        "title": "RequestView",
+        "description": "Una richiesta con le sue transizioni (06 5 `requests`, 6)."
+      },
+      "ResourceBalance": {
+        "properties": {
+          "department": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$",
+            "title": "Department"
+          },
+          "window": {
+            "type": "string",
+            "enum": [
+              "arrival",
+              "departure"
+            ],
+            "title": "Window"
+          },
+          "resource": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$",
+            "title": "Resource"
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Total"
+          },
+          "used": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Used"
+          },
+          "remaining": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Remaining"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "department",
+          "window",
+          "resource",
+          "total",
+          "used",
+          "remaining"
+        ],
+        "title": "ResourceBalance",
+        "description": "Una risorsa di un dipartimento in una finestra.\n\n`used` = già impegnata dall'evento + assegnata nel run (04 2: libere = totale − impegnate −\nassegnate); `remaining` = `total` − `used`."
+      },
+      "Run": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "title": "Id"
+          },
+          "event_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$",
+            "title": "Event Id"
+          },
+          "event_revision": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Event Revision"
+          },
+          "attendance_level": {
+            "type": "string",
+            "enum": [
+              "low",
+              "mid",
+              "high"
+            ],
+            "title": "Attendance Level"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "INTAKE",
+              "ANALYZE",
+              "RECONCILE",
+              "PLAN",
+              "DISPATCH",
+              "AWAIT",
+              "REPLAN",
+              "VERIFY",
+              "DONE",
+              "ERROR"
+            ],
+            "title": "State"
+          },
+          "iteration": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Iteration"
+          },
+          "replans": {
+            "type": "integer",
+            "maximum": 3.0,
+            "minimum": 0.0,
+            "title": "Replans"
+          },
+          "started_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Started At"
+          },
+          "ended_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ended At"
+          },
+          "params_hash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Params Hash"
+          },
+          "seed": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Seed"
+          },
+          "llm_mode": {
+            "type": "string",
+            "enum": [
+              "live",
+              "cache_only",
+              "template"
+            ],
+            "title": "Llm Mode"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "event_id",
+          "event_revision",
+          "attendance_level",
+          "state",
+          "iteration",
+          "replans",
+          "started_at",
+          "params_hash",
+          "seed",
+          "llm_mode"
+        ],
+        "title": "Run"
+      },
+      "RunExport": {
+        "properties": {
+          "event": {
+            "$ref": "#/components/schemas/Event"
+          },
+          "run": {
+            "$ref": "#/components/schemas/Run"
+          },
+          "plan": {
+            "items": {
+              "$ref": "#/components/schemas/PlanItem"
+            },
+            "type": "array",
+            "title": "Plan"
+          },
+          "requests": {
+            "items": {
+              "$ref": "#/components/schemas/RequestView"
+            },
+            "type": "array",
+            "title": "Requests"
+          },
+          "decisions": {
+            "items": {
+              "$ref": "#/components/schemas/Decision"
+            },
+            "type": "array",
+            "title": "Decisions"
+          },
+          "metrics": {
+            "items": {
+              "$ref": "#/components/schemas/IterationMetrics"
+            },
+            "type": "array",
+            "title": "Metrics"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "event",
+          "run",
+          "plan",
+          "requests",
+          "decisions",
+          "metrics"
+        ],
+        "title": "RunExport",
+        "description": "Pacchetto JSON di un run (06 5 export): evento nella revisione usata, run, piano, richieste\ncon eventi, decisioni, metriche di tutte le iterazioni con provenienza."
+      },
+      "RunView": {
+        "properties": {
+          "run": {
+            "$ref": "#/components/schemas/Run"
+          },
+          "timeline": {
+            "items": {
+              "$ref": "#/components/schemas/StateTransition"
+            },
+            "type": "array",
+            "title": "Timeline"
+          },
+          "agents": {
+            "items": {
+              "$ref": "#/components/schemas/AgentSummary"
+            },
+            "type": "array",
+            "title": "Agents"
+          },
+          "plan": {
+            "items": {
+              "$ref": "#/components/schemas/PlanItem"
+            },
+            "type": "array",
+            "title": "Plan"
+          },
+          "requests": {
+            "items": {
+              "$ref": "#/components/schemas/RequestView"
+            },
+            "type": "array",
+            "title": "Requests"
+          },
+          "degraded": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Degraded"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "run",
+          "timeline",
+          "agents",
+          "plan",
+          "requests",
+          "degraded"
+        ],
+        "title": "RunView",
+        "description": "Per il polling a 1 s: solo letture dal database, nessun calcolo (06 5)."
+      },
+      "StateTransition": {
+        "properties": {
+          "state": {
+            "type": "string",
+            "enum": [
+              "INTAKE",
+              "ANALYZE",
+              "RECONCILE",
+              "PLAN",
+              "DISPATCH",
+              "AWAIT",
+              "REPLAN",
+              "VERIFY",
+              "DONE",
+              "ERROR"
+            ],
+            "title": "State"
+          },
+          "at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "state",
+          "at"
+        ],
+        "title": "StateTransition"
+      },
+      "TimeWindow": {
+        "properties": {
+          "start": {
+            "type": "string",
+            "format": "time",
+            "title": "Start"
+          },
+          "end": {
+            "type": "string",
+            "format": "time",
+            "title": "End"
+          },
+          "peak": {
+            "type": "string",
+            "format": "time",
+            "title": "Peak"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "start",
+          "end",
+          "peak"
+        ],
+        "title": "TimeWindow"
+      },
+      "TransitDisruption": {
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Label"
+          },
+          "stop_name": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Stop Name"
+          },
+          "stop_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Stop Ids"
+          },
+          "window": {
+            "type": "string",
+            "enum": [
+              "arrival",
+              "departure",
+              "both"
+            ],
+            "title": "Window"
+          },
+          "source_ref": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Ref"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "label",
+          "stop_name",
+          "window"
+        ],
+        "title": "TransitDisruption"
+      },
+      "VdeptRegistry": {
+        "properties": {
+          "departments": {
+            "items": {
+              "$ref": "#/components/schemas/Department"
+            },
+            "type": "array",
+            "title": "Departments"
+          },
+          "resources": {
+            "items": {
+              "$ref": "#/components/schemas/ResourceBalance"
+            },
+            "type": "array",
+            "title": "Resources"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "departments"
+        ],
+        "title": "VdeptRegistry"
+      },
+      "Zone": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Name"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "road_gate",
+              "metro_gate",
+              "arrival_hub",
+              "near",
+              "far"
+            ],
+            "title": "Type"
+          },
+          "weight_pct": {
+            "type": "number",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Weight Pct"
+          },
+          "centroid": {
+            "$ref": "#/components/schemas/GeoPoint"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "type",
+          "weight_pct",
+          "centroid"
+        ],
+        "title": "Zone"
+      }
+    },
+    "securitySchemes": {
+      "APIKeyCookie": {
+        "type": "apiKey",
+        "description": "Cookie di sessione ottenuto con POST /api/auth/login",
+        "in": "cookie",
+        "name": "napoli_session"
+      }
+    }
+  }
+}

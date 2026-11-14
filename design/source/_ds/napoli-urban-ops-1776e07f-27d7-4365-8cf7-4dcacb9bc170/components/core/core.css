@@ -1,0 +1,34 @@
+.nuo-icon{flex:none;display:inline-block;vertical-align:middle}
+.nuo-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;min-width:44px;padding:0 18px;border:2px solid transparent;border-radius:var(--radius-control);font:600 var(--fs-sm)/var(--lh-sm) var(--font-ui);cursor:pointer;white-space:nowrap;transition:var(--transition-base);background:transparent}
+.nuo-btn:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px}
+.nuo-btn--icon{padding:0;width:44px}
+.nuo-btn--solid{background:var(--color-accent);color:var(--color-bg)}
+.nuo-btn--solid:hover{background:var(--color-accent-hover)}
+.nuo-btn--stroke{border-color:var(--color-accent);color:var(--color-accent)}
+.nuo-btn--stroke:hover{background:var(--color-accent);color:var(--color-bg)}
+.nuo-btn--ghost{color:var(--color-text)}
+.nuo-btn--ghost:hover{background:var(--color-surface-2)}
+.nuo-btn--ghost:active{background:var(--color-surface-3)}
+.nuo-btn:disabled{cursor:not-allowed}
+.nuo-btn--solid:disabled{background:var(--color-surface-1);color:var(--color-text-muted)}
+.nuo-btn--stroke:disabled{background:transparent;border-color:var(--color-text-muted);color:var(--color-text-muted)}
+.nuo-btn--ghost:disabled{background:transparent;color:var(--color-text-muted)}
+.nuo-btn.is-loading{pointer-events:none}
+.nuo-btn--block{width:100%}
+.nuo-card{background:var(--color-surface-1);border:1px solid var(--color-border-card);border-radius:var(--radius-card);padding:16px}
+.nuo-card--p20{padding:20px}
+.nuo-card--nested{background:var(--color-surface-2);border-radius:var(--radius-card-inner);border-color:transparent}
+.nuo-card--clickable{cursor:pointer;transition:var(--transition-base)}
+.nuo-card--clickable:hover{background:var(--color-surface-2)}
+.nuo-card--nested.nuo-card--clickable:hover{background:var(--color-surface-3)}
+.nuo-badge{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px;border:1px solid;border-radius:var(--radius-tag);font:var(--fw-badge) var(--fs-badge)/var(--lh-badge) var(--font-ui);letter-spacing:var(--ls-badge);text-transform:uppercase;white-space:nowrap}
+.nuo-badge--real{color:var(--color-data-real);border-color:var(--color-data-real);background:var(--color-badge-fill-real)}
+.nuo-badge--estimate{color:var(--color-data-estimate);border-color:var(--color-data-estimate);background:var(--color-badge-fill-estimate)}
+.nuo-badge--simulated{color:var(--color-data-simulated);border-color:var(--color-data-simulated);background:var(--color-badge-fill-simulated)}
+.nuo-badge--unavailable{color:var(--color-data-unavailable);border-color:var(--color-data-unavailable);background:var(--color-badge-fill-unavailable);border-style:dashed;text-transform:none}
+.nuo-badge--pending{color:var(--color-warning);border-color:var(--color-warning);background:var(--color-badge-fill-pending)}
+.nuo-tip{position:relative;display:inline-flex}
+.nuo-tip__bubble{position:absolute;left:50%;bottom:calc(100% + 6px);transform:translateX(-50%);z-index:20;padding:8px 10px;background:var(--color-surface-2);border:1px solid var(--color-border-tooltip);border-radius:var(--radius-tooltip);font:var(--fw-xs) var(--fs-xs)/var(--lh-xs) var(--font-ui);color:var(--color-text);white-space:nowrap;opacity:0;pointer-events:none;transition:opacity var(--motion-duration) var(--motion-easing)}
+.nuo-tip--bottom .nuo-tip__bubble{bottom:auto;top:calc(100% + 6px)}
+.nuo-tip:hover .nuo-tip__bubble,.nuo-tip:focus-within .nuo-tip__bubble,.nuo-tip--open .nuo-tip__bubble{opacity:1}
+

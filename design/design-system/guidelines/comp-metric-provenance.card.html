@@ -1,0 +1,19 @@
+<!-- @dsCard group="Components" viewport="700x620" name="MetricCard prima → dopo e provenienza" subtitle="Altezza 146 px · loading identico · tooltip multi-riga 340 px" -->
+<!DOCTYPE html><html lang="it"><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<style>body{padding:24px}.row{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;margin-bottom:20px}.cap{font:500 14px/20px var(--font-ui);color:var(--color-text-secondary);margin:0 0 8px}.col{display:flex;flex-direction:column;gap:8px}</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<script src="../_ds_bundle.js"></script></head><body><div id="r"></div><script type="text/babel">const {MetricCard,ProvenanceTooltip}=window.DesignSystem_1776e0;
+const rows=[['Fonte','TomTom Traffic'],['Metodo','Media pesata sui tratti'],['Unità','km/h'],['Ora del dato','21:04'],['Assunzioni',['Flusso stabile','Nessun incidente attivo']]];
+function App(){return <div>
+<p className="cap">Prima → dopo (SIMULATO), migliore · peggiore · nullo · loading</p>
+<div style={{display:'grid',gridTemplateColumns:'repeat(2,minmax(0,1fr))',gap:12,marginBottom:20}}>
+<MetricCard label="Attesa media" before="15,6" value="11,2" unit="min" delta={{tone:'better',direction:'down',text:'−28,2%'}}/>
+<MetricCard label="Velocità media" before="24" value="21" unit="km/h" delta={{tone:'worse',direction:'down',text:'−12,5%'}}/>
+<MetricCard label="Persone in area" before="150.000" value="150.000" delta={{tone:'neutral',text:'0,0%'}}/>
+<MetricCard loading/></div>
+<p className="cap">Tooltip di provenienza sotto la card (hover o focus)</p>
+<MetricCard label="Velocità media" value="24" unit="km/h" delta={{tone:'better',direction:'up',text:'+29,2%'}} provenance={{title:'Velocità media',rows}} showProvenance/>
+<div style={{height:190}}/></div>}</script><script type="text/babel">ReactDOM.createRoot(document.getElementById('r')).render(<App/>)</script></body></html>

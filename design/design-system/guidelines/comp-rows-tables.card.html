@@ -1,0 +1,13 @@
+<!-- @dsCard group="Components" viewport="700x640" name="Tabelle e righe form" subtitle="IterationTable · registro a colonne · EventFormRow · FieldHeader" -->
+<!DOCTYPE html><html lang="it"><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<style>body{padding:24px}.row{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;margin-bottom:20px}.cap{font:500 14px/20px var(--font-ui);color:var(--color-text-secondary);margin:0 0 8px}.col{display:flex;flex-direction:column;gap:8px}</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<script src="../_ds_bundle.js"></script></head><body><div id="r"></div><script type="text/babel">const {IterationTable,DecisionLogRow,EventFormRow,FieldHeader}=window.DesignSystem_1776e0;
+function App(){return <div className="col" style={{width:440,gap:20}}>
+<div><p className="cap">Confronto iterazioni (hover sulla riga 2)</p><IterationTable hoverRow={1} rows={[{metric:'Ore perse',badge:'simulated',values:['12.480 h','10.920 h','9.340 h']},{metric:'Attesa media',badge:'simulated',values:['15,6 min','13,1 min','11,2 min']},{metric:'Velocità',badge:'estimate',values:['24 km/h','28 km/h','31 km/h']}]}/></div>
+<div><p className="cap">Registro decisioni · colonne 56 / 132 / resto</p><div className="nuo-log"><DecisionLogRow head variant="log"/><DecisionLogRow variant="log" time="21:04" actor="agent" decision="Piano proposto" reason="Chiusura con deviazione"/><DecisionLogRow variant="log" time="21:06" actor="police" decision="Richiesta rifiutata" reason="Pattuglie esaurite" hover/></div></div>
+<div><p className="cap">Righe form Event Manager · compilato e LIVE</p><div className="col" style={{gap:6}}>
+<FieldHeader label="Ripartizione modale" badge="estimate"/><EventFormRow icon="calendar" label="Data" value="14 nov 2026"/><EventFormRow icon="clock" label="Finestra" value="20:00–23:00"/><EventFormRow icon="bus" label="Trasporto pubblico" value="—" live/></div></div></div>}</script><script type="text/babel">ReactDOM.createRoot(document.getElementById('r')).render(<App/>)</script></body></html>

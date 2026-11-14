@@ -1,0 +1,32 @@
+:root{
+/* Neutri */
+--color-bg:#121110;--color-surface-1:#1A1816;--color-surface-2:#232019;--color-surface-3:#2D2922;
+--color-border:#2E2A25;--color-border-strong:#4A453E;
+--color-border-card:rgba(74,69,62,.30);--color-border-tooltip:rgba(74,69,62,.70);
+--color-text:#F2EDE6;--color-text-secondary:#A39B90;--color-text-muted:#6F685F;
+--color-overlay:rgba(0,0,0,.60);
+/* Accenti e stati */
+--color-accent:#5B7CFA;--color-accent-hover:#7994FB;--color-accent-2:#6B7CF5;
+--color-success:#12BFA0;--color-warning:#D4A93A;--color-danger:#EE5663;
+/* Nomi obbligatori del brief */
+--color-data-real:#12BFA0;--color-data-estimate:#4DA3FF;--color-data-simulated:#F26A2E;--color-data-unavailable:#A39B90;
+--color-scenario-frame:#F26A2E;
+--color-status-accepted:#12BFA0;--color-status-rejected:#EE5663;--color-status-pending:#D4A93A;
+--color-delta-better:#12BFA0;--color-delta-worse:#EE5663;
+/* Riempimenti badge (16% su surface-1) */
+--color-badge-fill-real:#19332C;--color-badge-fill-estimate:#222E3B;--color-badge-fill-simulated:#3D251A;--color-badge-fill-unavailable:#302D2A;--color-badge-fill-pending:#382F1C;
+/* Riempimenti chip (20%) e modalità */
+--color-state-fill-running:#272C44;--color-state-fill-waiting:#3F351D;--color-state-fill-done:#183932;--color-state-fill-error:#442425;
+--color-mode-fill-live:#183932;--color-mode-fill-scenario:#45281B;
+--color-row-hover:#2D2922;
+/* Grafici */
+--color-chart-1:#9B6BFF;--color-chart-2:#D4A93A;--color-chart-3:#A39B90;--color-chart-4:#6B7CF5;
+/* Mappa */
+--color-map-congestion-1:#12BFA0;--color-map-congestion-2:#D4A93A;--color-map-congestion-3:#EE5663;--color-map-congestion-4:#C84BE0;
+--color-map-closure:#E8ECF5;--color-map-detour:#3495D2;--color-map-event-area:#6B7CF5;
+--color-map-stop-low:#12BFA0;--color-map-stop-mid:#D4A93A;--color-map-stop-over:#EE5663;
+/* Alias semantici */
+--surface-screen:var(--color-bg);--surface-card:var(--color-surface-1);--surface-nested:var(--color-surface-2);--surface-hover:var(--color-surface-3);
+--text-primary:var(--color-text);--text-support:var(--color-text-secondary);
+--action:var(--color-accent);--action-hover:var(--color-accent-hover);--focus-ring:var(--color-accent);
+}

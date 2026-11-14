@@ -1,0 +1,108 @@
+<!-- @dsCard group="Dashboard" viewport="1440x900" name="Plancia operativa" subtitle="Click-through: imposta evento, Analizza, LIVE/SCENARIO, mappa Prima/Dopo" -->
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="utf-8">
+  <title>Sentrix · Plancia</title>
+  <link rel="stylesheet" href="../../styles.css">
+  <style>
+    html,
+    body {
+      height: 100%;
+      overflow: auto
+    }
+
+    #root {
+      height: 100%;
+      min-width: 1440px;
+      min-height: 720px
+    }
+
+    .em-wrap .nuo-card {
+      background: none;
+      border: 0;
+      border-radius: 0;
+      padding: 16px
+    }
+  </style>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js"
+    integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"
+    integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"
+    integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+  <script src="../../_ds_bundle.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel" src="Shell.jsx"></script>
+  <script type="text/babel" src="MapPanel.jsx"></script>
+  <script type="text/babel" src="Panels.jsx"></script>
+  <script type="text/babel">(function () {
+      const { EventManager, EventManagerRail, EventManagerHeader } = window.DesignSystem_1776e0;
+      const L0 = [{ id: 'c', name: 'Congestione', color: 'var(--color-map-congestion-2)', on: true }, { id: 'x', name: 'Chiusure', color: 'var(--color-map-closure)', on: true, dashed: true }, { id: 'd', name: 'Deviazioni', color: 'var(--color-map-detour)', on: true, dashed: true }, { id: 'e', name: 'Area evento', color: 'var(--color-map-event-area)', on: true }, { id: 'f', name: 'Fermate', color: 'var(--color-map-stop-low)', on: true }, { id: 'r', name: 'Richieste', color: 'var(--color-accent)', on: true }];
+      function App() {
+        const [screen, setScreen] = React.useState('dashboard');
+        const [mode, setMode] = React.useState('live');
+        const [att, setAtt] = React.useState('150.000');
+        const [closures, setClosures] = React.useState(['Corso Umberto I']);
+        const [stops, setStops] = React.useState(['Fermata Duomo']);
+        const [stage, setStage] = React.useState(-1);
+        const [waiting, setWaiting] = React.useState(false);
+        const [manual, setManual] = React.useState(false);
+        const [requests, setRequests] = React.useState([]);
+        const [log, setLog] = React.useState([]);
+        const [after, setAfter] = React.useState(false);
+        const [it, setIt] = React.useState(1);
+        const [layers, setLayers] = React.useState(L0);
+        const [emOpen, setEmOpen] = React.useState(true);
+        const reqRef = React.useRef([]);
+        const setReq = (r) => { reqRef.current = r; setRequests(r) };
+        const addLog = (actor, decision, reason) => setLog(l => [...l, { time: new Date(Date.now()).toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' }), actor, decision, reason }]);
+        const resolve = (accept) => {
+          const r = reqRef.current.map(x => x.code === 'REQ-014' ? (accept ? { ...x, status: 'ACCEPTED' } : { ...x, status: 'REJECTED', rejection: { code: 'PATROLS_EXHAUSTED', reason: 'Pattuglie esaurite 21:00–23:00' } }) : x.code === 'REQ-016' ? { ...x, status: 'ACCEPTED' } : x);
+          setReq(r); addLog('police', accept ? 'Richiesta accettata' : 'Richiesta rifiutata', accept ? 'Presidio confermato' : 'Pattuglie esaurite'); addLog('transport', 'Richiesta accettata', 'Linea 1 rinforzata'); setWaiting(false);
+        };
+        const go = (n) => {
+          setStage(n);
+          if (n === 1) addLog('agent', 'Analisi della congestione', 'Traffic e Transit in parallelo');
+          if (n === 3) addLog('agent', 'Piano proposto', 'Chiusura Corso Umberto I con deviazione');
+          if (n === 4) { setReq([{ dept: 'police', code: 'REQ-014', status: 'SENT', measure: 'Presidio incroci Corso Umberto I' }, { dept: 'transport', code: 'REQ-016', status: 'SENT', measure: 'Linea 1 ogni 6 minuti' }]); addLog('system', 'Richieste inviate', '2 dipartimenti'); }
+          if (n === 5) { if (manual) { setWaiting(true); addLog('system', 'Decisione umana richiesta', 'Risposta manuale attiva'); } else resolve(false); }
+          if (n === 6 && reqRef.current.some(x => x.status === 'REJECTED')) { setReq([...reqRef.current, { dept: 'police', code: 'REQ-015', status: 'SENT', measure: 'Presidio ridotto Corso Umberto I', alternativeTo: 'REQ-014' }]); addLog('agent', 'Ripianificazione', 'Alternativa a REQ-014'); }
+          if (n === 7) setReq(reqRef.current.map(x => x.code === 'REQ-015' ? { ...x, status: 'ACCEPTED' } : x));
+          if (n === 8) { setAfter(true); setIt(1); addLog('system', 'Run completato', 'Iterazione 1 di 3'); }
+        };
+        React.useEffect(() => { if (stage < 0 || stage >= 8 || waiting) return; const t = setTimeout(() => go(stage + 1), stage === 4 ? 1100 : 850); return () => clearTimeout(t) }, [stage, waiting]);
+        const start = () => { setEmOpen(false); setReq([]); setLog([]); setAfter(false); setWaiting(false); go(0) };
+        const running = stage >= 0 && stage < 8;
+        const addUniq = (arr, set, v) => arr.includes(v) || set([...arr, v]);
+        const compact = true;
+        return <div style={{ position: 'relative', height: '100%', display: 'flex', background: 'var(--color-bg)' }}>
+          <Sidebar screen={screen} onScreen={setScreen} />
+          <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column' }}>
+            <TopBar mode={mode} onMode={setMode} sources={stage >= 3 ? ['TomTom'] : []} />
+            {screen === 'dashboard' && <div style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
+              <Metrics after={after} mode={mode} loading={running && stage < 3} />
+              <div style={{ flex: 1, minHeight: 0, display: 'grid', gridTemplateColumns: emOpen ? '360px minmax(0,1fr) 440px' : '108px minmax(0,1fr) 692px', gap: 16 }}>
+                {emOpen ? <div className="nuo-card em-wrap" style={{ padding: 0, overflow: 'auto', minHeight: 0, alignSelf: 'start', maxHeight: '100%' }}><EventManagerHeader fixed={stage < 0} running={running} onToggle={() => setEmOpen(false)} /><EventManager attendance={att} onAttendanceChange={setAtt} closures={closures} stops={stops} onRemoveClosure={(i) => setClosures(closures.filter((_, k) => k !== i))} onRemoveStop={(i) => setStops(stops.filter((_, k) => k !== i))} onAnalyze={start} analyzing={running} /></div> : <div style={{ alignSelf: 'start' }}><EventManagerRail running={running} open={false} onToggle={() => setEmOpen(true)} /></div>}
+                <MapPanel after={after} onAfter={setAfter} iteration={it} onIteration={setIt} layers={layers} onLayer={(id) => setLayers(layers.map(l => l.id === id ? { ...l, on: !l.on } : l))} closures={closures} onCloseRoad={(id) => addUniq(closures, setClosures, id)} onStop={(id) => addUniq(stops, setStops, id)} requests={requests} hasRun={stage >= 0} />
+                <div style={{ overflow: 'auto', minHeight: 0 }}><RightPanel stage={stage} waiting={waiting} requests={requests} manual={manual} onManual={setManual} onResolve={resolve} after={after} iteration={it} log={log} /></div>
+              </div></div>}
+            {screen === 'requests' && <RequestsScreen requests={requests} />}
+            {screen === 'log' && <LogScreen log={log.length ? log : [{ time: '—', actor: 'system', decision: 'Nessuna decisione registrata', reason: 'Avvia un\'analisi dalla Plancia' }]} />}
+          </div>
+          {mode === 'scenario' && <><div style={{ position: 'absolute', inset: 0, border: '4px solid var(--color-scenario-frame)', pointerEvents: 'none', zIndex: 50 }} /></>}
+        </div>;
+      }
+      ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    })();</script>
+</body>
+
+</html>

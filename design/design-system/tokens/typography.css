@@ -1,0 +1,13 @@
+:root{
+--font-ui:'Plus Jakarta Sans',system-ui,sans-serif;
+--font-mono:'Geist Mono',ui-monospace,monospace;
+--fs-kpi:48px;--lh-kpi:52px;--fw-kpi:700;/* @kind other */--ls-kpi:-.01em;/* @kind other */
+--fs-kpi-sm:32px;--lh-kpi-sm:40px;--fw-kpi-sm:600;/* @kind other */--ls-kpi-sm:0;/* @kind other */
+--fs-2xl:32px;--lh-2xl:40px;--fw-2xl:700;/* @kind other */--ls-2xl:-.01em;/* @kind other */
+--fs-xl:24px;--lh-xl:32px;--fw-xl:600;/* @kind other */--ls-xl:-.01em;/* @kind other */
+--fs-lg:20px;--lh-lg:28px;--fw-lg:600;/* @kind other */--ls-lg:-.01em;/* @kind other */
+--fs-md:16px;--lh-md:24px;--fw-md:400;/* @kind other */--ls-md:0;/* @kind other */
+--fs-sm:15px;--lh-sm:22px;--fw-sm:400;/* @kind other */--ls-sm:0;/* @kind other */
+--fs-xs:14px;--lh-xs:20px;--fw-xs:500;/* @kind other */--ls-xs:0;/* @kind other */
+--fs-badge:14px;--lh-badge:20px;--fw-badge:600;/* @kind other */--ls-badge:.04em;/* @kind other */
+}

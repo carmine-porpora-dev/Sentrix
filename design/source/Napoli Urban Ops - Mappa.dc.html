@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="_ds/napoli-urban-ops-1776e07f-27d7-4365-8cf7-4dcacb9bc170/styles.css">
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<script src="_ds/napoli-urban-ops-1776e07f-27d7-4365-8cf7-4dcacb9bc170/_ds_bundle.js"></script>
+<style>body{background:#0E0D0B}</style>
+</helmet>
+<div data-screen-label="Mappa" style="width:1920px;box-sizing:border-box;padding:48px;margin:40px;background:var(--color-bg);color:var(--color-text);font-family:var(--font-ui);border:1px solid var(--color-border-strong);display:flex;flex-direction:column;gap:32px">
+  <div style="display:flex;flex-direction:column;gap:8px">
+    <div class="t-2xl">Mappa — stili dei livelli</div>
+    <div class="t-md" style="color:var(--color-text-secondary)">Livelli sopra la base vettoriale scura (non disegnata). Ordine di sovrapposizione, dal basso: area evento, congestione, chiusure, deviazioni, fermate, marker richieste.</div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px">
+    <sc-for list="{{ cells }}" as="c" hint-placeholder-count="6">
+      <div class="nuo-card" style="display:flex;flex-direction:column;gap:16px;grid-column:{{ c.span }}">
+        <div class="t-lg">{{ c.title }}</div>
+        <div style="position:relative;background:var(--color-bg);border:1px solid var(--color-border);border-radius:8px;overflow:hidden">
+          <sc-if value="{{ c.isCong }}" hint-placeholder-val="{{ false }}">
+            <svg width="560" height="250" viewBox="0 0 560 250" style="display:block">
+              <text x="150" y="24" fill="var(--color-text-secondary)" font-family="var(--font-ui)" font-size="14" font-weight="500">A riposo · 40%</text>
+              <text x="320" y="24" fill="var(--color-text-secondary)" font-family="var(--font-ui)" font-size="14" font-weight="500">In hover · 100%</text>
+              <sc-for list="{{ congRows }}" as="r" hint-placeholder-count="4">
+                <text x="16" y="{{ r.ty }}" fill="var(--color-text)" font-family="var(--font-ui)" font-size="14" font-weight="500">{{ r.name }}</text>
+                <path d="M150 {{ r.y }} L 280 {{ r.y }}" stroke="{{ r.color }}" stroke-width="6" stroke-linecap="round" opacity="0.4"></path>
+                <path d="M320 {{ r.y }} L 450 {{ r.y }}" stroke="{{ r.color }}" stroke-width="6" stroke-linecap="round"></path>
+              </sc-for>
+            </svg>
+          </sc-if>
+          <sc-if value="{{ c.isClosure }}" hint-placeholder-val="{{ false }}">
+            <svg width="560" height="250" viewBox="0 0 560 250" style="display:block"><path d="M40 125 L 520 125" stroke="var(--color-map-closure)" stroke-width="4" stroke-dasharray="10 8" stroke-linecap="butt" fill="none"></path></svg>
+            <span style="position:absolute;left:268px;top:113px;width:24px;height:24px;border-radius:50%;background:var(--color-bg);border:2px solid var(--color-map-closure);color:var(--color-map-closure);display:grid;place-items:center"><x-import component-from-global-scope="DesignSystem_1776e0.Icon" name="ban" size="16" stroke="2" hint-size="16px,16px"></x-import></span>
+          </sc-if>
+          <sc-if value="{{ c.isDetour }}" hint-placeholder-val="{{ false }}">
+            <svg width="560" height="250" viewBox="0 0 560 250" style="display:block"><path d="M40 170 C 160 170 240 100 516 100" stroke="var(--color-map-detour)" stroke-width="4" stroke-dasharray="6 6" stroke-linecap="butt" stroke-linejoin="round" fill="none"></path><circle cx="40" cy="170" r="4" fill="var(--color-map-detour)"></circle><polygon points="516,93 516,107 530,100" fill="var(--color-map-detour)"></polygon></svg>
+          </sc-if>
+          <sc-if value="{{ c.isEvent }}" hint-placeholder-val="{{ false }}">
+            <svg width="560" height="250" viewBox="0 0 560 250" style="display:block"><polygon points="130,50 420,36 480,150 330,214 150,184" fill="var(--color-map-event-area)" fill-opacity="0.12" stroke="var(--color-map-event-area)" stroke-width="2"></polygon></svg>
+            <span style="position:absolute;left:260px;top:110px;padding:8px 10px;background:var(--color-surface-2);border:1px solid var(--color-border-tooltip);border-radius:4px;font:500 14px/20px var(--font-ui)">Area evento</span>
+          </sc-if>
+          <sc-if value="{{ c.isStops }}" hint-placeholder-val="{{ false }}">
+            <svg width="560" height="250" viewBox="0 0 560 250" style="display:block">
+              <sc-for list="{{ stopRows }}" as="s" hint-placeholder-count="3">
+                <circle cx="{{ s.x }}" cy="110" r="{{ s.r }}" fill="{{ s.fill }}" stroke="var(--color-bg)" stroke-width="2"></circle>
+                <text x="{{ s.x }}" y="170" text-anchor="middle" fill="var(--color-text)" font-family="var(--font-ui)" font-size="14" font-weight="500">{{ s.name }}</text>
+                <text x="{{ s.x }}" y="192" text-anchor="middle" fill="var(--color-text-secondary)" font-family="var(--font-mono)" font-size="14" font-weight="500">{{ s.rad }}</text>
+              </sc-for>
+            </svg>
+          </sc-if>
+          <sc-if value="{{ c.isLegend }}" hint-placeholder-val="{{ false }}">
+            <div style="height:250px;box-sizing:border-box;padding:16px;display:flex;flex-direction:column;justify-content:space-between">
+              <div style="white-space:nowrap"><x-import component-from-global-scope="DesignSystem_1776e0.MapLegend" hint-size="auto,46px"></x-import></div>
+              <div style="align-self:flex-end;white-space:nowrap"><x-import component-from-global-scope="DesignSystem_1776e0.MapAttribution" hint-size="auto,30px"></x-import></div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ c.isMarker }}" hint-placeholder-val="{{ false }}">
+            <div style="display:grid;grid-template-columns:140px repeat(4,minmax(0,1fr));gap:12px 16px;padding:16px;align-items:center">
+              <span></span>
+              <sc-for list="{{ deptHead }}" as="d" hint-placeholder-count="4">
+                <span class="t-xs" style="text-align:center">{{ d }}</span>
+              </sc-for>
+              <sc-for list="{{ markerRows }}" as="m" hint-placeholder-count="12">
+                <span class="t-xs" style="color:var(--color-text-secondary);display:{{ m.labelDisplay }}">{{ m.state }}</span>
+                <div style="display:flex;justify-content:center;padding-top:8px"><x-import component-from-global-scope="DesignSystem_1776e0.MapMarker" dept="{{ m.dept }}" state="{{ m.mstate }}" hint-size="44px,52px"></x-import></div>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+        <div style="display:grid;grid-template-columns:150px minmax(0,1fr);gap:8px 16px">
+          <sc-for list="{{ c.specs }}" as="s" hint-placeholder-count="5">
+            <span class="t-xs" style="color:var(--color-text-secondary)">{{ s.k }}</span>
+            <span class="t-sm">{{ s.v }}</span>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const sp = (g, t, s, d, o) => [{ k: 'Geometria', v: g }, { k: 'Colore (token)', v: t }, { k: 'Spessore / raggio', v: s }, { k: 'Tratteggio', v: d }, { k: 'Opacità', v: o }];
+    const base = { isCong: false, isClosure: false, isDetour: false, isEvent: false, isStops: false, isLegend: false, isMarker: false, span: 'auto' };
+    const cells = [
+      Object.assign({}, base, { isCong: true, title: 'Congestione · 4 classi', specs: sp('Linea, estremi arrotondati', 'color.map.congestion-1 #12BFA0 · -2 #D4A93A · -3 #EE5663 · -4 #C84BE0', '6 px, uguale per tutte le classi', 'No', '40% a riposo, 100% in hover (150 ms ease-out)') }),
+      Object.assign({}, base, { isClosure: true, title: 'Chiusure', specs: sp('Linea + simbolo di divieto al centro (disco 24 px, icona ban 16 px)', 'color.map.closure #E8ECF5 · disco: bg con bordo 2 px', '4 px', 'Sì: 10 px tratto, 8 px vuoto, estremi a taglio netto', '100%') }),
+      Object.assign({}, base, { isDetour: true, title: 'Deviazioni', specs: sp('Linea + punto di partenza + freccia finale', 'color.map.detour #3495D2', '4 px · punto raggio 4 px · freccia base 14 px', 'Sì: 6 px tratto, 6 px vuoto, estremi a taglio netto', '100%') }),
+      Object.assign({}, base, { isEvent: true, title: 'Area evento', specs: sp('Poligono', 'color.map.event-area #6B7CF5', 'Bordo 2 px', 'No', 'Riempimento 12%, bordo 100%. Hover: tooltip "Area evento", riempimento invariato') }),
+      Object.assign({}, base, { isStops: true, title: 'Fermate TPL · 3 livelli di carico', specs: sp('Cerchio pieno, bordo 2 px bg', 'color.map.stop-low #12BFA0 · -mid #D4A93A · -over #EE5663', 'Raggio 6 / 9 / 13 px', 'No', '100%') }),
+      Object.assign({}, base, { isLegend: true, title: 'Legenda e attribuzione', specs: [{ k: 'Legenda', v: 'Barra in basso a sinistra, 16 px dai bordi. surface-1, bordo border-card, raggio 10. Campioni 24×6 px al 100%, etichette 14 px.' }, { k: 'Attribuzione', v: 'Chip in basso a destra, 16 px dai bordi, sempre visibile. surface-1, bordo border-tooltip, raggio 6. Testo 14 px text-secondary. Link a openstreetmap.org/copyright.' }] }),
+      Object.assign({}, base, { isMarker: true, span: '1 / -1', title: 'Marker richieste · 4 dipartimenti × 3 stati', specs: sp('Icona con punta in basso (ancora sul punto)', 'Bordo: accent #5B7CFA (normale) · status-accepted #12BFA0 (accettata, badge check) · status-rejected #EE5663 (rifiutata, badge x)', 'Cerchio 44 px, icona 24 px, punta 14×8 px, badge 20 px', 'No', '100%') })
+    ];
+    const CN = [['Scorrevole', 1], ['Rallentata', 2], ['Intensa', 3], ['Satura', 4]];
+    const congRows = CN.map((c, i) => ({ name: c[0], y: 62 + i * 50, ty: 67 + i * 50, color: 'var(--color-map-congestion-' + c[1] + ')' }));
+    const stopRows = [[100, 6, 'low', 'Carico basso'], [280, 9, 'mid', 'Carico medio'], [460, 13, 'over', 'Oltre capacità']].map(s => ({ x: s[0], r: s[1], fill: 'var(--color-map-stop-' + s[2] + ')', name: s[3], rad: 'raggio ' + s[1] + ' px' }));
+    const D = [['traffic', 'Traffic Control'], ['police', 'Municipal Police'], ['transport', 'Transport Control'], ['comms', 'Public Communication']];
+    const ST = [['normal', 'Normale'], ['accepted', 'Accettata'], ['rejected', 'Rifiutata']];
+    const markerRows = [];
+    ST.forEach(s => D.forEach((d, i) => markerRows.push({ dept: d[0], mstate: s[0], state: s[1], labelDisplay: i === 0 ? 'block' : 'none' })));
+    return { cells, congRows, stopRows, deptHead: D.map(d => d[1]), markerRows };
+  }
+}
+</script>
+</body>
+</html>

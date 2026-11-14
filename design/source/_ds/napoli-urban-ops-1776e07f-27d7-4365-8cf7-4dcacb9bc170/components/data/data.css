@@ -1,0 +1,39 @@
+.nuo-metric{position:relative;overflow:hidden;min-width:240px;display:flex;flex-direction:column;gap:8px;padding:20px;background:var(--color-surface-1);border:1px solid var(--color-border-card);border-radius:var(--radius-card)}
+.nuo-metric__label{font:var(--fw-xs) var(--fs-xs)/var(--lh-xs) var(--font-ui);color:var(--color-text-secondary)}
+.nuo-metric__value{display:flex;align-items:baseline;gap:6px;font:var(--fw-kpi) var(--fs-kpi)/var(--lh-kpi) var(--font-mono);letter-spacing:var(--ls-kpi);font-variant-numeric:tabular-nums}
+.nuo-metric.is-sm .nuo-metric__value{font:var(--fw-kpi-sm) var(--fs-kpi-sm)/var(--lh-kpi-sm) var(--font-mono);letter-spacing:0}
+.nuo-metric__unit{font:400 var(--fs-md)/var(--lh-md) var(--font-ui);letter-spacing:0;color:var(--color-text-secondary)}
+.nuo-metric__foot{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:28px}
+.nuo-delta{display:inline-flex;align-items:center;gap:4px;font:600 var(--fs-xs)/var(--lh-xs) var(--font-mono)}
+.nuo-delta--better{color:var(--color-delta-better)}.nuo-delta--worse{color:var(--color-delta-worse)}.nuo-delta--neutral{color:var(--color-text-secondary)}
+.nuo-skel{background:var(--color-surface-3);border-radius:4px;animation:nuo-pulse 1.2s ease-in-out infinite}
+.nuo-loadbar{position:absolute;top:0;left:0;width:35%;height:2px;background:var(--color-accent);animation:nuo-slide 1.4s linear infinite}
+@media (prefers-reduced-motion:reduce){.nuo-loadbar{width:35%}}
+.nuo-run{display:flex;flex-direction:column;gap:8px}
+.nuo-chip{display:inline-flex;align-items:center;gap:8px;width:fit-content;white-space:nowrap;height:36px;padding:0 12px;background:var(--f);border:1px solid var(--c);border-radius:var(--radius-control);color:var(--color-text);font:600 var(--fs-xs)/var(--lh-xs) var(--font-ui)}
+.nuo-chip svg{color:var(--c)}
+.nuo-chip--sm{height:32px}
+.nuo-dot{flex:none;width:8px;height:8px;border-radius:50%;background:var(--c)}
+.nuo-dot--pulse{animation:nuo-pulse 1.2s ease-in-out infinite}
+.nuo-steps{display:flex;gap:3px}
+.nuo-step{flex:1;height:4px;border-radius:2px;background:var(--color-surface-3)}
+.nuo-step.is-done{background:var(--color-accent)}
+.nuo-step.is-current{background:var(--color-accent);animation:nuo-pulse 1.2s ease-in-out infinite}
+.nuo-steps--done .nuo-step{background:var(--color-data-real)}
+.nuo-step.is-current.is-error{background:var(--color-danger);animation:none}
+.nuo-step.is-current.is-warn{background:var(--color-warning);animation:none}
+.nuo-iter{display:inline-flex;align-items:center;gap:12px}
+.nuo-iter__label{font:600 var(--fs-xs)/var(--lh-xs) var(--font-ui);color:var(--color-text)}
+.nuo-iter__ticks{display:flex;gap:4px}
+.nuo-iter__tick{width:28px;height:6px;border-radius:3px;background:var(--color-surface-3)}
+.nuo-iter__tick.is-on{background:var(--color-accent)}
+.nuo-dept{display:flex;flex-direction:column;gap:12px;padding:16px;background:var(--color-surface-2);border-radius:var(--radius-card-inner)}
+.nuo-dept__head{display:flex;align-items:center;gap:10px}
+.nuo-dept__icon{display:grid;place-items:center;width:36px;height:36px;flex:none;background:var(--color-surface-3);border-radius:var(--radius-control)}
+.nuo-dept__name{font:600 var(--fs-md)/var(--lh-md) var(--font-ui)}
+.nuo-dept__num{font:var(--fw-kpi-sm) var(--fs-kpi-sm)/var(--lh-kpi-sm) var(--font-mono);font-variant-numeric:tabular-nums}
+.nuo-dept__num.is-zero{color:var(--color-danger)}
+.nuo-dept__of{font:500 var(--fs-xs)/var(--lh-xs) var(--font-mono);color:var(--color-text-secondary)}
+.nuo-dept__unit{font:var(--fw-xs) var(--fs-xs)/var(--lh-xs) var(--font-ui);color:var(--color-text-secondary)}
+.nuo-bar{height:6px;border-radius:3px;background:var(--color-surface-3);overflow:hidden}
+.nuo-bar>i{display:block;height:100%;background:var(--color-accent);border-radius:3px}
