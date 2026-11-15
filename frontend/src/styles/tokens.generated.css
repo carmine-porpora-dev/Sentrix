@@ -1,0 +1,178 @@
+:root {
+  /* color */
+  --color-bg: #121110;
+  --color-surface-1: #1A1816;
+  --color-surface-2: #232019;
+  --color-surface-3: #2D2922;
+  --color-border: #2E2A25;
+  --color-border-strong: #4A453E;
+  --color-border-card: rgba(74,69,62,.30);
+  --color-border-tooltip: rgba(74,69,62,.70);
+  --color-text: #F2EDE6;
+  --color-text-secondary: #A39B90;
+  --color-text-muted: #6F685F;
+  --color-overlay: rgba(0,0,0,.60);
+  --color-accent: #5B7CFA;
+  --color-accent-hover: #7994FB;
+  --color-accent-2: #6B7CF5;
+  --color-success: #12BFA0;
+  --color-warning: #D4A93A;
+  --color-danger: #EE5663;
+  --color-data-real: #12BFA0;
+  --color-data-estimate: #4DA3FF;
+  --color-data-simulated: #F26A2E;
+  --color-data-unavailable: #A39B90;
+  --color-scenario-frame: #F26A2E;
+  --color-status-accepted: #12BFA0;
+  --color-status-rejected: #EE5663;
+  --color-status-pending: #D4A93A;
+  --color-delta-better: #12BFA0;
+  --color-delta-worse: #EE5663;
+  --color-badge-fill-real: #19332C;
+  --color-badge-fill-estimate: #222E3B;
+  --color-badge-fill-simulated: #3D251A;
+  --color-badge-fill-unavailable: #302D2A;
+  --color-badge-fill-pending: #382F1C;
+  --color-state-fill-running: #272C44;
+  --color-state-fill-waiting: #3F351D;
+  --color-state-fill-done: #183932;
+  --color-state-fill-error: #442425;
+  --color-mode-fill-live: #183932;
+  --color-mode-fill-scenario: #45281B;
+  --color-row-hover: #2D2922;
+  --color-chart-1: #9B6BFF;
+  --color-chart-2: #D4A93A;
+  --color-chart-3: #A39B90;
+  --color-chart-4: #6B7CF5;
+  --color-map-congestion-1: #12BFA0;
+  --color-map-congestion-2: #D4A93A;
+  --color-map-congestion-3: #EE5663;
+  --color-map-congestion-4: #C84BE0;
+  --color-map-closure: #E8ECF5;
+  --color-map-detour: #3495D2;
+  --color-map-event-area: #6B7CF5;
+  --color-map-stop-low: #12BFA0;
+  --color-map-stop-mid: #D4A93A;
+  --color-map-stop-over: #EE5663;
+  /* surface */
+  --surface-screen: var(--color-bg);
+  --surface-card: var(--color-surface-1);
+  --surface-nested: var(--color-surface-2);
+  --surface-hover: var(--color-surface-3);
+  /* text */
+  --text-primary: var(--color-text);
+  --text-support: var(--color-text-secondary);
+  /* action */
+  --action: var(--color-accent);
+  --action-hover: var(--color-accent-hover);
+  /* focus */
+  --focus-ring: var(--color-accent);
+  /* font */
+  --font-ui: 'Plus Jakarta Sans',system-ui,sans-serif;
+  --font-mono: 'Geist Mono',ui-monospace,monospace;
+  /* fs */
+  --fs-kpi: 48px;
+  --fs-kpi-sm: 32px;
+  --fs-2xl: 32px;
+  --fs-xl: 24px;
+  --fs-lg: 20px;
+  --fs-md: 16px;
+  --fs-sm: 15px;
+  --fs-xs: 14px;
+  --fs-badge: 14px;
+  /* lh */
+  --lh-kpi: 52px;
+  --lh-kpi-sm: 40px;
+  --lh-2xl: 40px;
+  --lh-xl: 32px;
+  --lh-lg: 28px;
+  --lh-md: 24px;
+  --lh-sm: 22px;
+  --lh-xs: 20px;
+  --lh-badge: 20px;
+  /* fw */
+  --fw-kpi: 700;
+  --fw-kpi-sm: 600;
+  --fw-2xl: 700;
+  --fw-xl: 600;
+  --fw-lg: 600;
+  --fw-md: 400;
+  --fw-sm: 400;
+  --fw-xs: 500;
+  --fw-badge: 600;
+  /* ls */
+  --ls-kpi: -.01em;
+  --ls-kpi-sm: 0;
+  --ls-2xl: -.01em;
+  --ls-xl: -.01em;
+  --ls-lg: -.01em;
+  --ls-md: 0;
+  --ls-sm: 0;
+  --ls-xs: 0;
+  --ls-badge: .04em;
+  /* space */
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-48: 48px;
+  /* radius */
+  --radius-card: 10px;
+  --radius-card-inner: 8px;
+  --radius-control: 6px;
+  --radius-tag: 6px;
+  --radius-tooltip: 4px;
+  /* border */
+  --border-hairline: 1px;
+  --border-control: 2px;
+  --border-scenario-frame: 4px;
+  /* size */
+  --size-control-height: 44px;
+  --size-badge-height: 28px;
+  --size-sidebar-width: 72px;
+  --size-sidebar-button: 44px;
+  --size-topbar-height: 64px;
+  --size-metrics-height: 146px;
+  --size-icon: 20px;
+  --size-icon-sidebar: 22px;
+  --size-icon-marker: 24px;
+  --size-focus-ring-offset: 2px;
+  --size-road-line: 6px;
+  --size-icon-stroke: 1.5;
+  --size-chip-height: 36px;
+  --size-mode-button-height: 48px;
+  --size-node: 28px;
+  --size-status-chip-height: 32px;
+  --size-dept-icon: 36px;
+  --size-progress-bar: 6px;
+  --size-marker: 44px;
+  --size-marker-badge: 20px;
+  --size-layer-panel-width: 236px;
+  --size-layer-row-height: 40px;
+  --size-popover-width: 300px;
+  /* layout */
+  --layout-event-manager: 360px;
+  --layout-right-panel: 440px;
+  --layout-event-manager-compact: 300px;
+  --layout-right-panel-compact: 360px;
+  --layout-event-manager-rail: 108px;
+  --layout-right-panel-wide: 692px;
+  --layout-gap: 16px;
+  --layout-screen-padding: 16px;
+  /* breakpoint */
+  --breakpoint-compact: 1440px;
+  /* opacity */
+  --opacity-badge-fill: .16;
+  --opacity-card-border: .3;
+  --opacity-tooltip-border: .7;
+  --opacity-congestion-rest: .4;
+  --opacity-congestion-hover: 1;
+  --opacity-event-area-fill: .12;
+  /* motion */
+  --motion-duration: 150ms;
+  --motion-easing: ease-out;
+  /* transition */
+  --transition-base: color var(--motion-duration) var(--motion-easing),background-color var(--motion-duration) var(--motion-easing),border-color var(--motion-duration) var(--motion-easing),opacity var(--motion-duration) var(--motion-easing);
+}
