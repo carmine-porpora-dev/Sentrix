@@ -1,0 +1,51 @@
+@import "../../../design/design-system/fonts/fonts.css";
+@import "../../../design/design-system/tokens.css";
+@import "./styles/assistant-tokens.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    @apply m-0 bg-bg font-ui text-md text-text;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* L'anello di fuoco del design system: visibile a tastiera. */
+  :focus-visible {
+    outline: var(--border-control) solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+
+  a {
+    @apply text-accent hover:text-accent-hover;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .typing-dot {
+    opacity: 0.6 !important;
+  }
+}

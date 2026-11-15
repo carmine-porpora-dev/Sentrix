@@ -1,0 +1,8 @@
+:root {
+  --color-chat-user-fill: #272c44;
+  --color-liquid-highlight: #a9bbff;
+  --radius-field: 12px;
+  --motion-duration: 150ms;
+  --motion-enter: 500ms;
+  --motion-typing: 1.2s;
+}
