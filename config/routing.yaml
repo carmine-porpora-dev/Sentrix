@@ -1,0 +1,29 @@
+# Parametri di ricerca dei luoghi e di calcolo dei percorsi (docs/spec/10-assistant.md 4).
+# Non entra in `Run.params_hash` e non cambia nessun numero delle analisi. `engine.yaml` non si tocca:
+# la soglia di saturazione dei tratti è la sua `metrics.vc_critical_threshold`.
+
+search:
+  max_candidates: 5        # candidati per ricerca
+  max_query_words: 8       # una ricerca (o un lato di un incrocio) con più parole non trova nulla: costa troppo
+  long_street_m: 1000      # una strada più estesa di così è «lunga»: serve un incrocio o un luogo vicino
+  merge_clusters_m: 250    # i pezzi di una strada più vicini di così sono un luogo solo
+  dedupe_m: 150            # candidati più vicini di così sono lo stesso posto: resta il migliore
+  crossing_m: 30           # due strade si incrociano se i loro nodi più vicini distano al massimo così
+  fuzzy_cutoff: 0.8        # somiglianza minima (0-1) per la ricerca approssimata (errori di battitura)
+  intersection_words: [angolo, incrocio]   # «via Tasso angolo via Aniello Falcone»
+  abbreviations:           # abbreviazioni da espandere prima di cercare
+    "v.": via
+    "v.le": viale
+    "c.so": corso
+    "p.zza": piazza
+    "p.za": piazza
+    "p.le": piazzale
+    "l.go": largo
+
+route:
+  alternative_penalty: 1.5         # costo × questo sugli archi del primo percorso, per cercare l'alternativa
+  alternative_max_longer_pct: 50   # l'alternativa è scartata se dura più del primo di questa percentuale
+  alternative_max_overlap_pct: 90  # ... o se condivide con il primo più di questa percentuale della sua lunghezza
+  congested_max_listed: 5          # strade sature elencate per gruppo (sul percorso, vicine)
+  nearby_m: 300                    # un tratto saturo è «vicino» al percorso entro questa distanza
+  closure_near_m: 150              # una chiusura è «vicina» al cammino a strada libera entro questa distanza

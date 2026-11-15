@@ -1,0 +1,32 @@
+# Luoghi noti oltre a quelli che il dizionario ricava da solo (strade OSM, zone e punti di
+# `engine.yaml`, stazioni di metro e funicolari del GTFS): docs/spec/10-assistant.md 4.1.
+# PROPOSTA: le posizioni si verificano a vista sulla pagina di verifica (`scripts/route_check.py`).
+#
+# Un luogo ha `zone` (una zona di `engine.yaml`: la posizione è la sua, qui si aggiungono nomi) oppure
+# `lat` e `lon` (un punto, agganciato al nodo stradale più vicino). `aliases` sono i nomi con cui lo si
+# chiede (minuscole e accenti non contano).
+
+places:
+  - id: napoli_centrale
+    zone: central_station
+    aliases: [napoli centrale, stazione di napoli centrale, napoli garibaldi]
+  - id: molo_beverello
+    zone: port
+    aliases: [molo beverello, beverello, porto di napoli, molo angioino]
+  # La Stazione Marittima sta a ~300 m da Molo Beverello, nella stessa zona «Porto». Le fermate GTFS
+  # chiamate «MARITTIMA» NON vanno bene: sono a Torre Annunziata.
+  - id: stazione_marittima
+    zone: port
+    aliases: [stazione marittima, marittima]
+  # Fermata GTFS 2276 «MARINO - STADIO MARADONA», ~300 m dallo stadio.
+  - id: stadio_maradona
+    label: "Stadio Maradona"
+    lat: 40.828303
+    lon: 14.195876
+    aliases: [stadio maradona, stadio diego armando maradona, maradona, stadio san paolo]
+  # Punto del tratto LIVE `via_partenope` (lungomare davanti al castello, ~250 m): PROPOSTA.
+  - id: castel_dell_ovo
+    label: "Castel dell'Ovo"
+    lat: 40.829926
+    lon: 14.250027
+    aliases: [castel dell'ovo, castel dell ovo, borgo marinari]
