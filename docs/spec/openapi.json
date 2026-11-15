@@ -1522,6 +1522,169 @@
         }
       }
     },
+    "/api/places/search": {
+      "get": {
+        "tags": [
+          "routing"
+        ],
+        "summary": "Search Places",
+        "description": "Fino a 5 luoghi che corrispondono a `q` (una strada, una piazza, una stazione, una zona, un\nluogo noto, o un incrocio: «via Tasso angolo via Aniello Falcone»), dal più somigliante. Ogni\ncandidato ha il nodo stradale da cui un percorso parte o a cui arriva. Solo lettura: nessun\nservizio esterno.",
+        "operationId": "search_places",
+        "security": [
+          {
+            "APIKeyCookie": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200,
+              "description": "Il luogo, a testo",
+              "title": "Q"
+            },
+            "description": "Il luogo, a testo"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlaceCandidate"
+                  },
+                  "title": "Response Search Places"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Fonte o dati non disponibili",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Richiesta non valida (errori per campo in `details.fields`)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Non autenticato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/route": {
+      "post": {
+        "tags": [
+          "routing"
+        ],
+        "summary": "Compute Route",
+        "description": "Il percorso in auto consigliato tra due nodi, con un'alternativa, le chiusure che evita e i\ntratti saturi. Il calcolo è del motore, sui costi dell'ultima iterazione dell'ultima analisi\ncompletata dell'evento (o di `run_id`), per la fascia che contiene `time`; fuori dalle fasce\nsimulate, tempi a strada libera con le sole chiusure. Solo lettura.",
+        "operationId": "compute_route",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RouteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RouteResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Richiesta non valida (errori per campo in `details.fields`)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Risorsa non trovata",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflitto di stato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Fonte o dati non disponibili",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Non autenticato",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIKeyCookie": []
+          }
+        ]
+      }
+    },
     "/api/vdept": {
       "get": {
         "tags": [
@@ -2107,6 +2270,31 @@
         ],
         "title": "AuthState"
       },
+      "AvoidedClosure": {
+        "properties": {
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "source_ref": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Ref"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "label"
+        ],
+        "title": "AvoidedClosure"
+      },
       "BackgroundLoad": {
         "properties": {
           "arrival_peak_share": {
@@ -2231,6 +2419,24 @@
           "label"
         ],
         "title": "Closure"
+      },
+      "CongestedStreet": {
+        "properties": {
+          "street_name": {
+            "type": "string",
+            "title": "Street Name"
+          },
+          "vc": {
+            "$ref": "#/components/schemas/Measured"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "street_name",
+          "vc"
+        ],
+        "title": "CongestedStreet"
       },
       "CreateRunRequest": {
         "properties": {
@@ -3914,6 +4120,66 @@
         "title": "OperationRequestDraft",
         "description": "Ciò che serve per creare una richiesta (corpo di POST /api/vdept/{id}/requests, 06 6): tutto\ntranne l'identificativo, il dipartimento (nel percorso) e l'esito, che aggiunge\n`OperationRequest`."
       },
+      "PlaceCandidate": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Id"
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Label"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "street",
+              "place",
+              "station",
+              "zone"
+            ],
+            "title": "Kind"
+          },
+          "node_id": {
+            "type": "integer",
+            "title": "Node Id"
+          },
+          "lon": {
+            "type": "number",
+            "title": "Lon"
+          },
+          "lat": {
+            "type": "number",
+            "title": "Lat"
+          },
+          "score": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Score"
+          },
+          "long_street": {
+            "type": "boolean",
+            "title": "Long Street",
+            "default": false
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "label",
+          "kind",
+          "node_id",
+          "lon",
+          "lat",
+          "score"
+        ],
+        "title": "PlaceCandidate",
+        "description": "Un posto che una ricerca propone (06 5b). `lon` e `lat` sono quelli del nodo stradale\n`node_id`, cioè il punto da cui il percorso parte o a cui arriva."
+      },
       "PlanItem": {
         "properties": {
           "seq": {
@@ -4220,6 +4486,218 @@
         ],
         "title": "ResourceBalance",
         "description": "Una risorsa di un dipartimento in una finestra.\n\n`used` = già impegnata dall'evento + assegnata nel run (04 2: libere = totale − impegnate −\nassegnate); `remaining` = `total` − `used`."
+      },
+      "RouteContext": {
+        "properties": {
+          "event": {
+            "type": "string",
+            "title": "Event"
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "title": "Date"
+          },
+          "time": {
+            "type": "string",
+            "format": "time",
+            "title": "Time"
+          },
+          "window": {
+            "type": "string",
+            "enum": [
+              "arrival",
+              "departure",
+              "none"
+            ],
+            "title": "Window"
+          },
+          "peak": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Peak"
+          },
+          "iteration": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Iteration"
+          },
+          "run_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "title": "Run Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "event",
+          "date",
+          "time",
+          "window",
+          "peak",
+          "iteration",
+          "run_id"
+        ],
+        "title": "RouteContext"
+      },
+      "RouteOption": {
+        "properties": {
+          "steps": {
+            "items": {
+              "$ref": "#/components/schemas/RouteStep"
+            },
+            "type": "array",
+            "title": "Steps"
+          },
+          "duration": {
+            "$ref": "#/components/schemas/Measured"
+          },
+          "length": {
+            "$ref": "#/components/schemas/Measured"
+          },
+          "geometry": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/JsonValue"
+            },
+            "type": "object",
+            "title": "Geometry"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "steps",
+          "duration",
+          "length",
+          "geometry"
+        ],
+        "title": "RouteOption"
+      },
+      "RouteRequest": {
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$",
+            "title": "Event Id"
+          },
+          "from_node": {
+            "type": "integer",
+            "title": "From Node"
+          },
+          "to_node": {
+            "type": "integer",
+            "title": "To Node"
+          },
+          "time": {
+            "type": "string",
+            "format": "time",
+            "title": "Time"
+          },
+          "run_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]+$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Run Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "event_id",
+          "from_node",
+          "to_node",
+          "time"
+        ],
+        "title": "RouteRequest"
+      },
+      "RouteResponse": {
+        "properties": {
+          "routes": {
+            "items": {
+              "$ref": "#/components/schemas/RouteOption"
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Routes"
+          },
+          "avoided_closures": {
+            "items": {
+              "$ref": "#/components/schemas/AvoidedClosure"
+            },
+            "type": "array",
+            "title": "Avoided Closures"
+          },
+          "congested_on_route": {
+            "items": {
+              "$ref": "#/components/schemas/CongestedStreet"
+            },
+            "type": "array",
+            "title": "Congested On Route"
+          },
+          "congested_nearby": {
+            "items": {
+              "$ref": "#/components/schemas/CongestedStreet"
+            },
+            "type": "array",
+            "title": "Congested Nearby"
+          },
+          "context": {
+            "$ref": "#/components/schemas/RouteContext"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "routes",
+          "avoided_closures",
+          "congested_on_route",
+          "congested_nearby",
+          "context"
+        ],
+        "title": "RouteResponse",
+        "description": "`routes[0]` è il percorso consigliato, `routes[1]` (se c'è) l'alternativa."
+      },
+      "RouteStep": {
+        "properties": {
+          "street_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Street Name"
+          },
+          "length_m": {
+            "type": "number",
+            "minimum": 0.0,
+            "title": "Length M"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "street_name",
+          "length_m"
+        ],
+        "title": "RouteStep",
+        "description": "Archi consecutivi con lo stesso nome, uniti. `street_name` manca per le strade senza nome."
       },
       "Run": {
         "properties": {
